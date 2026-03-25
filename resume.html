@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anirudh Vaka – DevOps / Platform Engineer Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Print/ATS Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #1a56db;
+      --accent-light: #e8f0fe;
+      --text: #1e1e2e;
+      --muted: #4a4a6a;
+      --border: #d0d5e8;
+      --bg: #ffffff;
+      --section-gap: 11px;
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #e8ecf5;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    /* ── Page Shell ── */
+    .page {
+      background: var(--bg);
+      width: 794px;           /* A4 width at 96dpi */
+      min-height: 1123px;     /* A4 height at 96dpi */
+      padding: 36px 42px 32px;
+      box-shadow: 0 8px 40px rgba(26,86,219,.12), 0 2px 8px rgba(0,0,0,.06);
+      border-radius: 6px;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 2.5px solid var(--accent);
+      padding-bottom: 10px;
+      margin-bottom: 13px;
+    }
+    .header-left h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .header-left .title-tag {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 2px 8px;
+      border-radius: 3px;
+      letter-spacing: 0.4px;
+    }
+    .header-right {
+      text-align: right;
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .header-right a { color: var(--accent); text-decoration: none; }
+
+    /* ── Section ── */
+    section { margin-bottom: var(--section-gap); }
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 3px;
+      margin-bottom: 7px;
+    }
+
+    /* ── Summary ── */
+    .summary p {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Skills Grid ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px 12px;
+    }
+    .skill-item {
+      font-size: 11px;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+      line-height: 1.4;
+    }
+    .skill-item .label {
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+      min-width: 76px;
+    }
+
+    /* ── Experience ── */
+    .job { margin-bottom: 9px; }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1px;
+    }
+    .job-header .role {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .job-header .dates {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .company {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .project-block { margin-bottom: 6px; }
+    .project-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .project-label span {
+      font-weight: 400;
+      color: var(--muted);
+      font-size: 10.5px;
+    }
+    ul.bullets {
+      list-style: none;
+      padding: 0;
+    }
+    ul.bullets li {
+      font-size: 11px;
+      color: var(--muted);
+      padding-left: 13px;
+      position: relative;
+      line-height: 1.55;
+      margin-bottom: 2px;
+    }
+    ul.bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 9px;
+      top: 1px;
+    }
+    strong.num { color: var(--text); font-weight: 700; }
+
+    /* ── Education ── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px 10px;
+    }
+    .edu-item {
+      font-size: 11px;
+      line-height: 1.45;
+    }
+    .edu-item .deg { font-weight: 600; color: var(--text); }
+    .edu-item .inst { color: var(--muted); }
+    .edu-item .meta { color: var(--accent); font-size: 10.5px; }
+
+    /* ── Print Button (screen only) ── */
+    .print-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 11px 22px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: 'Inter', Arial, sans-serif;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(26,86,219,.35);
+      transition: background .15s, transform .1s;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .print-btn:hover { background: #1447c0; transform: translateY(-1px); }
+    .print-btn svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── Print / PDF ── */
+    @page {
+      size: A4 portrait;
+      margin: 14mm 16mm 12mm;
+    }
+    @media print {
+      html, body {
+        background: #fff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+        width: 100% !important;
+      }
+      .print-btn { display: none !important; }
+      .page {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        width: 100% !important;
+        min-height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      /* Force dark text — avoid grey-on-white wash-out */
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .summary p, ul.bullets li, .skill-item,
+      .edu-item .inst, .header-right { color: #333 !important; }
+      .section-title, .skill-item .label,
+      .company, .edu-item .meta,
+      .header-right a { color: #1a56db !important; }
+      /* No page breaks inside jobs */
+      .job, .project-block { page-break-inside: avoid; }
+      .section-title { page-break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+<!-- Print button -->
+<button class="print-btn" onclick="window.print()">
+  <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Print / Save as PDF
+</button>
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <header>
+    <div class="header-left">
+      <h1>Anirudh Vaka</h1>
+      <span class="title-tag">DevOps Engineer &amp; Platform Engineer</span>
+    </div>
+    <div class="header-right">
+      <a href="mailto:anirudhvaka@gmail.com">anirudhvaka@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+917981730312">+91 79817 30312</a><br/>
+      Hyderabad, India &nbsp;|&nbsp; 3 Years Experience<br/>
+      Available for mid / senior DevOps roles
+    </div>
+  </header>
+
+  <!-- ═══ SUMMARY ═══ -->
+  <section class="summary">
+    <div class="section-title">Professional Summary</div>
+    <p>
+      Expert in <strong>Building Resilient Systems</strong> across <strong>Cloud and On-Premise Infrastructure</strong> with <strong>3 years</strong> of high-impact experience. I design and operate systems that balance bare-metal reliability with cloud-native agility—from provisioning and managing infrastructure within enterprise-grade datacenters like CtrlS to engineering scalable, label-driven GitOps pipelines for Tier-1 platforms. I deliver infrastructure that is secure, observable, and built to scale while transforming legacy monoliths into automated, zero-touch production ecosystems.
+    </p>
+  </section>
+
+  <!-- ═══ SKILLS ═══ -->
+  <section>
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-item"><span class="label">Cloud Ops:</span> AWS (ECS, Lambda, S3, RDS, Athena, OpenSearch, ACM, AppFlow) · Azure (Functions, VMSS, AD)</div>
+      <div class="skill-item"><span class="label">GitOps:</span> GitHub Actions (Label-Driven FBE) · GitHub Enterprise · Azure DevOps · TeamCity · Octopus</div>
+      <div class="skill-item"><span class="label">IaC &amp; Mgmt:</span> Terraform · CloudFormation · LinearB · Miro · Cost Optimization · Amazon Q · AWS DevOps Agent</div>
+      <div class="skill-item"><span class="label">DevSecOps:</span> SonarQube Cloud · Trivy · Grype · bucketAV (ClamAV) · GenAI Remediation · Cloudflare WAF</div>
+      <div class="skill-item"><span class="label">Networking:</span> Fortigate 200F/G (SD-WAN, VPN, IPSec) · Cisco Switching (VLANs) · NGINX (Reverse Proxy, Redirects)</div>
+      <div class="skill-item"><span class="label">Observability:</span> Prometheus · Grafana · Loki · CloudWatch · New Relic · Pingdom · Power Automate (Teams Alerts)</div>
+      <div class="skill-item"><span class="label">Data &amp; Sync:</span> commercetools · Contentful (PII Masking) · HubSpot Sync · MongoDB · MS SQL · Backup &amp; Recovery</div>
+      <div class="skill-item"><span class="label">Containers:</span> Docker · Kubernetes (HELM) · AWS ECS · ECR · Hyper-V Virtualization · Bare-Metal Provisioning</div>
+      <div class="skill-item"><span class="label">Other Skills:</span> MSI Automation (InstallShield) · Salesforce DevOps · Xfiles · Linux Administration · Patching Strategy</div>
+    </div>
+  </section>
+
+  <!-- ═══ EXPERIENCE ═══ -->
+  <section>
+    <div class="section-title">Professional Experience</div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="role">DevOps Engineer</span>
+        <span class="dates">Jan 2023 – Present</span>
+      </div>
+      <div class="company">Snovasys Software Solutions Pvt Ltd &nbsp;·&nbsp; Hyderabad, India</div>
+
+      <!-- Project 1 -->
+      <div class="project-block">
+        <div class="project-label">Project 1: TimeChamp – SaaS Product Platform <span>| Jan 2023 – Oct 2024</span></div>
+        <ul class="bullets">
+          <li><strong>Infrastructure Architecture:</strong> Single-handedly architected and provisioned a full-scale on-premise data center at CtrlS (Hyderabad) from bare metal, encompassing DELL servers, Hyper-V virtualization, and OS configuration.</li>
+          <li><strong>Platform Modernization:</strong> Spearheaded the application delivery transformation from Windows IIS to Docker and Kubernetes (Linux-based) ecosystems, cutting release cycle times by <strong class="num">~60%</strong>.</li>
+          <li><strong>Network &amp; Edge Security:</strong> Engineered end-to-end enterprise network topology using Fortigate 200F/G firewalls (SD-WAN, IPSec VPN, IPv4 policies) and Cisco switches (VLAN routing). Managed Cloudflare WAF, DNS, CDN proxying, and SSL/TLS edge certificates.</li>
+          <li><strong>CI/CD Automation:</strong> Refactored legacy TeamCity &amp; Octopus deployments into fully automated Azure DevOps CI/CD pipelines incorporating SonarQube security scanning and one-click MSI generation via InstallShield.</li>
+          <li><strong>Observability &amp; DR:</strong> Established a resilient observability stack using Prometheus, Grafana, and Loki for log metrics. Engineered comprehensive Disaster Recovery (DR) and backup protocols for both applications and on-premise infrastructure.</li>
+          <li><strong>Cloud &amp; Data Pipelines:</strong> Managed AWS (S3, Lambda, EventBridge, ECS) and Azure (VMSS, Azure AD, Cost Management) integrations. Developed automated console apps for HubSpot to Totango data syncing and daily MongoDB backups.</li>
+        </ul>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-block">
+        <div class="project-label">Project 2: AICPA &amp; CIMA – Enterprise Service Client <span>| Nov 2024 – Present</span></div>
+        <ul class="bullets">
+          <li><strong>GitHub Enterprise &amp; GitOps:</strong> Led the migration to GitHub Enterprise and architected a proprietary Label-Driven GitOps topology (<strong class="num">Main ← Release ← Feature</strong>), eliminating manual deployments and cherry-picking.</li>
+          <li><strong>Full-Stack Ephemeral Environments (FBE):</strong> Engineered PR-triggered Feature Branch Environments (FBE) via GitHub Actions, dynamically provisioning a complete set of AWS resources (ECS, RDS, S3, SQS, SNS) for isolated dev testing upon <strong class="num">fbe</strong> label assignment.</li>
+          <li><strong>Automated Prod &amp; ITSM:</strong> Automated Staging and Production deployments via label triggers. Built programmatic ServiceNow integrations to auto-create, track, and close Change Requests (CR) tied to post-deployment E2E tests.</li>
+          <li><strong>GenAI-Driven DevSecOps:</strong> Integrated Trivy/Grype for container CVE scanning, leveraging GenAI to automatically suggest remediations directly as PR comments. Deployed bucketAV (ClamAV) for distributed S3 antivirus protection.</li>
+          <li><strong>AWS Cloud Engineering:</strong> Automated complex multi-service architectures encompassing ECS, API Gateway, DynamoDB, OpenSearch, SNS/SQS, and Route53 utilizing Terraform (IaC). Managed strict IAM roles, Secrets Manager, and VPC security groups.</li>
+          <li><strong>Data Sync &amp; Environment Masking:</strong> Built robust workflows to sanitize and continuously sync Commercetools and Contentful production data into lower environments without exposing sensitive PII.</li>
+          <li><strong>Observability &amp; ChatOps:</strong> Integrated AWS CloudWatch and Athena with Grafana alerts directly hooked into Microsoft Teams via Power Automate, ensuring <strong>global visibility of all deployment statuses</strong>. Utilized Amazon Q and AWS DevOps Agent for intelligent log investigation.</li>
+          <li><strong>Cross-Platform DevOps:</strong> Supported Data Engineering by managing Azure Functions, VMSS, and Data Storage via Azure DevOps pipelines. Tracked global deployment metrics utilizing LinearB.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EDUCATION ═══ -->
+  <section>
+    <div class="section-title">Education</div>
+    <div class="edu-grid">
+      <div class="edu-item">
+        <div class="deg">B.Tech – Computer Science &amp; Engineering</div>
+        <div class="inst">JNTU, Andhra Pradesh</div>
+        <div class="meta">2019 – 2023 &nbsp;·&nbsp; CGPA 8.3 / 10</div>
+      </div>
+      <div class="edu-item">
+        <div class="deg">Intermediate (12th Grade)</div>
+        <div class="inst">Narayana Junior College</div>
+        <div class="meta">2017 – 2019 &nbsp;·&nbsp; CGPA 9.67 / 10</div>
+      </div>
+      <div class="edu-item">
+        <div class="deg">SSC (10th Grade)</div>
+        <div class="inst">Jaya Usha High School</div>
+        <div class="meta">2017 &nbsp;·&nbsp; CGPA 9.8 / 10</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

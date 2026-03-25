@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anirudh Vaka | DevOps & Cloud Architect</title>
+  
+  <!-- Premium SaaS Fonts: Inter for unmatched legibility, Fira Code for technical details -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      /* Ultra-premium dark theme inspired by Linear & Vercel */
+      --bg-main: #0a0a0a;
+      --bg-card: #111111;
+      --bg-card-hover: #161616;
+      
+      --text-1: #ffffff;
+      --text-2: #a1a1aa;
+      --text-3: #71717a;
+      
+      --accent-primary: #3b82f6;   /* Enterprise Blue */
+      --accent-glow: rgba(59, 130, 246, 0.4);
+      --accent-secondary: #0ea5e9; /* Sky Blue */
+      --accent-success: #10b981;   /* Pipeline Green */
+      --accent-warning: #f59e0b;   /* AWS Orange */
+      
+      --border-light: rgba(255, 255, 255, 0.1);
+      --border-glow: rgba(255, 255, 255, 0.15);
+      
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.8);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-1);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- BACKGROUND LIGHTING --- */
+    .hero-glow {
+      position: absolute; top: -150px; left: 50%; transform: translateX(-50%);
+      width: 80vw; height: 500px;
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-glow), transparent 70%);
+      z-index: -1; pointer-events: none; opacity: 0.6;
+    }
+    .grid-bg {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
+      background-image: linear-gradient(var(--border-light) 1px, transparent 1px), linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+      background-size: 60px 60px; z-index: -2;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+      opacity: 0.3;
+    }
+
+    /* --- REUSABLE COMPONENTS --- */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
+    
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px;
+      transition: all 0.2s ease; cursor: pointer; text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--text-1); color: var(--bg-main); border: 1px solid var(--text-1);
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+    .btn-primary:hover { background: #e4e4e7; transform: translateY(-2px); box-shadow: 0 0 30px rgba(255,255,255,0.4); }
+    
+    .btn-secondary {
+      background: rgba(255,255,255,0.05); color: var(--text-1); border: 1px solid var(--border-light);
+      backdrop-filter: blur(10px);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--border-glow); transform: translateY(-2px); }
+
+    .tag {
+      font-family: 'Fira Code', monospace; font-size: 11px; padding: 4px 10px;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border-light);
+      border-radius: 30px; color: var(--text-2); display: inline-flex; align-items: center; gap: 5px;
+    }
+    .tag-blue { background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); color: #60a5fa; }
+    .tag-green { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #34d399; }
+
+    /* --- NAVIGATION --- */
+    nav {
+      position: fixed; top: 0; width: 100%; padding: 16px 0; z-index: 100;
+      background: rgba(10, 10, 10, 0.8); backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+    .nav-brand { font-size: 16px; font-weight: 700; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
+    .nav-status { font-family: 'Fira Code'; font-size: 11px; color: var(--accent-success); display: flex; align-items: center; gap: 6px; }
+    .status-dot { width: 8px; height: 8px; background: var(--accent-success); border-radius: 50%; box-shadow: 0 0 10px var(--accent-success); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+    /* --- HERO SECTION --- */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 0 60px; position: relative; }
+    
+    .hero-badge { margin-bottom: 24px; animation: slideUp 0.6s ease forwards; }
+    
+    .hero h1 {
+      font-size: clamp(32px, 8vw, 80px); font-weight: 800; letter-spacing: -2px; line-height: 1.1;
+      max-width: 900px; margin-bottom: 24px; animation: slideUp 0.8s ease forwards;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+      background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero h1 .text-glow {
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+      background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(59,130,246,0.3));
+    }
+    
+    .hero p {
+      font-size: clamp(16px, 3vw, 20px); color: var(--text-2); max-width: 650px; margin: 0 auto 40px;
+      line-height: 1.6; animation: slideUp 1s ease forwards; font-weight: 400;
+    }
+    
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; animation: slideUp 1.2s ease forwards; }
+
+    @keyframes slideUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+    /* Pipeline Graphic Animation */
+    .hero-pipeline {
+      margin-top: 60px; width: 100%; max-width: 800px;
+      background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px;
+      padding: 24px; box-shadow: var(--shadow-lg); animation: slideUp 1.4s ease forwards;
+    }
+    .hp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px;}
+    .hp-title { font-family: 'Fira Code'; font-size: 13px; color: var(--text-2); display: flex; align-items: center; gap: 8px; }
+    .hp-time { font-family: 'Fira Code'; font-size: 12px; color: var(--text-3); }
+    
+    .hp-flow { display: flex; justify-content: space-between; align-items: center; position: relative; }
+    .hp-line { position: absolute; top: 50%; left: 10%; right: 10%; height: 2px; background: var(--border-light); z-index: 1; }
+    .hp-line-glow { position: absolute; top: 0; left: 0; height: 100%; background: var(--accent-success); box-shadow: 0 0 10px var(--accent-success); animation: flow 4s infinite; }
+    @keyframes flow { 0% { width: 0%; left: 0; } 50% { width: 100%; left: 0; } 50.1% { width: 100%; left: auto; right: 0; } 100% { width: 0%; left: auto; right: 0; } }
+
+    .hp-step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--bg-card); padding: 0 10px; }
+    .hp-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); display: flex; justify-content: center; align-items: center; font-size: 16px; color: var(--text-1); }
+    .hp-icon.success { background: rgba(16,185,129,0.1); border-color: var(--accent-success); color: var(--accent-success); }
+    .hp-label { font-size: 11px; font-weight: 500; color: var(--text-2); }
+
+    /* --- LOGO STRIP --- */
+    .logo-strip { padding: 40px 0; border-bottom: 1px solid var(--border-light); background: rgba(255,255,255,0.01); overflow: hidden; white-space: nowrap; }
+    .ls-track { display: inline-block; animation: scroll-logos 30s linear infinite; }
+    .ls-item { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: var(--text-3); margin: 0 30px; transition: 0.3s; }
+    .ls-item:hover { color: var(--text-1); }
+    @keyframes scroll-logos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* --- IMPACT METRICS --- */
+    .metrics-section { padding: 80px 0; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .metric-card {
+      background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px;
+      padding: 32px; text-align: center; transition: 0.3s;
+    }
+    .metric-card:hover { border-color: var(--border-glow); transform: translateY(-5px); background: var(--bg-card-hover); }
+    .mc-val { font-size: 40px; font-weight: 800; color: var(--text-1); letter-spacing: -1px; margin-bottom: 8px; line-height: 1; }
+    .mc-label { font-size: 13px; color: var(--text-2); font-weight: 500; }
+
+    /* --- CASE STUDIES --- */
+    .case-studies { padding: 40px 0 120px; }
+    .section-head { margin-bottom: 60px; text-align: center; }
+    .sh-title { font-size: clamp(32px, 5vw, 40px); font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
+    .sh-desc { font-size: 18px; color: var(--text-2); max-width: 600px; margin: 0 auto; }
+
+    .case-card {
+      background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 24px;
+      padding: 1px; margin-bottom: 40px; transition: 0.3s;
+    }
+    .case-card:hover { border-color: rgba(255,255,255,0.2); box-shadow: var(--shadow-lg); }
+    .cc-inner {
+      background: #0a0a0a; border-radius: 23px; padding: 60px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+
+    .cc-content h3 { font-size: clamp(24px, 4vw, 32px); font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
+    .cc-content p { font-size: 16px; color: var(--text-2); line-height: 1.6; margin-bottom: 30px; }
+    
+    .arch-features { list-style: none; margin-bottom: 30px; }
+    .arch-features li { display: flex; gap: 12px; margin-bottom: 16px; font-size: 15px; color: var(--text-1); align-items: flex-start; }
+    .arch-features i { color: var(--accent-primary); font-size: 18px; margin-top: 2px; }
+    
+    .cc-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* Architectural Infographics */
+    .arch-graphic {
+      background: #111116; border: 1px solid #222; border-radius: 16px; padding: 24px;
+      position: relative; box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
+    }
+    .ag-header { font-family: 'Fira Code'; font-size: 11px; color: var(--text-3); margin-bottom: 24px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+    
+    .matrix-grid { display: grid; grid-template-columns: 1fr 30px 1fr; gap: 10px; align-items: center; }
+    .mg-col { display: flex; flex-direction: column; gap: 12px; }
+    .mg-node { background: #1a1a24; border: 1px solid #333; padding: 10px; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; }
+    .mg-node i { color: var(--text-2); font-size: 14px; }
+    .mg-arrow { color: var(--text-3); text-align: center; }
+    
+    .mg-node.aws { border-color: rgba(245,158,11,0.3); } .mg-node.aws i { color: var(--accent-warning); }
+    .mg-node.sec { border-color: rgba(16,185,129,0.3); } .mg-node.sec i { color: var(--accent-success); }
+    .mg-node.gh { border-color: rgba(59,130,246,0.3); } .mg-node.gh i { color: var(--accent-primary); }
+
+    .topo-layer { border: 1px solid #333; border-radius: 12px; padding: 16px; position: relative; margin-bottom: 20px; background: rgba(255,255,255,0.02); }
+    .tl-title { font-family: 'Fira Code'; font-size: 10px; color: var(--text-2); position: absolute; top: -10px; left: 16px; background: #111116; padding: 0 8px; }
+    .tl-flex { display: flex; gap: 12px; justify-content: center; }
+    .tl-box { background: #1a1a24; border: 1px solid #333; border-radius: 8px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; flex-direction: column; font-size: 18px; color: var(--accent-secondary); }
+    .tl-box span { font-size: 8px; font-family: 'Fira Code'; margin-top: 4px; color: var(--text-3); }
+
+    /* --- FOOTER --- */
+    footer { padding: 60px 0; border-top: 1px solid var(--border-light); text-align: center; background: #050505; }
+    .foot-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; }
+    .foot-links a { color: var(--text-2); font-size: 24px; transition: 0.2s; }
+    .foot-links a:hover { color: var(--text-1); }
+    .foot-copy { font-family: 'Fira Code'; font-size: 12px; color: var(--text-3); }
+
+    /* --- RESPONSIVE BREAKPOINTS --- */
+    @media (max-width: 1024px) {
+      .cc-inner { grid-template-columns: 1fr; padding: 48px; gap: 40px; }
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-pipeline { transform: scale(0.9); margin-top: 40px; }
+      .sh-title { font-size: 32px; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      nav { padding: 12px 0; }
+      .nav-inner { flex-direction: column; gap: 12px; align-items: center; }
+      .nav-inner > div:last-child { flex-direction: column; gap: 8px !important; }
+      .nav-status { font-size: 10px; }
+      
+      .hero { padding: 140px 0 40px; }
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 15px; margin-bottom: 30px; }
+      .hero-actions { flex-direction: column; width: 100%; max-width: 300px; }
+      .hero-actions .btn { width: 100%; }
+      .hero-pipeline { display: none; }
+      
+      .metrics-grid { grid-template-columns: 1fr; }
+      .cc-inner { padding: 32px 20px; }
+      .case-card { border-radius: 16px; }
+      .cc-inner { border-radius: 15px; }
+      
+      .ls-item { font-size: 16px; margin: 0 20px; }
+      .foot-links { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Tech -->
+  <div class="hero-glow"></div>
+  <div class="grid-bg"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container nav-inner">
+      <div class="nav-brand"><i class="fa-solid fa-code-merge" style="color:var(--accent-primary)"></i> Anirudh Vaka</div>
+      <div style="display: flex; gap: 24px; align-items: center;" class="nav-actions">
+        <div class="nav-status"><div class="status-dot"></div> Available for Opportunities</div>
+        <a href="resume.html" target="_blank" class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Export Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- High-Impact Hero Section -->
+  <section class="hero container">
+    <div class="tag hero-badge">DevOps Engineer &amp; Platform Architect</div>
+    <h1>Building Resilient <span class="text-glow">Systems</span><br/>Across Cloud and On-Premise Infrastructure</h1>
+    <p>I design and operate systems that balance bare-metal reliability with cloud-native agility. From provisioning and managing infrastructure within enterprise-grade datacenters like CtrlS to engineering scalable, label-driven GitOps pipelines for Tier-1 platforms — I deliver infrastructure that is secure, observable, and built to scale.</p>
+    
+    <div class="hero-actions">
+      <a href="#case-studies" class="btn btn-primary">View Deployments</a>
+      <a href="resume.html" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-github"></i> View Full Profile</a>
+    </div>
+
+    <!-- Live Pipeline Graphic for instant "Ah, he's DevOps" recognition -->
+    <div class="hero-pipeline">
+      <div class="hp-header">
+        <div class="hp-title"><i class="fa-solid fa-play" style="color:var(--accent-success)"></i> Workflow: production-release-matrix.yml</div>
+        <div class="hp-time">4m 12s</div>
+      </div>
+      <div class="hp-flow">
+        <div class="hp-line"><div class="hp-line-glow"></div></div>
+        <div class="hp-step"><div class="hp-icon success"><i class="fa-solid fa-check"></i></div><div class="hp-label">Build</div></div>
+        <div class="hp-step"><div class="hp-icon success"><i class="fa-solid fa-shield"></i></div><div class="hp-label">SAST Scan</div></div>
+        <div class="hp-step"><div class="hp-icon success"><i class="fa-brands fa-aws"></i></div><div class="hp-label">Assume IAM</div></div>
+        <div class="hp-step"><div class="hp-icon success"><i class="fa-solid fa-cube"></i></div><div class="hp-label">ECS Deploy</div></div>
+        <div class="hp-step"><div class="hp-icon" style="color:var(--accent-warning); border-color:rgba(245,158,11,0.3); background:rgba(245,158,11,0.1)"><i class="fa-solid fa-spinner fa-spin"></i></div><div class="hp-label">E2E Tests</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recruiter Logo Scroller: Immediate Stack Recognition -->
+  <div class="logo-strip">
+    <div class="ls-track">
+      <!-- Duplicate content to ensure smooth infinite scroll -->
+      <span class="ls-item"><i class="fa-brands fa-aws" style="color:#f59e0b"></i> AWS Cloud</span>
+      <span class="ls-item"><i class="fa-brands fa-github" style="color:#ffffff"></i> GitHub Enterprise</span>
+      <span class="ls-item"><i class="fa-solid fa-dharmachakra" style="color:#3b82f6"></i> Kubernetes</span>
+      <span class="ls-item"><i class="fa-brands fa-docker" style="color:#0ea5e9"></i> Docker</span>
+      <span class="ls-item"><i class="fa-brands fa-cloudflare" style="color:#f38020"></i> Cloudflare</span>
+      <span class="ls-item"><i class="fa-solid fa-shield-halved" style="color:#cd3d33"></i> Fortigate</span>
+      <span class="ls-item"><i class="fa-solid fa-cubes" style="color:#8b5cf6"></i> Terraform</span>
+      <span class="ls-item"><i class="fa-solid fa-bolt" style="color:#3b82f6"></i> ServiceNow</span>
+      <span class="ls-item"><i class="fa-brands fa-microsoft" style="color:#0ea5e9"></i> Azure DevOps</span>
+      
+      <span class="ls-item"><i class="fa-brands fa-aws" style="color:#f59e0b"></i> AWS Cloud</span>
+      <span class="ls-item"><i class="fa-brands fa-github" style="color:#ffffff"></i> GitHub Enterprise</span>
+      <span class="ls-item"><i class="fa-solid fa-dharmachakra" style="color:#3b82f6"></i> Kubernetes</span>
+      <span class="ls-item"><i class="fa-brands fa-docker" style="color:#0ea5e9"></i> Docker</span>
+      <span class="ls-item"><i class="fa-brands fa-cloudflare" style="color:#f38020"></i> Cloudflare</span>
+      <span class="ls-item"><i class="fa-solid fa-shield-halved" style="color:#cd3d33"></i> Fortigate</span>
+      <span class="ls-item"><i class="fa-solid fa-cubes" style="color:#8b5cf6"></i> Terraform</span>
+      <span class="ls-item"><i class="fa-solid fa-bolt" style="color:#3b82f6"></i> ServiceNow</span>
+      <span class="ls-item"><i class="fa-brands fa-microsoft" style="color:#0ea5e9"></i> Azure DevOps</span>
+    </div>
+  </div>
+
+  <!-- Clear Impact Metrics -->
+  <section class="metrics-section container">
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="mc-val">300+</div>
+        <div class="mc-label">Global Workflows Built</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-val">52</div>
+        <div class="mc-label">Core Enterprise Pipelines</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-val">60%</div>
+        <div class="mc-label"> Faster Cycle Time</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-val">Z-T</div>
+        <div class="mc-label">Zero-Trust Endpoints</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architectural Case Studies -->
+  <section id="case-studies" class="case-studies container">
+    <div class="section-head">
+      <h2 class="sh-title">Enterprise Case Studies</h2>
+      <p class="sh-desc">Deep technical dives into the architectures and highly regulated deployment topologies I have engineered over my career.</p>
+    </div>
+
+    <!-- Card 1: AICPA -->
+    <div class="case-card">
+      <div class="cc-inner">
+        <div class="cc-content">
+          <div class="tag tag-blue" style="margin-bottom: 16px;">CI/CD ARCHITECTURE</div>
+          <h3>AICPA Actions Platform</h3>
+          <p>Spearheaded the organization's DevOps migration, replacing an error-prone sequential model (develop &rarr; sit) with a deeply automated, <strong>Label-Driven GitOps Topology</strong> (Main &rarr; Release). Completely eliminated manual cherry-picking and prod deployments.</p>
+          
+          <ul class="arch-features">
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Full-Stack FBEs:</strong> Feature PRs dynamically provision complete AWS sets (ECS, RDS, S3, SQS) via an `fbe` label for exhaustive isolated testing.</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Teams Deployment Ops:</strong> Integrated Power Automate hooks into the CD pipeline for real-time global deployment visibility in MS Teams.</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Zero-Touch Prod Releases:</strong> Merging to `main` fires Prod deployments with automated ServiceNow CR creation and keyless OIDC authentication.</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>ServiceNow ITSM:</strong> The production pipeline programmatically creates a Change Request before initialization and closes it upon successful E2E validation.</li>
+          </ul>
+
+          <div class="cc-tags">
+            <span class="tag">GitOps</span><span class="tag">GitHub Actions</span><span class="tag">AWS ECS</span><span class="tag">ServiceNow</span><span class="tag">OIDC</span>
+          </div>
+        </div>
+        
+        <!-- Structural Graphic -->
+        <div class="arch-graphic">
+          <div class="ag-header" style="margin-bottom: 15px;">architecture://gitops_release_topology.yml</div>
+          
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <!-- Step 1: Feature -> Release -->
+            <div class="mg-node gh" style="justify-content: space-between; padding: 16px;">
+              <div style="display: flex; gap: 10px; align-items: center;"><i class="fa-solid fa-code-branch"></i> Feature &rarr; Release PR</div>
+              <div class="tag tag-blue" style="font-size: 10px; padding: 4px 10px;">label: fbe &rarr; Spawns FBE</div>
+            </div>
+            
+            <div style="text-align: center; color: #333; margin: -2px 0;"><i class="fa-solid fa-arrow-down"></i></div>
+            
+            <!-- Step 2: Auto PR Staging -->
+            <div class="mg-node gh" style="justify-content: space-between; padding: 16px;">
+              <div style="display: flex; gap: 10px; align-items: center;"><i class="fa-brands fa-github"></i> Auto: Release &rarr; Main PR</div>
+              <div class="tag tag-green" style="font-size: 10px; padding: 4px 10px;">label: staging &rarr; ECS Staging</div>
+            </div>
+
+            <div style="text-align: center; color: #333; margin: -2px 0;"><i class="fa-solid fa-arrow-down"></i></div>
+            
+            <!-- Step 3: Prod Merge & ITSM -->
+            <div class="mg-node aws" style="justify-content: space-between; padding: 16px;">
+              <div style="display: flex; gap: 10px; align-items: center; color: var(--text-1); font-weight: 600;"><i class="fa-solid fa-rocket" style="color: var(--accent-warning);"></i> Merge PR to Main</div>
+              <div class="tag" style="background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: #f59e0b; font-size: 10px; padding: 4px 10px;">SNOW Auth + ECS Prod</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: TimeChamp -->
+    <div class="case-card">
+      <div class="cc-inner">
+        <div class="cc-content">
+          <div class="tag tag-green" style="margin-bottom: 16px;">BARE-METAL DATACENTER ARCHITECTURE</div>
+          <h3>TimeChamp Infrastructure</h3>
+          <p>Single-handedly architected and provisioned a full-scale on-premise Kubernetes infrastructure from bare metal at the CtrlS Datacenter in Hyderabad. Modernized a legacy Windows monolith into a high-availability Linux ecosystem without reliance on managed cloud providers.</p>
+          
+          <ul class="arch-features">
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Platform Reboot:</strong> Migrated from Octopus Deploy to full Azure DevOps pipelines.</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>K8s Orchestration:</strong> Orchestrated Linux containerized microservices via Helm charts.</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Physical Security:</strong> Designed Fortigate 200F/G edge security and IPsec VPNs.</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Observability:</strong> Continuous Prometheus polling mapped to Grafana dashboards.</li>
+          </ul>
+
+          <div class="cc-tags">
+            <span class="tag">Kubernetes</span><span class="tag">Azure DevOps</span><span class="tag">Docker</span><span class="tag">Fortigate</span>
+          </div>
+        </div>
+        
+        <div class="arch-graphic">
+          <div class="ag-header">architecture://ctrls_baremetal_topology.drawio</div>
+          
+          <div class="topo-layer" style="border-color: rgba(16,185,129,0.3);">
+            <div class="tl-title">CTRLS DATACENTER: HYDERABAD (ON-PREM)</div>
+            <div class="tl-flex" style="flex-wrap: wrap; gap: 15px;">
+              <div class="tl-box" style="color:#60a5fa"><i class="fa-solid fa-server"></i><span>Fortigate</span></div>
+              <div class="tl-box" style="color:#34d399"><i class="fa-solid fa-dharmachakra"></i><span>K8s Node 1</span></div>
+              <div class="tl-box" style="color:#34d399"><i class="fa-solid fa-dharmachakra"></i><span>K8s Node 2</span></div>
+              <div class="tl-box" style="color:#f59e0b"><i class="fa-solid fa-database"></i><span>DB Vault</span></div>
+            </div>
+          </div>
+          
+          <div style="text-align: center; color: var(--accent-success); font-family: 'Fira Code'; font-size: 11px; margin-top: 15px;">
+            <i class="fa-solid fa-check-circle"></i> 100% Single-Handed Bare-Metal Execution
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="foot-links">
+        <a href="mailto:anirudhvaka@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        <a href="tel:+917981730312"><i class="fa-solid fa-phone"></i></a>
+        <a href="resume.html"><i class="fa-regular fa-file-pdf"></i></a>
+      </div>
+      <div class="foot-copy">
+        // DEVOPS &amp; PLATFORM PORTFOLIO // ENTERPRISE SPEC // 2026 ANIRUDH VAKA
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
