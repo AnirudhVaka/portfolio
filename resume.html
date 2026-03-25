@@ -16,7 +16,7 @@
       --muted: #4a4a6a;
       --border: #d0d5e8;
       --bg: #ffffff;
-      --section-gap: 11px;
+      --section-gap: 8px;
     }
 
     body {
@@ -46,7 +46,7 @@
       align-items: flex-end;
       border-bottom: 2.5px solid var(--accent);
       padding-bottom: 10px;
-      margin-bottom: 13px;
+      margin-bottom: 10px;
     }
     .header-left h1 {
       font-size: 24px;
@@ -239,8 +239,9 @@
       .section-title, .skill-item .label,
       .company, .edu-item .meta,
       .header-right a { color: #1a56db !important; }
-      /* No page breaks inside jobs */
-      .job, .project-block { page-break-inside: avoid; }
+      /* Allow project blocks to break, but protect titles and individual bullets */
+      .section-title, .summary, ul.bullets li { page-break-inside: avoid; }
+      .project-block { page-break-inside: auto; }
       .section-title { page-break-after: avoid; }
     }
   </style>
@@ -260,8 +261,8 @@
       <span class="title-tag">DevOps Engineer &amp; Platform Engineer</span>
     </div>
     <div class="header-right">
-      <a href="mailto:anirudhvaka@gmail.com">anirudhvaka@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+917981730312">+91 79817 30312</a><br/>
-      Hyderabad, India &nbsp;|&nbsp; 3 Years Experience<br/>
+      <a href="mailto:anirudhvaka@gmail.com">anirudhvaka@gmail.com</a> &nbsp;|&nbsp; <a href="tel:+917981730312">+91 79817 30312</a> &nbsp;|&nbsp; <a href="https://anirudhvaka.dev/" target="_blank">anirudhvaka.dev</a><br/>
+      Hyderabad, India &nbsp;|&nbsp; <a href="https://github.com/AnirudhVaka" target="_blank">github.com/AnirudhVaka</a> &nbsp;|&nbsp; <a href="https://www.linkedin.com/in/anirudh-vaka-7a99041b6" target="_blank">linkedin.com/in/anirudh-vaka</a><br/>
       Available for mid / senior DevOps roles
     </div>
   </header>
