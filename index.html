@@ -3,468 +3,699 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anirudh Vaka | DevOps & Cloud Architect</title>
-  
-  <!-- Premium SaaS Fonts: Inter for unmatched legibility, Fira Code for technical details -->
+  <title>Anirudh Vaka | DevOps & Platform Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
   <style>
     :root {
-      /* Ultra-premium dark theme inspired by Linear & Vercel */
-      --bg-main: #0a0a0a;
-      --bg-card: #111111;
-      --bg-card-hover: #161616;
-      
-      --text-1: #ffffff;
-      --text-2: #a1a1aa;
-      --text-3: #71717a;
-      
-      --accent-primary: #3b82f6;   /* Enterprise Blue */
-      --accent-glow: rgba(59, 130, 246, 0.4);
-      --accent-secondary: #0ea5e9; /* Sky Blue */
-      --accent-success: #10b981;   /* Pipeline Green */
-      --accent-warning: #f59e0b;   /* AWS Orange */
-      
-      --border-light: rgba(255, 255, 255, 0.1);
-      --border-glow: rgba(255, 255, 255, 0.15);
-      
-      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-      --shadow-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.8);
+      --bg: #050510;
+      --surface: rgba(15,15,35,0.65);
+      --elevated: rgba(25,25,55,0.7);
+      --cyan: #00E5FF;
+      --cyan-dim: rgba(0,229,255,0.08);
+      --amber: #FFAB40;
+      --amber-dim: rgba(255,171,64,0.08);
+      --green: #00E676;
+      --green-dim: rgba(0,230,118,0.08);
+      --red: #FF5252;
+      --purple: #B388FF;
+      --text: #F1F5F9;
+      --text2: #A8B2C4;
+      --text3: #6B7A90;
+      --border: rgba(255,255,255,0.06);
+      --border2: rgba(255,255,255,0.1);
+      --glow-cyan: 0 0 30px rgba(0,229,255,0.15);
+      --glow-green: 0 0 30px rgba(0,230,118,0.15);
+      --glass: saturate(180%) blur(20px);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+    /* Animated Aurora Mesh Background */
+    body::before,body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none}
+    body::before{
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 20%, rgba(0,229,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 30%, rgba(179,136,255,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 50% at 60% 80%, rgba(0,230,118,0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 30% 30% at 10% 70%, rgba(255,171,64,0.04) 0%, transparent 50%);
+      animation:aurora 20s ease-in-out infinite alternate;
+    }
+    body::after{
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);
+      background-size:60px 60px;
+      mask-image:radial-gradient(ellipse 70% 50% at 50% 40%,black,transparent);
+      -webkit-mask-image:radial-gradient(ellipse 70% 50% at 50% 40%,black,transparent);
+      opacity:0.5;
+    }
+    @keyframes aurora{
+      0%{transform:scale(1) translate(0,0)}
+      33%{transform:scale(1.05) translate(-2%,1%)}
+      66%{transform:scale(0.97) translate(1%,-1%)}
+      100%{transform:scale(1.02) translate(-1%,2%)}
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-1);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      overflow-x: hidden;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+    /* Reveal System */
+    [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+    [data-reveal].revealed{opacity:1;transform:translateY(0)}
+    [data-reveal-delay]{transition-delay:var(--d)}
 
-    /* --- BACKGROUND LIGHTING --- */
-    .hero-glow {
-      position: absolute; top: -150px; left: 50%; transform: translateX(-50%);
-      width: 80vw; height: 500px;
-      background: radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-glow), transparent 70%);
-      z-index: -1; pointer-events: none; opacity: 0.6;
-    }
-    .grid-bg {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
-      background-image: linear-gradient(var(--border-light) 1px, transparent 1px), linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
-      background-size: 60px 60px; z-index: -2;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
-      opacity: 0.3;
-    }
+    .container{max-width:1100px;margin:0 auto;padding:0 24px}
+    .mono{font-family:'Fira Code',monospace}
 
-    /* --- REUSABLE COMPONENTS --- */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
-    
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px;
-      transition: all 0.2s ease; cursor: pointer; text-decoration: none;
-      white-space: nowrap;
+    /* ── NAV ── */
+    nav{position:fixed;top:0;width:100%;z-index:100;padding:14px 0;background:rgba(5,5,16,0.6);backdrop-filter:var(--glass);border-bottom:1px solid var(--border);transition:all .4s}
+    nav.scrolled{background:rgba(5,5,16,0.9);box-shadow:0 4px 40px rgba(0,0,0,0.4),0 0 60px rgba(0,229,255,0.03)}
+    .nav-inner{display:flex;justify-content:space-between;align-items:center}
+    .nav-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.3px}
+    .nav-cursor{width:14px;height:14px;border:2px solid var(--cyan);border-radius:3px;animation:cursor-blink 1.2s steps(1) infinite;box-shadow:0 0 8px rgba(0,229,255,0.3)}
+    @keyframes cursor-blink{50%{opacity:0}}
+    .nav-links{display:flex;gap:28px}
+    .nav-links a{color:var(--text2);font-size:13px;font-weight:500;text-decoration:none;transition:color .2s;position:relative}
+    .nav-links a:hover,.nav-links a.active{color:var(--text)}
+    .nav-links a.active::after{content:'';position:absolute;bottom:-6px;left:0;width:100%;height:1.5px;background:var(--cyan);border-radius:1px}
+    .nav-right{display:flex;align-items:center;gap:20px}
+    .nav-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green)}
+    .nav-status .dot{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green),0 0 16px rgba(0,230,118,0.2);animation:pulse 2s infinite}
+    @keyframes pulse{50%{opacity:.4}}
+    .btn-nav{padding:7px 16px;font-size:12px;font-weight:600;color:var(--text);background:rgba(255,255,255,0.03);border:1px solid var(--border2);border-radius:6px;text-decoration:none;transition:all .3s}
+    .btn-nav:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 16px rgba(0,229,255,0.15)}
+
+    /* ── HERO ── */
+    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 24px 60px;position:relative}
+    .hero-tag{display:inline-block;font-size:clamp(.7rem,1.2vw,.82rem);color:var(--cyan);background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);padding:6px 18px;border-radius:20px;margin-bottom:28px;letter-spacing:.5px}
+    .hero h1{font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px}
+    .hero h1 .accent{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 30px rgba(0,229,255,0.2))}
+    .hero-tagline{font-size:clamp(1rem,2vw,1.2rem);color:var(--text2);margin-bottom:44px;max-width:480px}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:10px;font-weight:600;font-size:14px;text-decoration:none;transition:all .3s;cursor:pointer;border:none}
+    .btn-primary{background:linear-gradient(135deg,var(--cyan),#7C4DFF);color:#fff;position:relative;overflow:hidden}
+    .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#7C4DFF,var(--cyan));opacity:0;transition:opacity .3s}
+    .btn-primary:hover::before{opacity:1}
+    .btn-primary:hover{box-shadow:0 8px 32px rgba(0,229,255,0.25),0 0 60px rgba(124,77,255,0.15);transform:translateY(-2px)}
+    .btn-primary span,.btn-primary i{position:relative;z-index:1}
+    .btn-ghost{background:rgba(255,255,255,0.03);color:var(--text);border:1px solid var(--border2);backdrop-filter:blur(10px)}
+    .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 20px rgba(0,229,255,0.1)}
+
+    /* ── PIPELINE ── */
+    .pipeline-section{padding:0 24px 100px}
+    .pipeline-box{max-width:900px;margin:0 auto;background:var(--surface);backdrop-filter:var(--glass);border:1px solid var(--border);border-radius:16px;padding:28px 32px;position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.04)}
+    .pipeline-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+    .pipeline-header .name{font-size:13px;color:var(--text2);display:flex;align-items:center;gap:8px}
+    .pipeline-header .status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green)}
+    .pipeline-header .time{font-size:12px;color:var(--text3)}
+    .pipeline-track{display:flex;align-items:center;position:relative;gap:0}
+    .pipeline-rail{position:absolute;top:50%;left:36px;right:36px;height:2px;background:linear-gradient(90deg,var(--border),rgba(0,229,255,0.1),var(--border));z-index:0}
+    .pipeline-packet{position:absolute;width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green),0 0 24px rgba(0,230,118,0.3);z-index:1;top:-3px;left:0;opacity:0}
+    .pipeline-stage{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:2;cursor:pointer}
+    .stage-ring{width:52px;height:52px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(10,10,30,0.8);backdrop-filter:blur(8px);transition:all .3s}
+    .stage-ring.pass{border-color:var(--green);color:var(--green);box-shadow:0 0 20px rgba(0,230,118,0.15),inset 0 0 12px rgba(0,230,118,0.05)}
+    .stage-ring.running{border-color:var(--amber);color:var(--amber);animation:ring-pulse 2s infinite}
+    @keyframes ring-pulse{0%{box-shadow:0 0 8px rgba(255,171,64,0.1)}50%{box-shadow:0 0 24px rgba(255,171,64,0.3),0 0 48px rgba(255,171,64,0.1)}100%{box-shadow:0 0 8px rgba(255,171,64,0.1)}}
+    .stage-name{font-size:11px;font-weight:500;color:var(--text)}
+    .stage-detail{position:absolute;top:calc(100% + 12px);background:rgba(15,15,35,0.85);backdrop-filter:blur(12px);border:1px solid var(--border2);border-radius:10px;padding:12px 16px;font-size:12px;color:var(--text2);white-space:nowrap;opacity:0;transform:translateY(-6px);pointer-events:none;transition:all .25s;z-index:10;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+    .pipeline-stage:hover .stage-detail,.pipeline-stage.active .stage-detail{opacity:1;transform:translateY(0);pointer-events:auto}
+    .stage-detail .detail-time{color:var(--cyan);margin-top:4px;display:block}
+
+    /* ── METRICS DASHBOARD ── */
+    .metrics-section{padding:40px 24px 80px}
+    .metrics-bar{max-width:900px;margin:0 auto;display:flex;background:var(--surface);backdrop-filter:var(--glass);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.04)}
+    .metric-cell{flex:1;padding:32px 20px;text-align:center;position:relative;transition:background .3s}
+    .metric-cell:hover{background:rgba(255,255,255,0.02)}
+    .metric-cell+.metric-cell::before{content:'';position:absolute;left:0;top:20%;height:60%;width:1px;background:var(--border)}
+    .metric-label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--text2);margin-bottom:10px}
+    .metric-val{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+    .metric-sub{font-size:11px;color:var(--text3);margin-top:6px}
+    .metric-spark{display:block;margin:8px auto 0;opacity:.5}
+
+    /* ── SKILLS CONSTELLATION ── */
+    .skills-section{padding:80px 24px}
+    .section-title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+    .section-title .gradient{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section-sub{font-size:16px;color:var(--text2);margin-bottom:48px;max-width:500px}
+    .constellation{position:relative;width:100%;max-width:900px;margin:0 auto;height:480px}
+    .constellation svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+    .constellation line{stroke:rgba(255,255,255,0.04);stroke-width:1;transition:all .4s}
+    .constellation line.bright{stroke:rgba(0,229,255,0.35);filter:drop-shadow(0 0 4px rgba(0,229,255,0.3))}
+    .skill-node{position:absolute;padding:7px 16px;background:rgba(15,15,35,0.7);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:500;color:var(--text2);cursor:default;transition:all .3s;white-space:nowrap;z-index:2}
+    .skill-node:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 24px rgba(0,229,255,0.15),inset 0 0 12px rgba(0,229,255,0.05);transform:translateY(-2px)}
+    .cluster-label{position:absolute;font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:var(--text2);z-index:1}
+
+    /* Skills fallback for mobile */
+    .skills-mobile{display:none}
+    .skills-mobile-group{margin-bottom:28px}
+    .skills-mobile-group h4{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--text3);margin-bottom:10px}
+    .skills-mobile-pills{display:flex;flex-wrap:wrap;gap:8px}
+    .skills-mobile-pills span{padding:6px 14px;background:rgba(15,15,35,0.7);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--text2)}
+
+    /* ── CASE STUDIES ── */
+    .cases-section{padding:40px 24px 80px}
+    .case-block{margin-bottom:80px}
+    .case-tag{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.12em;padding:5px 14px;border-radius:20px;margin-bottom:14px}
+    .case-tag.blue{background:rgba(0,229,255,0.08);color:var(--cyan);border:1px solid rgba(0,229,255,0.15)}
+    .case-tag.green{background:rgba(0,230,118,0.08);color:var(--green);border:1px solid rgba(0,230,118,0.15)}
+    .case-title{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+    .case-summary{font-size:15px;color:var(--text2);max-width:600px;margin-bottom:36px;line-height:1.7}
+
+    /* AICPA Flow */
+    .flow-container{position:relative;overflow-x:auto;padding-bottom:20px;-webkit-overflow-scrolling:touch}
+    .flow-track{display:flex;align-items:flex-start;gap:0;min-width:max-content;padding:0 20px}
+    .flow-node{min-width:180px;max-width:200px;background:var(--surface);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:14px;padding:20px;cursor:pointer;transition:all .3s;position:relative;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,0.2)}
+    .flow-node:hover,.flow-node.expanded{border-color:rgba(0,229,255,0.3);box-shadow:0 8px 32px rgba(0,229,255,0.1),inset 0 1px 0 rgba(255,255,255,0.05)}
+    .flow-node-icon{font-size:20px;color:var(--cyan);margin-bottom:10px}
+    .flow-node-title{font-size:14px;font-weight:700;margin-bottom:4px}
+    .flow-node-badge{display:inline-block;font-size:10px;padding:3px 10px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);border-radius:20px;color:var(--cyan);margin-top:6px}
+    .flow-node-detail{max-height:0;overflow:hidden;transition:max-height .4s ease,margin .4s;margin-top:0}
+    .flow-node.expanded .flow-node-detail{max-height:200px;margin-top:12px}
+    .flow-node-detail p{font-size:12px;color:var(--text2);line-height:1.6}
+    .flow-connector{display:flex;align-items:center;justify-content:center;width:50px;flex-shrink:0;position:relative}
+    .flow-connector::before{content:'';width:100%;height:2px;background:linear-gradient(90deg,rgba(0,229,255,0.1),rgba(0,229,255,0.4),rgba(0,229,255,0.1))}
+    .flow-connector::after{content:'';position:absolute;right:2px;border:5px solid transparent;border-left:6px solid var(--cyan);filter:drop-shadow(0 0 4px rgba(0,229,255,0.4))}
+    .flow-connector-label{position:absolute;top:-18px;font-size:9px;color:var(--text3);white-space:nowrap}
+
+    /* Sidecars */
+    .flow-sidecars{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
+    .sidecar{background:var(--surface);backdrop-filter:blur(12px);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:12px;padding:16px 20px;flex:1;min-width:180px;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:all .3s}
+    .sidecar:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+    .sidecar-title{font-size:13px;font-weight:600;margin-bottom:4px}
+    .sidecar-desc{font-size:11px;color:var(--text2)}
+    .case-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+    .case-tags span{padding:4px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;font-size:11px;color:var(--text2);transition:all .2s}
+    .case-tags span:hover{border-color:rgba(255,255,255,0.15);color:var(--text)}
+
+    /* TimeChamp Layers */
+    .infra-layers{max-width:650px;margin:0 auto;display:flex;flex-direction:column;align-items:stretch;gap:0}
+    .infra-layer{background:var(--surface);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:14px;padding:22px 24px;transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,0.2)}
+    .infra-layer:hover{background:var(--elevated);border-color:var(--border2);box-shadow:0 8px 24px rgba(0,0,0,0.3);transform:translateX(4px)}
+    .infra-layer.l-physical{border-left:3px solid var(--amber)}
+    .infra-layer.l-orch{border-left:3px solid var(--cyan)}
+    .infra-layer.l-obs{border-left:3px solid var(--green)}
+    .infra-layer.l-cicd{border-left:3px solid var(--purple)}
+    .layer-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .layer-label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--text2)}
+    .layer-location{font-size:10px;color:var(--text2)}
+    .layer-pills{display:flex;flex-wrap:wrap;gap:8px}
+    .layer-pill{padding:5px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;font-size:12px;color:var(--text);transition:all .2s}
+    .layer-pill:hover{border-color:rgba(255,255,255,0.18);background:rgba(255,255,255,0.08)}
+    .layer-connector{display:flex;justify-content:center;padding:4px 0}
+    .layer-connector-line{width:2px;height:24px;background:linear-gradient(180deg,rgba(0,229,255,0.15),rgba(179,136,255,0.15));position:relative}
+    .layer-connector-dot{position:absolute;width:6px;height:6px;background:var(--cyan);border-radius:50%;left:-2px;box-shadow:0 0 8px rgba(0,229,255,0.4);animation:dot-travel 2s ease-in-out infinite}
+    @keyframes dot-travel{0%{top:0;opacity:0}20%{opacity:1}80%{opacity:1}100%{top:100%;opacity:0}}
+
+    /* ── FOOTER ── */
+    .cta-section{padding:100px 24px;text-align:center}
+    .cta-title{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.03em;margin-bottom:12px}
+    .cta-gradient{background:linear-gradient(135deg,var(--cyan),var(--purple),var(--green));background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradient-shift 4s ease infinite}
+    @keyframes gradient-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .cta-sub{font-size:17px;color:var(--text2);margin-bottom:36px;max-width:440px;margin-left:auto;margin-right:auto}
+    .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+    footer{padding:48px 24px;text-align:center;border-top:1px solid var(--border)}
+    .footer-terminal{max-width:460px;margin:0 auto 28px;background:var(--surface);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:14px;padding:20px 24px;text-align:left;box-shadow:0 8px 32px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.04)}
+    .footer-prompt{color:var(--green);font-size:13px;margin-bottom:14px}
+    .footer-links{display:flex;flex-direction:column;gap:6px}
+    .footer-links a{color:var(--text2);text-decoration:none;font-size:12px;display:flex;align-items:center;gap:10px;transition:color .2s}
+    .footer-links a:hover{color:var(--cyan)}
+    .footer-links a::before{content:'>';color:var(--text3);font-size:10px}
+    .footer-links a i{width:16px;text-align:center;color:var(--text3)}
+    .footer-copy{font-size:11px;color:var(--text2)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .constellation{height:420px}
     }
-    .btn-primary {
-      background: var(--text-1); color: var(--bg-main); border: 1px solid var(--text-1);
-      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .nav-inner{gap:12px}
+      .pipeline-track{flex-direction:column;align-items:flex-start;gap:0;padding-left:24px}
+      .pipeline-rail{top:24px;bottom:24px;left:47px;right:auto;width:2px;height:auto}
+      .pipeline-stage{flex-direction:row;gap:16px}
+      .stage-detail{position:static;opacity:1;transform:none;margin-top:8px;white-space:normal}
+      .pipeline-packet{display:none}
+      .metrics-bar{flex-wrap:wrap}
+      .metric-cell{min-width:50%}
+      .metric-cell:nth-child(3)::before,.metric-cell:nth-child(1)::before{display:none}
+      .constellation{display:none}
+      .skills-mobile{display:block}
+      .flow-track{flex-direction:column;min-width:0;gap:0;padding:0}
+      .flow-node{min-width:0;max-width:100%;width:100%}
+      .flow-connector{width:auto;height:32px;flex-direction:column}
+      .flow-connector::before{width:2px;height:100%}
+      .flow-connector::after{border:5px solid transparent;border-top:6px solid var(--cyan);border-left:none;right:auto;bottom:0;top:auto}
+      .flow-connector-label{top:auto;left:24px;bottom:4px}
+      .flow-sidecars{flex-direction:column}
+      .sidecar{min-width:0}
     }
-    .btn-primary:hover { background: #e4e4e7; transform: translateY(-2px); box-shadow: 0 0 30px rgba(255,255,255,0.4); }
-    
-    .btn-secondary {
-      background: rgba(255,255,255,0.05); color: var(--text-1); border: 1px solid var(--border-light);
-      backdrop-filter: blur(10px);
-    }
-    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--border-glow); transform: translateY(-2px); }
-
-    .tag {
-      font-family: 'Fira Code', monospace; font-size: 11px; padding: 4px 10px;
-      background: rgba(255,255,255,0.05); border: 1px solid var(--border-light);
-      border-radius: 30px; color: var(--text-2); display: inline-flex; align-items: center; gap: 5px;
-    }
-    .tag-blue { background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); color: #60a5fa; }
-    .tag-green { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #34d399; }
-
-    /* --- NAVIGATION --- */
-    nav {
-      position: fixed; top: 0; width: 100%; padding: 16px 0; z-index: 100;
-      background: rgba(10, 10, 10, 0.8); backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid var(--border-light);
-    }
-    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-size: 16px; font-weight: 700; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
-    .nav-status { font-family: 'Fira Code'; font-size: 11px; color: var(--accent-success); display: flex; align-items: center; gap: 6px; }
-    .status-dot { width: 8px; height: 8px; background: var(--accent-success); border-radius: 50%; box-shadow: 0 0 10px var(--accent-success); animation: pulse 2s infinite; }
-    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-    /* --- HERO SECTION --- */
-    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 0 60px; position: relative; }
-    
-    .hero-badge { margin-bottom: 24px; animation: slideUp 0.6s ease forwards; }
-    
-    .hero h1 {
-      font-size: clamp(32px, 8vw, 80px); font-weight: 800; letter-spacing: -2px; line-height: 1.1;
-      max-width: 900px; margin-bottom: 24px; animation: slideUp 0.8s ease forwards;
-    }
-    .hero h1 span {
-      background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
-      background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero h1 .text-glow {
-      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-      background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(59,130,246,0.3));
-    }
-    
-    .hero p {
-      font-size: clamp(16px, 3vw, 20px); color: var(--text-2); max-width: 650px; margin: 0 auto 40px;
-      line-height: 1.6; animation: slideUp 1s ease forwards; font-weight: 400;
-    }
-    
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; animation: slideUp 1.2s ease forwards; }
-
-    @keyframes slideUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
-
-    /* Pipeline Graphic Animation */
-    .hero-pipeline {
-      margin-top: 60px; width: 100%; max-width: 800px;
-      background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px;
-      padding: 24px; box-shadow: var(--shadow-lg); animation: slideUp 1.4s ease forwards;
-    }
-    .hp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px;}
-    .hp-title { font-family: 'Fira Code'; font-size: 13px; color: var(--text-2); display: flex; align-items: center; gap: 8px; }
-    .hp-time { font-family: 'Fira Code'; font-size: 12px; color: var(--text-3); }
-    
-    .hp-flow { display: flex; justify-content: space-between; align-items: center; position: relative; }
-    .hp-line { position: absolute; top: 50%; left: 10%; right: 10%; height: 2px; background: var(--border-light); z-index: 1; }
-    .hp-line-glow { position: absolute; top: 0; left: 0; height: 100%; background: var(--accent-success); box-shadow: 0 0 10px var(--accent-success); animation: flow 4s infinite; }
-    @keyframes flow { 0% { width: 0%; left: 0; } 50% { width: 100%; left: 0; } 50.1% { width: 100%; left: auto; right: 0; } 100% { width: 0%; left: auto; right: 0; } }
-
-    .hp-step { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--bg-card); padding: 0 10px; }
-    .hp-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); display: flex; justify-content: center; align-items: center; font-size: 16px; color: var(--text-1); }
-    .hp-icon.success { background: rgba(16,185,129,0.1); border-color: var(--accent-success); color: var(--accent-success); }
-    .hp-label { font-size: 11px; font-weight: 500; color: var(--text-2); }
-
-    /* --- LOGO STRIP --- */
-    .logo-strip { padding: 40px 0; border-bottom: 1px solid var(--border-light); background: rgba(255,255,255,0.01); overflow: hidden; white-space: nowrap; }
-    .ls-track { display: inline-block; animation: scroll-logos 30s linear infinite; }
-    .ls-item { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: var(--text-3); margin: 0 30px; transition: 0.3s; }
-    .ls-item:hover { color: var(--text-1); }
-    @keyframes scroll-logos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    /* --- IMPACT METRICS --- */
-    .metrics-section { padding: 80px 0; }
-    .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .metric-card {
-      background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px;
-      padding: 32px; text-align: center; transition: 0.3s;
-    }
-    .metric-card:hover { border-color: var(--border-glow); transform: translateY(-5px); background: var(--bg-card-hover); }
-    .mc-val { font-size: 40px; font-weight: 800; color: var(--text-1); letter-spacing: -1px; margin-bottom: 8px; line-height: 1; }
-    .mc-label { font-size: 13px; color: var(--text-2); font-weight: 500; }
-
-    /* --- CASE STUDIES --- */
-    .case-studies { padding: 40px 0 120px; }
-    .section-head { margin-bottom: 60px; text-align: center; }
-    .sh-title { font-size: clamp(32px, 5vw, 40px); font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
-    .sh-desc { font-size: 18px; color: var(--text-2); max-width: 600px; margin: 0 auto; }
-
-    .case-card {
-      background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 24px;
-      padding: 1px; margin-bottom: 40px; transition: 0.3s;
-    }
-    .case-card:hover { border-color: rgba(255,255,255,0.2); box-shadow: var(--shadow-lg); }
-    .cc-inner {
-      background: #0a0a0a; border-radius: 23px; padding: 60px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-    }
-
-    .cc-content h3 { font-size: clamp(24px, 4vw, 32px); font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
-    .cc-content p { font-size: 16px; color: var(--text-2); line-height: 1.6; margin-bottom: 30px; }
-    
-    .arch-features { list-style: none; margin-bottom: 30px; }
-    .arch-features li { display: flex; gap: 12px; margin-bottom: 16px; font-size: 15px; color: var(--text-1); align-items: flex-start; }
-    .arch-features i { color: var(--accent-primary); font-size: 18px; margin-top: 2px; }
-    
-    .cc-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-
-    /* Architectural Infographics */
-    .arch-graphic {
-      background: #111116; border: 1px solid #222; border-radius: 16px; padding: 24px;
-      position: relative; box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
-    }
-    .ag-header { font-family: 'Fira Code'; font-size: 11px; color: var(--text-3); margin-bottom: 24px; border-bottom: 1px solid #222; padding-bottom: 10px; }
-    
-    .matrix-grid { display: grid; grid-template-columns: 1fr 30px 1fr; gap: 10px; align-items: center; }
-    .mg-col { display: flex; flex-direction: column; gap: 12px; }
-    .mg-node { background: #1a1a24; border: 1px solid #333; padding: 10px; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; }
-    .mg-node i { color: var(--text-2); font-size: 14px; }
-    .mg-arrow { color: var(--text-3); text-align: center; }
-    
-    .mg-node.aws { border-color: rgba(245,158,11,0.3); } .mg-node.aws i { color: var(--accent-warning); }
-    .mg-node.sec { border-color: rgba(16,185,129,0.3); } .mg-node.sec i { color: var(--accent-success); }
-    .mg-node.gh { border-color: rgba(59,130,246,0.3); } .mg-node.gh i { color: var(--accent-primary); }
-
-    .topo-layer { border: 1px solid #333; border-radius: 12px; padding: 16px; position: relative; margin-bottom: 20px; background: rgba(255,255,255,0.02); }
-    .tl-title { font-family: 'Fira Code'; font-size: 10px; color: var(--text-2); position: absolute; top: -10px; left: 16px; background: #111116; padding: 0 8px; }
-    .tl-flex { display: flex; gap: 12px; justify-content: center; }
-    .tl-box { background: #1a1a24; border: 1px solid #333; border-radius: 8px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; flex-direction: column; font-size: 18px; color: var(--accent-secondary); }
-    .tl-box span { font-size: 8px; font-family: 'Fira Code'; margin-top: 4px; color: var(--text-3); }
-
-    /* --- FOOTER --- */
-    footer { padding: 60px 0; border-top: 1px solid var(--border-light); text-align: center; background: #050505; }
-    .foot-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; }
-    .foot-links a { color: var(--text-2); font-size: 24px; transition: 0.2s; }
-    .foot-links a:hover { color: var(--text-1); }
-    .foot-copy { font-family: 'Fira Code'; font-size: 12px; color: var(--text-3); }
-
-    /* --- RESPONSIVE BREAKPOINTS --- */
-    @media (max-width: 1024px) {
-      .cc-inner { grid-template-columns: 1fr; padding: 48px; gap: 40px; }
-      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 768px) {
-      .hero-pipeline { transform: scale(0.9); margin-top: 40px; }
-      .sh-title { font-size: 32px; }
-    }
-
-    @media (max-width: 600px) {
-      .container { padding: 0 20px; }
-      nav { padding: 12px 0; }
-      .nav-inner { flex-direction: column; gap: 12px; align-items: center; }
-      .nav-inner > div:last-child { flex-direction: column; gap: 8px !important; }
-      .nav-status { font-size: 10px; }
-      
-      .hero { padding: 140px 0 40px; }
-      .hero h1 { font-size: 32px; }
-      .hero p { font-size: 15px; margin-bottom: 30px; }
-      .hero-actions { flex-direction: column; width: 100%; max-width: 300px; }
-      .hero-actions .btn { width: 100%; }
-      .hero-pipeline { display: none; }
-      
-      .metrics-grid { grid-template-columns: 1fr; }
-      .cc-inner { padding: 32px 20px; }
-      .case-card { border-radius: 16px; }
-      .cc-inner { border-radius: 15px; }
-      
-      .ls-item { font-size: 16px; margin: 0 20px; }
-      .foot-links { gap: 16px; }
+    @media(max-width:480px){
+      .hero h1{font-size:2.2rem}
+      .hero-actions{flex-direction:column;width:100%;max-width:280px}
+      .hero-actions .btn{width:100%;justify-content:center}
+      .pipeline-box{padding:20px 16px}
+      .metric-cell{padding:20px 12px}
+      .cta-actions{flex-direction:column;align-items:center}
+      .cta-actions .btn{width:100%;max-width:280px;justify-content:center}
     }
   </style>
 </head>
 <body>
 
-  <!-- Background Tech -->
-  <div class="hero-glow"></div>
-  <div class="grid-bg"></div>
-
-  <!-- Navigation -->
-  <nav>
-    <div class="container nav-inner">
-      <div class="nav-brand"><i class="fa-solid fa-code-merge" style="color:var(--accent-primary)"></i> Anirudh Vaka</div>
-      <div style="display: flex; gap: 24px; align-items: center;" class="nav-actions">
-        <div class="nav-status"><div class="status-dot"></div> Available for Opportunities</div>
-        <a href="resume.html" target="_blank" class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Export Resume</a>
-      </div>
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <div class="nav-brand"><div class="nav-cursor"></div> Anirudh Vaka</div>
+    <div class="nav-links">
+      <a href="#metrics">Metrics</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
     </div>
-  </nav>
-
-  <!-- High-Impact Hero Section -->
-  <section class="hero container">
-    <div class="tag hero-badge">DevOps Engineer &amp; Platform Architect</div>
-    <h1>Building Resilient <span class="text-glow">Systems</span><br/>Across Cloud and On-Premise Infrastructure</h1>
-    <p>I design and operate systems that balance bare-metal reliability with cloud-native agility. From provisioning and managing infrastructure within enterprise-grade datacenters like CtrlS to engineering scalable, label-driven GitOps pipelines for Tier-1 platforms — I deliver infrastructure that is secure, observable, and built to scale.</p>
-    
-    <div class="hero-actions">
-      <a href="#case-studies" class="btn btn-primary">View Deployments</a>
-      <a href="resume.html" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-github"></i> View Full Profile</a>
-    </div>
-
-    <!-- Live Pipeline Graphic for instant "Ah, he's DevOps" recognition -->
-    <div class="hero-pipeline">
-      <div class="hp-header">
-        <div class="hp-title"><i class="fa-solid fa-play" style="color:var(--accent-success)"></i> Workflow: production-release-matrix.yml</div>
-        <div class="hp-time">4m 12s</div>
-      </div>
-      <div class="hp-flow">
-        <div class="hp-line"><div class="hp-line-glow"></div></div>
-        <div class="hp-step"><div class="hp-icon success"><i class="fa-solid fa-check"></i></div><div class="hp-label">Build</div></div>
-        <div class="hp-step"><div class="hp-icon success"><i class="fa-solid fa-shield"></i></div><div class="hp-label">SAST Scan</div></div>
-        <div class="hp-step"><div class="hp-icon success"><i class="fa-brands fa-aws"></i></div><div class="hp-label">Assume IAM</div></div>
-        <div class="hp-step"><div class="hp-icon success"><i class="fa-solid fa-cube"></i></div><div class="hp-label">ECS Deploy</div></div>
-        <div class="hp-step"><div class="hp-icon" style="color:var(--accent-warning); border-color:rgba(245,158,11,0.3); background:rgba(245,158,11,0.1)"><i class="fa-solid fa-spinner fa-spin"></i></div><div class="hp-label">E2E Tests</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Recruiter Logo Scroller: Immediate Stack Recognition -->
-  <div class="logo-strip">
-    <div class="ls-track">
-      <!-- Duplicate content to ensure smooth infinite scroll -->
-      <span class="ls-item"><i class="fa-brands fa-aws" style="color:#f59e0b"></i> AWS Cloud</span>
-      <span class="ls-item"><i class="fa-brands fa-github" style="color:#ffffff"></i> GitHub Enterprise</span>
-      <span class="ls-item"><i class="fa-solid fa-dharmachakra" style="color:#3b82f6"></i> Kubernetes</span>
-      <span class="ls-item"><i class="fa-brands fa-docker" style="color:#0ea5e9"></i> Docker</span>
-      <span class="ls-item"><i class="fa-brands fa-cloudflare" style="color:#f38020"></i> Cloudflare</span>
-      <span class="ls-item"><i class="fa-solid fa-shield-halved" style="color:#cd3d33"></i> Fortigate</span>
-      <span class="ls-item"><i class="fa-solid fa-cubes" style="color:#8b5cf6"></i> Terraform</span>
-      <span class="ls-item"><i class="fa-solid fa-bolt" style="color:#3b82f6"></i> ServiceNow</span>
-      <span class="ls-item"><i class="fa-brands fa-microsoft" style="color:#0ea5e9"></i> Azure DevOps</span>
-      
-      <span class="ls-item"><i class="fa-brands fa-aws" style="color:#f59e0b"></i> AWS Cloud</span>
-      <span class="ls-item"><i class="fa-brands fa-github" style="color:#ffffff"></i> GitHub Enterprise</span>
-      <span class="ls-item"><i class="fa-solid fa-dharmachakra" style="color:#3b82f6"></i> Kubernetes</span>
-      <span class="ls-item"><i class="fa-brands fa-docker" style="color:#0ea5e9"></i> Docker</span>
-      <span class="ls-item"><i class="fa-brands fa-cloudflare" style="color:#f38020"></i> Cloudflare</span>
-      <span class="ls-item"><i class="fa-solid fa-shield-halved" style="color:#cd3d33"></i> Fortigate</span>
-      <span class="ls-item"><i class="fa-solid fa-cubes" style="color:#8b5cf6"></i> Terraform</span>
-      <span class="ls-item"><i class="fa-solid fa-bolt" style="color:#3b82f6"></i> ServiceNow</span>
-      <span class="ls-item"><i class="fa-brands fa-microsoft" style="color:#0ea5e9"></i> Azure DevOps</span>
+    <div class="nav-right">
+      <div class="nav-status mono"><div class="dot"></div> Available</div>
+      <a href="resume.html" target="_blank" class="btn-nav mono">Resume</a>
     </div>
   </div>
+</nav>
 
-  <!-- Clear Impact Metrics -->
-  <section class="metrics-section container">
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="mc-val">300+</div>
-        <div class="mc-label">Global Workflows Built</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag mono" data-reveal>DevOps Engineer & Platform Architect</div>
+  <h1 data-reveal>Anirudh <span class="accent">Vaka</span></h1>
+  <p class="hero-tagline" data-reveal>Hybrid infrastructure. Bare-metal to cloud-native.</p>
+  <div class="hero-actions" data-reveal>
+    <a href="#projects" class="btn btn-primary"><span>View Projects</span></a>
+    <a href="resume.html" target="_blank" class="btn btn-ghost"><i class="fa-regular fa-file-lines"></i> Resume</a>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="pipeline-section" data-reveal>
+  <div class="pipeline-box">
+    <div class="pipeline-header mono">
+      <span class="name"><i class="fa-solid fa-play" style="color:var(--green);font-size:10px"></i> production-release-matrix.yml</span>
+      <span class="status"><div class="dot" style="width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 6px var(--green)"></div> Passing</span>
+      <span class="time">4m 12s</span>
+    </div>
+    <div class="pipeline-track">
+      <div class="pipeline-rail">
+        <div class="pipeline-packet" id="pkt1"></div>
+        <div class="pipeline-packet" id="pkt2"></div>
+        <div class="pipeline-packet" id="pkt3"></div>
       </div>
-      <div class="metric-card">
-        <div class="mc-val">52</div>
-        <div class="mc-label">Core Enterprise Pipelines</div>
+      <div class="pipeline-stage">
+        <div class="stage-ring pass"><i class="fa-solid fa-hammer"></i></div>
+        <span class="stage-name mono">Build</span>
+        <div class="stage-detail mono">Multi-arch Docker build<span class="detail-time">42s</span></div>
       </div>
-      <div class="metric-card">
-        <div class="mc-val">60%</div>
-        <div class="mc-label"> Faster Cycle Time</div>
+      <div class="pipeline-stage">
+        <div class="stage-ring pass"><i class="fa-solid fa-shield"></i></div>
+        <span class="stage-name mono">SAST</span>
+        <div class="stage-detail mono">Trivy + Grype CVE scan<span class="detail-time">1m 08s</span></div>
       </div>
-      <div class="metric-card">
-        <div class="mc-val">Z-T</div>
-        <div class="mc-label">Zero-Trust Endpoints</div>
+      <div class="pipeline-stage">
+        <div class="stage-ring pass"><i class="fa-solid fa-key"></i></div>
+        <span class="stage-name mono">IAM</span>
+        <div class="stage-detail mono">OIDC keyless auth to AWS<span class="detail-time">12s</span></div>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-ring pass"><i class="fa-solid fa-cube"></i></div>
+        <span class="stage-name mono">Deploy</span>
+        <div class="stage-detail mono">ECS rolling deployment<span class="detail-time">1m 34s</span></div>
+      </div>
+      <div class="pipeline-stage">
+        <div class="stage-ring running"><i class="fa-solid fa-vial"></i></div>
+        <span class="stage-name mono">E2E</span>
+        <div class="stage-detail mono">Integration test suite<span class="detail-time" style="color:var(--amber)">running...</span></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Architectural Case Studies -->
-  <section id="case-studies" class="case-studies container">
-    <div class="section-head">
-      <h2 class="sh-title">Enterprise Case Studies</h2>
-      <p class="sh-desc">Deep technical dives into the architectures and highly regulated deployment topologies I have engineered over my career.</p>
+<!-- METRICS -->
+<section id="metrics" class="metrics-section" data-reveal>
+  <div class="metrics-bar">
+    <div class="metric-cell">
+      <div class="metric-label mono">Workflows</div>
+      <div class="metric-val mono" data-target="300" data-suffix="+">0</div>
+      <svg class="metric-spark" width="48" height="16" viewBox="0 0 48 16"><polyline points="0,14 8,10 16,12 24,6 32,8 40,3 48,1" fill="none" stroke="#00FF88" stroke-width="1.5"/></svg>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-label mono">Pipelines</div>
+      <div class="metric-val mono" data-target="52" data-suffix="">0</div>
+      <svg class="metric-spark" width="48" height="16" viewBox="0 0 48 16"><polyline points="0,12 8,11 16,8 24,9 32,5 40,4 48,2" fill="none" stroke="#00D4FF" stroke-width="1.5"/></svg>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-label mono">Cycle Time</div>
+      <div class="metric-val mono" data-target="60" data-suffix="%">0</div>
+      <div class="metric-sub">faster</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-label mono">Zero-Trust</div>
+      <div class="metric-val mono" data-target="100" data-suffix="%">0</div>
+      <div class="metric-sub">coverage</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section" data-reveal>
+  <div class="container">
+    <h2 class="section-title">Tech <span class="gradient">Stack</span></h2>
+    <p class="section-sub">Technologies I use daily to build, ship, and operate infrastructure at scale.</p>
+
+    <!-- Desktop: Constellation -->
+    <div class="constellation" id="constellation">
+      <svg id="constellation-svg"></svg>
+      <!-- Cloud cluster (top-left) -->
+      <span class="cluster-label" style="top:2%;left:8%">CLOUD</span>
+      <div class="skill-node mono" data-id="aws" style="top:10%;left:5%"><i class="fa-brands fa-aws" style="color:var(--amber)"></i> AWS</div>
+      <div class="skill-node mono" data-id="azure" style="top:8%;left:20%"><i class="fa-brands fa-microsoft" style="color:#0ea5e9"></i> Azure</div>
+      <div class="skill-node mono" data-id="cf" style="top:20%;left:12%"><i class="fa-brands fa-cloudflare" style="color:#f38020"></i> Cloudflare</div>
+
+      <!-- CI/CD cluster (top-right) -->
+      <span class="cluster-label" style="top:2%;right:12%">CI/CD</span>
+      <div class="skill-node mono" data-id="gha" style="top:10%;right:5%"><i class="fa-brands fa-github"></i> Actions</div>
+      <div class="skill-node mono" data-id="ado" style="top:8%;right:22%"><i class="fa-brands fa-microsoft" style="color:#0ea5e9"></i> Azure DevOps</div>
+      <div class="skill-node mono" data-id="tf" style="top:22%;right:10%"><i class="fa-solid fa-cubes" style="color:var(--purple)"></i> Terraform</div>
+      <div class="skill-node mono" data-id="sn" style="top:22%;right:28%"><i class="fa-solid fa-bolt" style="color:var(--cyan)"></i> ServiceNow</div>
+      <div class="skill-node mono" data-id="lerna" style="top:35%;right:16%"><i class="fa-solid fa-layer-group" style="color:var(--purple)"></i> Lerna</div>
+
+      <!-- Containers cluster (center) -->
+      <span class="cluster-label" style="top:42%;left:38%">CONTAINERS</span>
+      <div class="skill-node mono" data-id="docker" style="top:50%;left:30%"><i class="fa-brands fa-docker" style="color:#0ea5e9"></i> Docker</div>
+      <div class="skill-node mono" data-id="k8s" style="top:48%;left:48%"><i class="fa-solid fa-dharmachakra" style="color:var(--cyan)"></i> Kubernetes</div>
+      <div class="skill-node mono" data-id="helm" style="top:60%;left:38%"><i class="fa-solid fa-anchor" style="color:#0ea5e9"></i> Helm</div>
+      <div class="skill-node mono" data-id="ecs" style="top:58%;left:55%"><i class="fa-solid fa-cube" style="color:var(--amber)"></i> ECS</div>
+      <div class="skill-node mono" data-id="ecr" style="top:50%;left:66%"><i class="fa-solid fa-box" style="color:var(--amber)"></i> ECR</div>
+
+      <!-- Security cluster (bottom-left) -->
+      <span class="cluster-label" style="bottom:18%;left:5%">SECURITY</span>
+      <div class="skill-node mono" data-id="fg" style="bottom:14%;left:3%"><i class="fa-solid fa-shield-halved" style="color:var(--red)"></i> Fortigate</div>
+      <div class="skill-node mono" data-id="oidc" style="bottom:26%;left:18%"><i class="fa-solid fa-key" style="color:var(--green)"></i> OIDC/IAM</div>
+      <div class="skill-node mono" data-id="vpn" style="bottom:12%;left:22%"><i class="fa-solid fa-lock" style="color:var(--amber)"></i> IPsec</div>
+      <div class="skill-node mono" data-id="scan" style="bottom:26%;left:3%"><i class="fa-solid fa-bug-slash" style="color:var(--cyan)"></i> Trivy</div>
+      <div class="skill-node mono" data-id="tm" style="bottom:2%;left:12%"><i class="fa-solid fa-shield" style="color:var(--red)"></i> Trend Micro</div>
+      <div class="skill-node mono" data-id="s1" style="bottom:2%;left:30%"><i class="fa-solid fa-virus-slash" style="color:var(--purple)"></i> SentinelOne</div>
+
+      <!-- Version Control cluster (center-bottom) -->
+      <span class="cluster-label" style="bottom:2%;left:46%">VERSION CONTROL</span>
+      <div class="skill-node mono" data-id="git" style="bottom:8%;left:44%"><i class="fa-brands fa-git-alt" style="color:#f05032"></i> Git</div>
+      <div class="skill-node mono" data-id="gh" style="bottom:8%;left:58%"><i class="fa-brands fa-github"></i> GitHub</div>
+
+      <!-- Observability cluster (bottom-right) -->
+      <span class="cluster-label" style="bottom:18%;right:8%">OBSERVABILITY</span>
+      <div class="skill-node mono" data-id="prom" style="bottom:14%;right:3%"><i class="fa-solid fa-fire" style="color:#e85d2a"></i> Prometheus</div>
+      <div class="skill-node mono" data-id="graf" style="bottom:26%;right:18%"><i class="fa-solid fa-chart-line" style="color:var(--amber)"></i> Grafana</div>
+      <div class="skill-node mono" data-id="cw" style="bottom:12%;right:22%"><i class="fa-solid fa-cloud" style="color:var(--amber)"></i> CloudWatch</div>
+      <div class="skill-node mono" data-id="pa" style="bottom:26%;right:3%"><i class="fa-solid fa-bell" style="color:#0ea5e9"></i> Alerts</div>
+      <div class="skill-node mono" data-id="nr" style="bottom:2%;right:10%"><i class="fa-solid fa-chart-area" style="color:#1CE783"></i> New Relic</div>
     </div>
 
-    <!-- Card 1: AICPA -->
-    <div class="case-card">
-      <div class="cc-inner">
-        <div class="cc-content">
-          <div class="tag tag-blue" style="margin-bottom: 16px;">CI/CD ARCHITECTURE</div>
-          <h3>AICPA Actions Platform</h3>
-          <p>Spearheaded the organization's DevOps migration, replacing an error-prone sequential model (develop &rarr; sit) with a deeply automated, <strong>Label-Driven GitOps Topology</strong> (Main &rarr; Release). Completely eliminated manual cherry-picking and prod deployments.</p>
-          
-          <ul class="arch-features">
-            <li><i class="fa-solid fa-circle-check"></i> <strong>Full-Stack FBEs:</strong> Feature PRs dynamically provision complete AWS sets (ECS, RDS, S3, SQS) via an `fbe` label for exhaustive isolated testing.</li>
-            <li><i class="fa-solid fa-circle-check"></i> <strong>Teams Deployment Ops:</strong> Integrated Power Automate hooks into the CD pipeline for real-time global deployment visibility in MS Teams.</li>
-            <li><i class="fa-solid fa-circle-check"></i> <strong>Zero-Touch Prod Releases:</strong> Merging to `main` fires Prod deployments with automated ServiceNow CR creation and keyless OIDC authentication.</li>
-            <li><i class="fa-solid fa-circle-check"></i> <strong>ServiceNow ITSM:</strong> The production pipeline programmatically creates a Change Request before initialization and closes it upon successful E2E validation.</li>
-          </ul>
+    <!-- Mobile: Grouped pills -->
+    <div class="skills-mobile">
+      <div class="skills-mobile-group"><h4 class="mono">Cloud Platforms</h4><div class="skills-mobile-pills"><span>AWS</span><span>Azure</span><span>Cloudflare</span></div></div>
+      <div class="skills-mobile-group"><h4 class="mono">CI/CD & GitOps</h4><div class="skills-mobile-pills"><span>GitHub Actions</span><span>Azure DevOps</span><span>Terraform</span><span>ServiceNow</span><span>Lerna</span></div></div>
+      <div class="skills-mobile-group"><h4 class="mono">Containers</h4><div class="skills-mobile-pills"><span>Docker</span><span>Kubernetes</span><span>Helm</span><span>ECS</span><span>ECR</span></div></div>
+      <div class="skills-mobile-group"><h4 class="mono">Security</h4><div class="skills-mobile-pills"><span>Fortigate</span><span>OIDC/IAM</span><span>IPsec VPN</span><span>Trivy/Grype</span><span>Trend Micro</span><span>SentinelOne</span></div></div>
+      <div class="skills-mobile-group"><h4 class="mono">Version Control</h4><div class="skills-mobile-pills"><span>Git</span><span>GitHub</span></div></div>
+      <div class="skills-mobile-group"><h4 class="mono">Observability</h4><div class="skills-mobile-pills"><span>Prometheus</span><span>Grafana</span><span>CloudWatch</span><span>New Relic</span><span>Power Automate</span></div></div>
+    </div>
+  </div>
+</section>
 
-          <div class="cc-tags">
-            <span class="tag">GitOps</span><span class="tag">GitHub Actions</span><span class="tag">AWS ECS</span><span class="tag">ServiceNow</span><span class="tag">OIDC</span>
+<!-- CASE STUDIES -->
+<section id="projects" class="cases-section">
+  <div class="container">
+
+    <!-- AICPA -->
+    <div class="case-block" data-reveal>
+      <span class="case-tag blue mono">CI/CD Architecture</span>
+      <h2 class="case-title">AICPA Actions Platform</h2>
+      <p class="case-summary">Replaced an error-prone sequential model with a deeply automated, label-driven GitOps topology. Eliminated manual cherry-picking and prod deployments entirely.</p>
+
+      <div class="flow-container">
+        <div class="flow-track" id="aicpa-flow">
+          <div class="flow-node" data-expand>
+            <div class="flow-node-icon"><i class="fa-solid fa-code-branch"></i></div>
+            <div class="flow-node-title">Feature Branch</div>
+            <div class="flow-node-badge mono">PR to release</div>
+            <div class="flow-node-detail"><p>Developers create feature branches and open PRs to the release branch for review and CI checks.</p></div>
+          </div>
+          <div class="flow-connector"><span class="flow-connector-label mono">label: fbe</span></div>
+          <div class="flow-node" data-expand>
+            <div class="flow-node-icon" style="color:var(--green)"><i class="fa-solid fa-server"></i></div>
+            <div class="flow-node-title">FBE Spawn</div>
+            <div class="flow-node-badge mono">ECS + RDS + S3 + SQS</div>
+            <div class="flow-node-detail"><p>Full-Stack Feature Branch Environment provisioned per PR. Scheduled Friday-night cleanup auto-destroys all FBEs to save weekend costs.</p></div>
+          </div>
+          <div class="flow-connector"><span class="flow-connector-label mono">auto PR</span></div>
+          <div class="flow-node" data-expand>
+            <div class="flow-node-icon"><i class="fa-brands fa-github"></i></div>
+            <div class="flow-node-title">Release &rarr; Main</div>
+            <div class="flow-node-badge mono">label: staging</div>
+            <div class="flow-node-detail"><p>Auto-generated PR from release to main. Staging label triggers ECS staging deployment for final validation.</p></div>
+          </div>
+          <div class="flow-connector"><span class="flow-connector-label mono">merge</span></div>
+          <div class="flow-node" data-expand>
+            <div class="flow-node-icon" style="color:var(--amber)"><i class="fa-solid fa-rocket"></i></div>
+            <div class="flow-node-title">Production Deploy</div>
+            <div class="flow-node-badge mono">SNOW CR + OIDC + ECS</div>
+            <div class="flow-node-detail"><p>ServiceNow Change Request auto-created, OIDC keyless auth to AWS, ECS prod deployment, E2E validation, CR auto-closed.</p></div>
           </div>
         </div>
-        
-        <!-- Structural Graphic -->
-        <div class="arch-graphic">
-          <div class="ag-header" style="margin-bottom: 15px;">architecture://gitops_release_topology.yml</div>
-          
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <!-- Step 1: Feature -> Release -->
-            <div class="mg-node gh" style="justify-content: space-between; padding: 16px;">
-              <div style="display: flex; gap: 10px; align-items: center;"><i class="fa-solid fa-code-branch"></i> Feature &rarr; Release PR</div>
-              <div class="tag tag-blue" style="font-size: 10px; padding: 4px 10px;">label: fbe &rarr; Spawns FBE</div>
-            </div>
-            
-            <div style="text-align: center; color: #333; margin: -2px 0;"><i class="fa-solid fa-arrow-down"></i></div>
-            
-            <!-- Step 2: Auto PR Staging -->
-            <div class="mg-node gh" style="justify-content: space-between; padding: 16px;">
-              <div style="display: flex; gap: 10px; align-items: center;"><i class="fa-brands fa-github"></i> Auto: Release &rarr; Main PR</div>
-              <div class="tag tag-green" style="font-size: 10px; padding: 4px 10px;">label: staging &rarr; ECS Staging</div>
-            </div>
+      </div>
 
-            <div style="text-align: center; color: #333; margin: -2px 0;"><i class="fa-solid fa-arrow-down"></i></div>
-            
-            <!-- Step 3: Prod Merge & ITSM -->
-            <div class="mg-node aws" style="justify-content: space-between; padding: 16px;">
-              <div style="display: flex; gap: 10px; align-items: center; color: var(--text-1); font-weight: 600;"><i class="fa-solid fa-rocket" style="color: var(--accent-warning);"></i> Merge PR to Main</div>
-              <div class="tag" style="background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: #f59e0b; font-size: 10px; padding: 4px 10px;">SNOW Auth + ECS Prod</div>
-            </div>
-          </div>
+      <div class="flow-sidecars" data-reveal>
+        <div class="sidecar">
+          <div class="sidecar-title">ServiceNow ITSM</div>
+          <div class="sidecar-desc mono">Auto CR lifecycle tied to deployments</div>
         </div>
+        <div class="sidecar" style="border-left-color:var(--cyan)">
+          <div class="sidecar-title">Teams ChatOps</div>
+          <div class="sidecar-desc mono">Power Automate deployment notifications</div>
+        </div>
+        <div class="sidecar" style="border-left-color:var(--purple)">
+          <div class="sidecar-title">Lerna Monorepo</div>
+          <div class="sidecar-desc mono">Auto semver + ECR image promotion</div>
+        </div>
+      </div>
+
+      <div class="case-tags mono">
+        <span>GitOps</span><span>GitHub Actions</span><span>AWS ECS</span><span>Lerna</span><span>ECR</span><span>ServiceNow</span><span>OIDC</span>
       </div>
     </div>
 
-    <!-- Card 2: TimeChamp -->
-    <div class="case-card">
-      <div class="cc-inner">
-        <div class="cc-content">
-          <div class="tag tag-green" style="margin-bottom: 16px;">BARE-METAL DATACENTER ARCHITECTURE</div>
-          <h3>TimeChamp Infrastructure</h3>
-          <p>Single-handedly architected and provisioned a full-scale on-premise Kubernetes infrastructure from bare metal at the CtrlS Datacenter in Hyderabad. Modernized a legacy Windows monolith into a high-availability Linux ecosystem without reliance on managed cloud providers.</p>
-          
-          <ul class="arch-features">
-            <li><i class="fa-solid fa-circle-check"></i> <strong>Platform Reboot:</strong> Migrated from Octopus Deploy to full Azure DevOps pipelines.</li>
-            <li><i class="fa-solid fa-circle-check"></i> <strong>K8s Orchestration:</strong> Orchestrated Linux containerized microservices via Helm charts.</li>
-            <li><i class="fa-solid fa-circle-check"></i> <strong>Physical Security:</strong> Designed Fortigate 200F/G edge security and IPsec VPNs.</li>
-            <li><i class="fa-solid fa-circle-check"></i> <strong>Observability:</strong> Continuous Prometheus polling mapped to Grafana dashboards.</li>
-          </ul>
+    <!-- TimeChamp -->
+    <div class="case-block" data-reveal>
+      <span class="case-tag green mono">Bare-Metal Infrastructure</span>
+      <h2 class="case-title">TimeChamp Infrastructure</h2>
+      <p class="case-summary">Single-handedly architected a full-scale on-premise Kubernetes infrastructure from bare metal at CtrlS Datacenter. Modernized a legacy Windows monolith into a high-availability Linux ecosystem.</p>
 
-          <div class="cc-tags">
-            <span class="tag">Kubernetes</span><span class="tag">Azure DevOps</span><span class="tag">Docker</span><span class="tag">Fortigate</span>
+      <div class="infra-layers">
+        <div class="infra-layer l-physical">
+          <div class="layer-header"><span class="layer-label mono">Physical Layer</span><span class="layer-location mono">CtrlS Datacenter, Hyderabad</span></div>
+          <div class="layer-pills mono">
+            <span class="layer-pill">Fortigate 200F/G</span>
+            <span class="layer-pill">IPsec VPN</span>
+            <span class="layer-pill">DELL Bare-Metal</span>
+            <span class="layer-pill">Cisco VLANs</span>
           </div>
         </div>
-        
-        <div class="arch-graphic">
-          <div class="ag-header">architecture://ctrls_baremetal_topology.drawio</div>
-          
-          <div class="topo-layer" style="border-color: rgba(16,185,129,0.3);">
-            <div class="tl-title">CTRLS DATACENTER: HYDERABAD (ON-PREM)</div>
-            <div class="tl-flex" style="flex-wrap: wrap; gap: 15px;">
-              <div class="tl-box" style="color:#60a5fa"><i class="fa-solid fa-server"></i><span>Fortigate</span></div>
-              <div class="tl-box" style="color:#34d399"><i class="fa-solid fa-dharmachakra"></i><span>K8s Node 1</span></div>
-              <div class="tl-box" style="color:#34d399"><i class="fa-solid fa-dharmachakra"></i><span>K8s Node 2</span></div>
-              <div class="tl-box" style="color:#f59e0b"><i class="fa-solid fa-database"></i><span>DB Vault</span></div>
-            </div>
-          </div>
-          
-          <div style="text-align: center; color: var(--accent-success); font-family: 'Fira Code'; font-size: 11px; margin-top: 15px;">
-            <i class="fa-solid fa-check-circle"></i> 100% Single-Handed Bare-Metal Execution
+        <div class="layer-connector"><div class="layer-connector-line"><div class="layer-connector-dot"></div></div></div>
+        <div class="infra-layer l-orch">
+          <div class="layer-header"><span class="layer-label mono">Orchestration Layer</span></div>
+          <div class="layer-pills mono">
+            <span class="layer-pill">Kubernetes</span>
+            <span class="layer-pill">Helm Charts</span>
+            <span class="layer-pill">Docker</span>
+            <span class="layer-pill">Hyper-V</span>
           </div>
         </div>
+        <div class="layer-connector"><div class="layer-connector-line"><div class="layer-connector-dot" style="animation-delay:.6s"></div></div></div>
+        <div class="infra-layer l-obs">
+          <div class="layer-header"><span class="layer-label mono">Observability Layer</span></div>
+          <div class="layer-pills mono">
+            <span class="layer-pill">Prometheus</span>
+            <span class="layer-pill">Grafana</span>
+            <span class="layer-pill">Loki</span>
+          </div>
+        </div>
+        <div class="layer-connector"><div class="layer-connector-line"><div class="layer-connector-dot" style="animation-delay:1.2s"></div></div></div>
+        <div class="infra-layer l-cicd">
+          <div class="layer-header"><span class="layer-label mono">CI/CD Layer</span></div>
+          <div class="layer-pills mono">
+            <span class="layer-pill">Azure DevOps</span>
+            <span class="layer-pill">SonarQube</span>
+            <span class="layer-pill">InstallShield MSI</span>
+          </div>
+        </div>
+      </div>
 
+      <div class="case-tags mono" style="margin-top:28px;justify-content:center">
+        <span>Kubernetes</span><span>Azure DevOps</span><span>Docker</span><span>Fortigate</span><span>Prometheus</span>
       </div>
     </div>
 
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="foot-links">
-        <a href="mailto:anirudhvaka@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-        <a href="tel:+917981730312"><i class="fa-solid fa-phone"></i></a>
-        <a href="resume.html"><i class="fa-regular fa-file-pdf"></i></a>
-      </div>
-      <div class="foot-copy">
-        // DEVOPS &amp; PLATFORM PORTFOLIO // ENTERPRISE SPEC // 2026 ANIRUDH VAKA
-      </div>
+<!-- CTA -->
+<section id="contact" class="cta-section" data-reveal>
+  <h2 class="cta-title">Let's <span class="cta-gradient">Build Together</span></h2>
+  <p class="cta-sub">Looking for a DevOps engineer who ships infrastructure at scale?</p>
+  <div class="cta-actions">
+    <a href="mailto:anirudhvaka@gmail.com" class="btn btn-primary"><i class="fa-solid fa-envelope" style="position:relative;z-index:1"></i> <span>Get in Touch</span></a>
+    <a href="https://www.linkedin.com/in/anirudh-vaka-7a99041b6" target="_blank" class="btn btn-ghost"><i class="fa-brands fa-linkedin"></i> Connect</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-terminal mono">
+    <div class="footer-prompt">$ ssh anirudh@connect</div>
+    <div class="footer-links">
+      <a href="mailto:anirudhvaka@gmail.com"><i class="fa-solid fa-envelope"></i> anirudhvaka@gmail.com</a>
+      <a href="tel:+917981730312"><i class="fa-solid fa-phone"></i> +91 79817 30312</a>
+      <a href="https://github.com/AnirudhVaka" target="_blank"><i class="fa-brands fa-github"></i> github.com/AnirudhVaka</a>
+      <a href="https://www.linkedin.com/in/anirudh-vaka-7a99041b6" target="_blank"><i class="fa-brands fa-linkedin"></i> linkedin.com/in/anirudh-vaka</a>
     </div>
-  </footer>
+  </div>
+  <div class="footer-copy mono">// DEVOPS &amp; PLATFORM PORTFOLIO // 2026 ANIRUDH VAKA</div>
+</footer>
 
+<script>
+(function(){
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── Scroll Reveal ──
+  var revealObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('revealed');
+        revealObs.unobserve(e.target);
+        if(e.target.classList.contains('metrics-section')) countUp();
+      }
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){revealObs.observe(el)});
+
+  // ── Counter ──
+  function countUp(){
+    document.querySelectorAll('.metric-val[data-target]').forEach(function(el){
+      var t=parseInt(el.dataset.target),s=el.dataset.suffix||'',start=performance.now();
+      function tick(now){
+        var p=Math.min((now-start)/1500,1),ease=1-Math.pow(1-p,3);
+        el.textContent=Math.round(t*ease)+s;
+        if(p<1)requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  // ── Nav Scroll ──
+  var nav=document.querySelector('nav'),scrolling=false;
+  window.addEventListener('scroll',function(){
+    if(!scrolling){scrolling=true;requestAnimationFrame(function(){
+      nav.classList.toggle('scrolled',window.scrollY>60);scrolling=false;
+    })}
+  },{passive:true});
+
+  // ── Active Nav Link ──
+  var navLinks=document.querySelectorAll('.nav-links a');
+  var secObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        navLinks.forEach(function(l){l.classList.remove('active')});
+        var a=document.querySelector('.nav-links a[href="#'+e.target.id+'"]');
+        if(a)a.classList.add('active');
+      }
+    });
+  },{threshold:0.2,rootMargin:'-80px 0px -50% 0px'});
+  document.querySelectorAll('section[id]').forEach(function(s){secObs.observe(s)});
+
+  // ── Pipeline Packets ──
+  if(!reduced){
+    var rail=document.querySelector('.pipeline-rail');
+    if(rail){
+      var pkts=rail.querySelectorAll('.pipeline-packet');
+      var started=false;
+      var pipeObs=new IntersectionObserver(function(entries){
+        if(entries[0].isIntersecting&&!started){started=true;animatePackets()}
+      },{threshold:0.3});
+      pipeObs.observe(rail.parentElement);
+      function animatePackets(){
+        pkts.forEach(function(p,i){
+          p.style.opacity='1';
+          var delay=i*1400;
+          function loop(){
+            p.animate([
+              {left:'0%',opacity:0},{left:'5%',opacity:1},{left:'85%',opacity:1},{left:'100%',opacity:0}
+            ],{duration:4000,delay:delay,easing:'ease-in-out'}).onfinish=loop;
+          }
+          loop();
+        });
+      }
+    }
+  }
+
+  // ── Flow Node Accordion ──
+  document.querySelectorAll('.flow-node[data-expand]').forEach(function(node){
+    node.addEventListener('click',function(){
+      var wasExpanded=this.classList.contains('expanded');
+      this.closest('.flow-track').querySelectorAll('.flow-node').forEach(function(n){n.classList.remove('expanded')});
+      if(!wasExpanded)this.classList.add('expanded');
+    });
+  });
+
+  // ── Constellation Lines ──
+  var connections=[
+    ['aws','ecs'],['aws','ecr'],['aws','cw'],['azure','ado'],['azure','k8s'],
+    ['cf','fg'],['gha','tf'],['gha','lerna'],['ado','sn'],
+    ['docker','k8s'],['docker','ecs'],['k8s','helm'],['ecs','ecr'],
+    ['fg','oidc'],['fg','vpn'],['oidc','scan'],['fg','tm'],['tm','s1'],['s1','oidc'],
+    ['prom','graf'],['cw','pa'],['graf','cw'],['nr','prom'],['nr','graf'],
+    ['k8s','prom'],['ecs','cw'],['tf','aws'],['lerna','ecr'],
+    ['git','gh'],['gh','gha'],['git','ado']
+  ];
+  var cvp=document.getElementById('constellation');
+  var csvg=document.getElementById('constellation-svg');
+  if(cvp&&csvg&&window.innerWidth>768){
+    setTimeout(function(){
+      csvg.innerHTML='';
+      connections.forEach(function(c){
+        var a=cvp.querySelector('[data-id="'+c[0]+'"]');
+        var b=cvp.querySelector('[data-id="'+c[1]+'"]');
+        if(!a||!b)return;
+        var ar=a.getBoundingClientRect(),br=b.getBoundingClientRect(),pr=cvp.getBoundingClientRect();
+        var line=document.createElementNS('http://www.w3.org/2000/svg','line');
+        line.setAttribute('x1',ar.left-pr.left+ar.width/2);
+        line.setAttribute('y1',ar.top-pr.top+ar.height/2);
+        line.setAttribute('x2',br.left-pr.left+br.width/2);
+        line.setAttribute('y2',br.top-pr.top+br.height/2);
+        line.dataset.from=c[0];line.dataset.to=c[1];
+        csvg.appendChild(line);
+      });
+    },300);
+
+    cvp.addEventListener('mouseover',function(e){
+      var node=e.target.closest('.skill-node');
+      if(!node)return;
+      var id=node.dataset.id;
+      csvg.querySelectorAll('line').forEach(function(l){
+        l.classList.toggle('bright',l.dataset.from===id||l.dataset.to===id);
+      });
+    });
+    cvp.addEventListener('mouseout',function(){
+      csvg.querySelectorAll('line').forEach(function(l){l.classList.remove('bright')});
+    });
+  }
+
+})();
+</script>
 </body>
 </html>
