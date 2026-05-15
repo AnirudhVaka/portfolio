@@ -28,8 +28,9 @@ export default async function OGImage() {
           alignItems: "flex-start",
           padding: "80px 96px",
           color: "#F1F5F9",
-          background:
-            "radial-gradient(ellipse 60% 50% at 20% 20%, rgba(0,229,255,0.20), transparent 60%), radial-gradient(ellipse 50% 40% at 80% 30%, rgba(179,136,255,0.18), transparent 55%), radial-gradient(ellipse 40% 50% at 60% 80%, rgba(0,230,118,0.12), transparent 50%), #050510",
+          backgroundColor: "#050510",
+          backgroundImage:
+            "radial-gradient(ellipse 60% 50% at 20% 20%, rgba(0,229,255,0.20), transparent)",
         }}
       >
         <div

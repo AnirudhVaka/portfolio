@@ -21,7 +21,7 @@ export function PipelineWidget() {
     let cancelled = false;
     const animations: Animation[] = [];
 
-    function startWhenVisible() {
+    function startWhenVisible(railEl: HTMLDivElement) {
       const obs = new IntersectionObserver(
         (entries) => {
           if (!entries[0]?.isIntersecting || cancelled) return;
@@ -48,10 +48,10 @@ export function PipelineWidget() {
         },
         { threshold: 0.3 }
       );
-      if (rail.parentElement) obs.observe(rail.parentElement);
+      if (railEl.parentElement) obs.observe(railEl.parentElement);
     }
 
-    startWhenVisible();
+    startWhenVisible(rail);
     return () => {
       cancelled = true;
       animations.forEach((a) => a.cancel());
