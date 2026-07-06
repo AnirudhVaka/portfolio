@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 interface Props {
-  /** Font Awesome class string (e.g. "fa-solid fa-database"). */
-  icon: string;
+  /** Pre-rendered icon element (lucide-react component). */
+  icon: ReactNode;
   title: string;
   badge: string;
   detail: string;
@@ -44,7 +44,7 @@ export function FlowNode({ icon, title, badge, detail, mode = "expand" }: Props)
       }
     >
       <div className="flow-node-icon" aria-hidden="true">
-        <i className={icon} />
+        {icon}
       </div>
       <div className="flow-node-title">{title}</div>
       <div className="flow-node-badge">{badge}</div>

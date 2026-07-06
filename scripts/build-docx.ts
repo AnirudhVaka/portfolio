@@ -31,8 +31,7 @@ import { writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { resume } from "../data/resume";
-import { RULES, bulletAllowed, type ResumeRules, type SectionKey } from "../lib/resumeRules";
-import { REGIONS, type Region } from "../lib/geo";
+import { UNIVERSAL_RULES, bulletAllowed, type ResumeRules, type SectionKey } from "../lib/resumeRules";
 
 // Resolve project root robustly whether run from project root or elsewhere.
 const here = dirname(fileURLToPath(import.meta.url));
@@ -405,12 +404,13 @@ function references(): Paragraph[] {
   ];
 }
 
-async function buildOne(region: Region): Promise<void> {
-  const rules = RULES[region];
+async function buildUniversal(): Promise<void> {
+  const rules = UNIVERSAL_RULES;
   const doc = new Document({
     creator: "Anirudh Vaka",
-    title: `Anirudh Vaka — Resume (${region.toUpperCase()})`,
-    description: `Senior DevOps Engineer resume formatted for ${region.toUpperCase()}.`,
+    title: "Anirudh Vaka — Resume",
+    description:
+      "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer. Comprehensive resume.",
     styles: {
       default: {
         document: { run: { font: "Calibri", size: 22 } },
@@ -436,15 +436,13 @@ async function buildOne(region: Region): Promise<void> {
   const buf = await Packer.toBuffer(doc);
   const outPath = join(outDir, `anirudh-vaka-resume-${rules.fileSlug}.docx`);
   writeFileSync(outPath, buf);
-  console.log(`  ✓ ${rules.fileSlug.padEnd(8)} → ${outPath}`);
+  console.log(`  ✓ ${rules.fileSlug.padEnd(10)} → ${outPath}`);
 }
 
 async function main() {
-  console.log("Building region-specific DOCX resumes…");
-  for (const region of REGIONS) {
-    await buildOne(region);
-  }
-  console.log(`Done. ${REGIONS.length} files written to ${outDir}`);
+  console.log("Building the universal DOCX resume…");
+  await buildUniversal();
+  console.log(`Done. 1 file written to ${outDir}`);
 }
 
 main().catch((err) => {

@@ -96,7 +96,7 @@ export interface ResumeData {
 export const resume: ResumeData = {
   contact: {
     name: "Anirudh Vaka",
-    title: "Senior DevOps Engineer",
+    title: "Senior DevOps / Platform / SRE Engineer",
     email: "anirudhvaka@gmail.com",
     phone: "+91 79817 30312",
     linkedin: "linkedin.com/in/anirudhvaka",
@@ -106,7 +106,7 @@ export const resume: ResumeData = {
   },
 
   summary:
-    "Senior DevOps Engineer with 3+ years operating production infrastructure across AWS, Azure, and on-prem Kubernetes — including building an on-prem Kubernetes data center from bare metal at 99.9% uptime. Founder of two live SaaS products (PrepAtlas, HumanifyCV) with paying users. Strong on Terraform, Docker, GitHub Actions, Nginx, Redis, Linux networking.",
+    "Senior DevOps / Platform / SRE engineer with 3+ years operating production infrastructure across AWS, Azure, and on-prem Kubernetes — including building an on-prem Kubernetes data center from bare metal at 99.9% uptime for 1000+ customers. Promoted intern → DevOps Lead in under two years; now lead a team of 5 under an ISO 27001:2022-certified practice. Founder of two live AI SaaS products (PrepAtlas, HumanifyCV) with paying users. Strong on Terraform, Kubernetes, GitHub Actions, GitOps, and FinOps.",
 
   experience: [
     {
@@ -165,12 +165,16 @@ export const resume: ResumeData = {
           priority: "core",
         },
         {
-          text: "Manage hybrid cloud workloads across AWS + Azure with optimized backup and DR for SQL Server + PostgreSQL.",
+          text: "Manage hybrid cloud workloads across AWS + Azure (AKS, VMSS, Blob Storage, Functions, Entra ID, Key Vault) with optimized backup and DR for SQL Server + PostgreSQL.",
           priority: "core",
         },
         {
-          text: "Drove ~25% monthly cloud cost reduction through right-sizing, reserved instances, and shutting down idle ephemeral environments on schedule.",
+          text: "Drove ~25% monthly cloud cost reduction through FinOps — right-sizing, Reserved Instances / Savings Plans, biweekly cost reviews, and weekend scale-to-zero automation that idles all non-prod every Friday and restores it Monday.",
           priority: "core",
+        },
+        {
+          text: "Built an internal AI platform on the on-prem cluster — self-hosted open LLMs (Ollama: DeepSeek, Qwen), grounded RAG on pgvector, and an AI-in-SDLC auto-remediation pipeline (detect → diagnose → generate fix → PR → gated QA) that cut MTTR.",
+          priority: "extra",
         },
         {
           text: "Designed corporate network: dual-ISP + SD-WAN on FortiGate 60F (active-active failover) — 99.9% office network uptime.",
@@ -295,11 +299,13 @@ export const resume: ResumeData = {
 
   skills: [
     {
-      label: "Cloud & Infrastructure",
+      label: "Cloud (AWS & Azure)",
       items: [
         "AWS (ECS, RDS, Lambda, S3, Route 53, IAM, multi-region)",
-        "Azure (VMSS, Functions, App Services)",
-        "On-prem (Hyper-V, bare metal)",
+        "Azure (AKS, VMs / VMSS, Blob Storage, Functions)",
+        "Entra ID + Key Vault",
+        "Azure OpenAI + Azure Speech",
+        "On-prem (Hyper-V, bare-metal Kubernetes)",
         "GCP (fundamentals)",
       ],
     },
@@ -309,18 +315,34 @@ export const resume: ResumeData = {
         "Kubernetes (production, on-prem + cloud)",
         "Docker",
         "Helm",
+        "ArgoCD",
         "Horizontal Pod Autoscaling",
         "Ingress",
       ],
     },
     {
-      label: "IaC & CI/CD",
+      label: "IaC",
+      items: ["Terraform", "AWS CDK", "Ansible"],
+    },
+    {
+      label: "CI/CD & GitOps",
       items: [
-        "Terraform",
         "GitHub Actions",
-        "Azure DevOps",
-        "Ansible",
+        "GitLab CI",
         "Jenkins",
+        "Azure DevOps",
+        "ArgoCD",
+        "OPA (policy-as-code)",
+      ],
+    },
+    {
+      label: "AI Infrastructure",
+      items: [
+        "Ollama (self-hosted LLMs)",
+        "DeepSeek / Qwen",
+        "RAG on pgvector",
+        "Anthropic Claude API",
+        "AI-in-SDLC auto-remediation",
       ],
     },
     {
@@ -376,5 +398,5 @@ export const resume: ResumeData = {
     { name: "Hindi", level: "Fluent" },
   ],
 
-  noticePeriod: "60 days (negotiable)",
+  noticePeriod: "90 days (negotiable)",
 };

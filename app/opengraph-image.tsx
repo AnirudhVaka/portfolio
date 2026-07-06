@@ -11,7 +11,7 @@ import { ImageResponse } from "next/og";
  * generation fast.
  */
 export const runtime = "edge";
-export const alt = "Anirudh Vaka — Senior DevOps Engineer";
+export const alt = "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -28,7 +28,7 @@ export default async function OGImage() {
           alignItems: "flex-start",
           padding: "80px 96px",
           color: "#F1F5F9",
-          backgroundColor: "#050510",
+          backgroundColor: "#0A0A0B",
           backgroundImage:
             "radial-gradient(ellipse 60% 50% at 20% 20%, rgba(0,229,255,0.20), transparent)",
         }}
@@ -87,8 +87,8 @@ export default async function OGImage() {
             flexWrap: "wrap",
           }}
         >
-          Senior DevOps Engineer · AWS, on-prem Kubernetes · Founder of
-          PrepAtlas + HumanifyCV
+          Senior DevOps / Platform / SRE Engineer · AWS, Azure &amp; Kubernetes ·
+          Founder of PrepAtlas + HumanifyCV
         </div>
         <div
           style={{
@@ -99,13 +99,11 @@ export default async function OGImage() {
             fontSize: 22,
           }}
         >
-          <span>99.9% uptime</span>
+          <span>99.9% uptime · 1000+ customers</span>
           <span style={{ color: "#3a3f55" }}>·</span>
           <span>200+ pipelines</span>
           <span style={{ color: "#3a3f55" }}>·</span>
-          <span>2 paid SaaS</span>
-          <span style={{ color: "#3a3f55" }}>·</span>
-          <span>3+ yrs production</span>
+          <span>leads a team of 5</span>
         </div>
       </div>
     ),

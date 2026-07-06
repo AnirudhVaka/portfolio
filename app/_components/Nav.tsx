@@ -1,13 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { RegionSwitcher } from "./RegionSwitcher";
-import type { Region } from "@/lib/geo";
-
-interface Props {
-  region: Region;
-  source: "override" | "detected" | "header" | "fallback";
-}
 
 const SECTIONS = [
   { id: "projects", label: "Projects" },
@@ -16,7 +9,7 @@ const SECTIONS = [
   { id: "contact", label: "Contact" },
 ];
 
-export function Nav({ region, source }: Props) {
+export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string>("");
 
@@ -79,7 +72,6 @@ export function Nav({ region, source }: Props) {
           <a href="/resume" className="btn-nav mono">
             Resume
           </a>
-          <RegionSwitcher current={region} source={source} />
         </div>
       </div>
     </nav>

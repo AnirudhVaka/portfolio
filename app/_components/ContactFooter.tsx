@@ -1,30 +1,33 @@
-import type { Region } from "@/lib/geo";
-import { CONTACT_CTA } from "@/lib/regionCopy";
+import { Mail, Phone, Code } from "lucide-react";
+import { CONTACT_CTA, AVAILABILITY } from "@/lib/regionCopy";
 import { resume } from "@/data/resume";
-
-interface Props {
-  region: Region;
-}
+import { GithubIcon, LinkedinIcon } from "./BrandIcons";
+import { ContactTerminal } from "./ContactTerminal";
 
 /**
- * Contact CTA + footer. Region-aware role-pitch sentence reads from
- * lib/regionCopy.ts. LinkedIn URL is the canonical /in/anirudhvaka
- * (fixed from the v1 legacy URL).
+ * Contact CTA + footer. One universal role-pitch + availability line from
+ * lib/regionCopy.ts. Icons are self-hosted (lucide + inline brand marks) —
+ * no Font Awesome CDN. The interactive terminal (ContactTerminal) is the hero
+ * of this section; the `ssh anirudh@connect` block below is the static / no-JS
+ * fallback.
  */
-export function ContactFooter({ region }: Props) {
+export function ContactFooter() {
   return (
     <>
       <section className="cta-section" id="contact" data-reveal>
         <h2 className="cta-title">
           Let&apos;s <span className="cta-gradient">build together</span>
         </h2>
-        <p className="cta-sub">{CONTACT_CTA[region]}</p>
+        <p className="cta-sub">{CONTACT_CTA}</p>
+        <p className="cta-availability mono" data-reveal>
+          <span className="dot" aria-hidden="true" /> {AVAILABILITY}
+        </p>
+
+        <ContactTerminal />
+
         <div className="cta-actions">
-          <a
-            href={`mailto:${resume.contact.email}`}
-            className="btn btn-primary"
-          >
-            <i className="fa-solid fa-envelope" aria-hidden="true" />
+          <a href={`mailto:${resume.contact.email}`} className="btn btn-primary" data-magnetic>
+            <Mail size={16} aria-hidden="true" />
             <span>Get in touch</span>
           </a>
           <a
@@ -33,7 +36,7 @@ export function ContactFooter({ region }: Props) {
             rel="noopener noreferrer"
             className="btn btn-ghost"
           >
-            <i className="fa-brands fa-linkedin" aria-hidden="true" />
+            <LinkedinIcon size={16} />
             <span>Connect on LinkedIn</span>
           </a>
         </div>
@@ -44,11 +47,11 @@ export function ContactFooter({ region }: Props) {
           <div className="footer-prompt">$ ssh anirudh@connect</div>
           <div className="footer-links">
             <a href={`mailto:${resume.contact.email}`}>
-              <i className="fa-solid fa-envelope" aria-hidden="true" />
+              <Mail size={13} aria-hidden="true" />
               {resume.contact.email}
             </a>
             <a href={`tel:${resume.contact.phone.replace(/\s/g, "")}`}>
-              <i className="fa-solid fa-phone" aria-hidden="true" />
+              <Phone size={13} aria-hidden="true" />
               {resume.contact.phone}
             </a>
             <a
@@ -56,7 +59,7 @@ export function ContactFooter({ region }: Props) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fa-brands fa-linkedin" aria-hidden="true" />
+              <LinkedinIcon size={13} />
               {resume.contact.linkedin}
             </a>
             <a
@@ -64,7 +67,7 @@ export function ContactFooter({ region }: Props) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fa-brands fa-github" aria-hidden="true" />
+              <GithubIcon size={13} />
               {resume.contact.github}
             </a>
             <a
@@ -72,13 +75,13 @@ export function ContactFooter({ region }: Props) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fa-solid fa-code" aria-hidden="true" />
-              view this site's source
+              <Code size={13} aria-hidden="true" />
+              view this site&apos;s source
             </a>
           </div>
         </div>
         <div className="footer-copy">
-          // SENIOR DEVOPS &amp; PRODUCT ENGINEER · 2026 ANIRUDH VAKA
+          // SENIOR DEVOPS / PLATFORM / SRE ENGINEER · 2026 ANIRUDH VAKA
         </div>
       </footer>
     </>

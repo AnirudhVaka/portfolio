@@ -1,4 +1,6 @@
+import { GitBranch, Server, GitPullRequest, Rocket } from "lucide-react";
 import { FlowNode } from "./FlowNode";
+import { RunnableFlow } from "./RunnableFlow";
 
 /**
  * AICPA & CIMA — third in the projects list. Existing FBE flow preserved
@@ -41,43 +43,41 @@ export function AicpaCard() {
         </p>
       </div>
 
-      <div className="flow-container" role="img" aria-label="AICPA GitOps deployment flow">
-        <div className="flow-track">
-          <FlowNode
-            icon="fa-solid fa-code-branch"
-            title="Feature Branch"
-            badge="PR to release"
-            detail="Developers create feature branches and open PRs to the release branch for review and CI checks."
-          />
-          <div className="flow-connector">
-            <span className="flow-connector-label">label: fbe</span>
-          </div>
-          <FlowNode
-            icon="fa-solid fa-server"
-            title="FBE Spawn"
-            badge="ECS + RDS + S3 + SQS"
-            detail="Full-Stack Feature Branch Environment provisioned per PR via Terraform. Friday-night cleanup auto-destroys all FBEs to save weekend costs."
-          />
-          <div className="flow-connector">
-            <span className="flow-connector-label">auto PR</span>
-          </div>
-          <FlowNode
-            icon="fa-brands fa-github"
-            title="Release → Main"
-            badge="label: staging"
-            detail="Auto-generated PR from release to main. Staging label triggers ECS staging deployment for final validation."
-          />
-          <div className="flow-connector">
-            <span className="flow-connector-label">merge</span>
-          </div>
-          <FlowNode
-            icon="fa-solid fa-rocket"
-            title="Production Deploy"
-            badge="SNOW CR + OIDC + ECS"
-            detail="ServiceNow Change Request auto-created, OIDC keyless auth to AWS, ECS prod deployment, E2E validation, CR auto-closed."
-          />
+      <RunnableFlow ariaLabel="AICPA GitOps deployment flow" label="Run a PR">
+        <FlowNode
+          icon={<GitBranch size={20} />}
+          title="Feature Branch"
+          badge="PR to release"
+          detail="Developers create feature branches and open PRs to the release branch for review and CI checks."
+        />
+        <div className="flow-connector">
+          <span className="flow-connector-label">label: fbe</span>
         </div>
-      </div>
+        <FlowNode
+          icon={<Server size={20} />}
+          title="FBE Spawn"
+          badge="ECS + RDS + S3 + SQS"
+          detail="Full-Stack Feature Branch Environment provisioned per PR via Terraform. Friday-night cleanup auto-destroys all FBEs to save weekend costs."
+        />
+        <div className="flow-connector">
+          <span className="flow-connector-label">auto PR</span>
+        </div>
+        <FlowNode
+          icon={<GitPullRequest size={20} />}
+          title="Release → Main"
+          badge="label: staging"
+          detail="Auto-generated PR from release to main. Staging label triggers ECS staging deployment for final validation."
+        />
+        <div className="flow-connector">
+          <span className="flow-connector-label">merge</span>
+        </div>
+        <FlowNode
+          icon={<Rocket size={20} />}
+          title="Production Deploy"
+          badge="SNOW CR + OIDC + ECS"
+          detail="ServiceNow Change Request auto-created, OIDC keyless auth to AWS, ECS prod deployment, E2E validation, CR auto-closed."
+        />
+      </RunnableFlow>
 
       <div className="flow-sidecars">
         <div className="sidecar">

@@ -13,6 +13,8 @@
     "build:docx:py": "node --experimental-strip-types --no-warnings scripts/dump-data.mjs > /tmp/resume-data.json && python3 scripts/build_docx.py /tmp/resume-data.json public/downloads/"
   },
   "dependencies": {
+    "framer-motion": "^12.42.2",
+    "lucide-react": "^1.23.0",
     "next": "^15.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

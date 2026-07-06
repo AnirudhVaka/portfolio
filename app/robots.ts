@@ -1,10 +1,8 @@
 import type { MetadataRoute } from "next";
 
 /**
- * Robots policy: index everything except internal API routes.
- * Region detection happens before robots crawl — Googlebot's user agent
- * carries no country header from Vercel, so crawls render the Global
- * variant, which is appropriate for SEO.
+ * Robots policy: index everything. One universal version of the site — no
+ * region variants, no per-visitor rendering.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -12,7 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/"],
       },
     ],
     sitemap: "https://anirudhvaka.dev/sitemap.xml",

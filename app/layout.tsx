@@ -4,7 +4,9 @@ import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  // Trimmed to the weights actually used (dropped 300 + 900) to shrink the
+  // font payload on the LCP path — the hero heading is the LCP element.
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   variable: "--font-inter",
 });
@@ -19,27 +21,32 @@ const firaCode = Fira_Code({
 export const metadata: Metadata = {
   metadataBase: new URL("https://anirudhvaka.dev"),
   title: {
-    default: "Anirudh Vaka — Senior DevOps Engineer",
+    default: "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer",
     template: "%s · Anirudh Vaka",
   },
-  description:
-    "Senior DevOps Engineer running production infrastructure on AWS and on-prem Kubernetes. Founder of PrepAtlas and HumanifyCV.",
+  // NOTE: the `description` <meta> is emitted as a literal tag in <head> below
+  // (see STATIC_DESCRIPTION). On the force-dynamic home route, metadata-API
+  // tags hydrate into <body>, which some crawlers/auditors ignore; a literal
+  // head tag is guaranteed to stay in <head>.
   keywords: [
     "Senior DevOps Engineer",
     "Platform Engineer",
     "SRE",
     "AWS",
+    "Azure",
     "Kubernetes",
     "Terraform",
+    "GitOps",
     "GitHub Actions",
+    "FinOps",
     "Hyderabad",
     "Remote DevOps",
   ],
   authors: [{ name: "Anirudh Vaka", url: "https://anirudhvaka.dev" }],
   openGraph: {
-    title: "Anirudh Vaka — Senior DevOps Engineer",
+    title: "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer",
     description:
-      "Production infrastructure on AWS + on-prem Kubernetes. Founder of PrepAtlas + HumanifyCV.",
+      "Production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers. Founder of two live AI SaaS products.",
     url: "https://anirudhvaka.dev",
     siteName: "Anirudh Vaka",
     locale: "en_US",
@@ -47,17 +54,56 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anirudh Vaka — Senior DevOps Engineer",
+    title: "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer",
     description:
-      "Production infrastructure on AWS + on-prem Kubernetes. Founder of PrepAtlas + HumanifyCV.",
+      "Production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers. Founder of two live AI SaaS products.",
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050510",
+  themeColor: "#0A0A0B",
   width: "device-width",
   initialScale: 1,
+};
+
+/**
+ * Person structured data (schema.org/Person). Rendered as JSON-LD so search
+ * engines + rich results understand who this is. Kept in sync with the hero
+ * + resume — no fabricated fields.
+ */
+/**
+ * Region-neutral meta description, rendered as a literal <head> tag so it
+ * survives hydration on the force-dynamic home route (metadata-API tags get
+ * relocated to <body> there). ~155 chars — within Google's snippet window.
+ */
+const STATIC_DESCRIPTION =
+  "Senior DevOps / Platform / SRE engineer — production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers. Founder of PrepAtlas & HumanifyCV.";
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Anirudh Vaka",
+  url: "https://anirudhvaka.dev",
+  jobTitle: "Senior DevOps / Platform / SRE Engineer",
+  email: "mailto:anirudhvaka@gmail.com",
+  worksFor: { "@type": "Organization", name: "Snovasys Software Solutions" },
+  knowsAbout: [
+    "DevOps",
+    "Platform Engineering",
+    "Site Reliability Engineering",
+    "AWS",
+    "Azure",
+    "Kubernetes",
+    "Terraform",
+    "GitOps",
+    "FinOps",
+    "AI Infrastructure",
+  ],
+  sameAs: [
+    "https://www.linkedin.com/in/anirudhvaka",
+    "https://github.com/AnirudhVaka",
+  ],
 };
 
 export default function RootLayout({
@@ -69,29 +115,22 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${firaCode.variable}`}>
       <head>
         {/*
-         * Font Awesome 6 — used for icons in the pipeline widget, project
-         * flow diagrams, and footer. Loaded from cdnjs (same as the v1
-         * site). No SRI hash so an FA point-release patch doesn't brick
-         * the icons; cdnjs over HTTPS is the trust anchor.
-         */}
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          referrerPolicy="no-referrer"
-        />
-        <link
-          rel="preconnect"
-          href="https://cdnjs.cloudflare.com"
-          crossOrigin="anonymous"
-        />
-        {/*
+         * Icons are now self-hosted (lucide-react + inline brand SVGs) — no
+         * third-party icon CDN (brief A10). Fonts self-host via next/font.
+         *
          * Noscript fallback: if JavaScript is disabled, every [data-reveal]
          * stays at opacity:0 because the IntersectionObserver never runs.
          * This forces them visible so the page is still readable + crawlable.
          */}
+        <meta name="description" content={STATIC_DESCRIPTION} />
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
       </head>
       <body>
         <a className="skip-link" href="#projects">

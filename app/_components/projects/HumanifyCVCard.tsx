@@ -153,15 +153,6 @@ export function HumanifyCVCard() {
         >
           <span>Visit humanifycv.com →</span>
         </a>
-        <button
-          type="button"
-          disabled
-          aria-disabled="true"
-          className="btn btn-ghost"
-          title="Writeup in progress — coming soon"
-        >
-          <span>Engineering deep-dive · coming soon</span>
-        </button>
       </div>
     </article>
   );

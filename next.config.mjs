@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  // /resume is dynamic per visitor; everything else can be static-with-cookie-revalidation.
+  // One universal version — all routes are statically prerendered.
   experimental: {
     // Keep server components lean — we don't need React compiler experiments here.
   },

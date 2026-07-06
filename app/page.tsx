@@ -1,7 +1,3 @@
-import type { Metadata } from "next";
-import { getRegion } from "@/lib/getRegion";
-import { REGION_LABEL } from "@/lib/geo";
-import { INTRO_CLAUSE } from "@/lib/regionCopy";
 import { Nav } from "./_components/Nav";
 import { Hero } from "./_components/Hero";
 import { PipelineWidget } from "./_components/PipelineWidget";
@@ -12,68 +8,37 @@ import { SkillsSection } from "./_components/SkillsSection";
 import { WriteupsSection } from "./_components/WriteupsSection";
 import { ContactFooter } from "./_components/ContactFooter";
 import { RevealController } from "./_components/RevealController";
+import { BootSequence } from "./_components/BootSequence";
+import { StatusBar } from "./_components/StatusBar";
+import { Interactions } from "./_components/Interactions";
 
 /**
- * Portfolio root.
+ * Portfolio root — one universal version for everyone (no region detection).
  *
- * Server Component. Resolves the visitor's region once (server-side from
- * cookie or x-vercel-ip-country header), then composes the seven sections
- * spec'd in the brief:
- *   1. Hero (region pill)
- *   2. Intro paragraph (visa clause varies by region)
- *   3. Pipeline widget (decorative)
- *   4. Metrics strip (hardcoded, no animation)
- *   5. Projects (PrepAtlas, HumanifyCV, AICPA, TimeChamp — in that order)
- *   6. Tech stack (consolidated, no duplication)
- *   7. Engineering writeups
- *   8. Contact + footer (region-aware CTA, LinkedIn URL fixed)
- *
- * Everything except RegionSwitcher / Nav / PipelineWidget / FlowNode /
- * RevealController is a Server Component — minimal JS shipped to the
- * browser.
+ * Static Server Component. Title/OG/description come from the root layout's
+ * metadata; page content is a single universal variant. Only Nav, the hero
+ * background, the pipeline/terminal/metrics interactions, RevealController,
+ * and Interactions ship JS — everything else is server-rendered.
  */
-export default async function HomePage() {
-  const { region, source } = await getRegion();
-
+export default function HomePage() {
   return (
     <>
-      <Nav region={region} source={source} />
+      <div className="grain" aria-hidden="true" />
+      <BootSequence />
+      <Nav />
       <main>
-        <Hero region={region} />
-        <IntroSection region={region} />
+        <Hero />
+        <IntroSection />
         <PipelineWidget />
         <MetricsStrip />
         <ProjectsSection />
         <SkillsSection />
         <WriteupsSection />
-        <ContactFooter region={region} />
+        <ContactFooter />
       </main>
+      <StatusBar />
       <RevealController />
+      <Interactions />
     </>
   );
-}
-
-// Force per-request rendering — the page reads cookies and headers.
-export const dynamic = "force-dynamic";
-
-/**
- * Per-region metadata: visa eligibility and region name appear in the
- * meta description so the social card and search snippet match the body
- * the visitor will actually see. Title stays clean.
- */
-export async function generateMetadata(): Promise<Metadata> {
-  const { region } = await getRegion();
-  const description = `Senior DevOps Engineer running production infrastructure on AWS + on-prem Kubernetes. Founder of PrepAtlas + HumanifyCV. Exploring roles in ${INTRO_CLAUSE[region]}`;
-  return {
-    title: `Senior DevOps Engineer · ${REGION_LABEL[region]} view`,
-    description,
-    openGraph: {
-      title: "Anirudh Vaka — Senior DevOps Engineer",
-      description,
-    },
-    twitter: {
-      title: "Anirudh Vaka — Senior DevOps Engineer",
-      description,
-    },
-  };
 }

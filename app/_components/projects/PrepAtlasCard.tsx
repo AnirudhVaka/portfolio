@@ -1,3 +1,4 @@
+import { MessageSquare, Brain, Database, Bot, BookOpen } from "lucide-react";
 import { resume } from "@/data/resume";
 import { FlowNode } from "./FlowNode";
 
@@ -45,7 +46,7 @@ export function PrepAtlasCard() {
         <div className="flow-track">
           <FlowNode
             mode="static"
-            icon="fa-solid fa-circle-question"
+            icon={<MessageSquare size={20} />}
             title="Student Query"
             badge="UTF-8 in"
             detail="Natural-language question entered in the Next.js client. Tokenised, normalised."
@@ -55,7 +56,7 @@ export function PrepAtlasCard() {
           </div>
           <FlowNode
             mode="static"
-            icon="fa-solid fa-brain"
+            icon={<Brain size={20} />}
             title="Embed"
             badge="Claude embed"
             detail="Query embedded into a 1536-dim vector. Cached on the user record for repeat hits."
@@ -65,7 +66,7 @@ export function PrepAtlasCard() {
           </div>
           <FlowNode
             mode="static"
-            icon="fa-solid fa-database"
+            icon={<Database size={20} />}
             title="Retrieve"
             badge="Top-K passages"
             detail="Cosine-similarity search against the curated corpus stored in Supabase Postgres + pgvector. K = 5."
@@ -75,7 +76,7 @@ export function PrepAtlasCard() {
           </div>
           <FlowNode
             mode="static"
-            icon="fa-solid fa-comment-dots"
+            icon={<Bot size={20} />}
             title="Claude"
             badge="grounded prompt"
             detail="Anthropic Claude prompted with retrieved passages as context and a strict 'refuse if not in context' instruction."
@@ -85,7 +86,7 @@ export function PrepAtlasCard() {
           </div>
           <FlowNode
             mode="static"
-            icon="fa-solid fa-book-open"
+            icon={<BookOpen size={20} />}
             title="Cited Answer"
             badge="source-linked"
             detail="Returned answer links every claim back to the passage it was generated from. Ungrounded claims are blocked."

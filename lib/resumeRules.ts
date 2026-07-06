@@ -1,22 +1,15 @@
 /**
- * Per-region resume-rendering rules.
+ * Resume-rendering rules.
  *
  * The resume content lives in data/resume.ts as a single source of truth.
- * This file is the *formatting* layer — it controls:
+ * This file is the *formatting* layer — section order, labels, and which
+ * optional fields show.
  *
- *   - which sections appear and in what order
- *   - which optional fields show (CGPA, notice period, nationality, photo)
- *   - the visa-eligibility line
- *   - the city / location line on the header
- *   - which labels to use (e.g. "Professional Summary" vs "Personal Statement")
- *   - which bullet priority to keep ("core" only for tight 1-pagers,
- *     "core" + "extra" for 2-page variants)
- *
- * Adding a new region = adding a new entry to RULES. The renderer is
- * generic and doesn't need changes for new regions.
+ * There is now ONE comprehensive resume for everyone (`UNIVERSAL_RULES`):
+ * every bullet (core + extra), every section, all the detail. The renderer
+ * (ResumeRenderer) and the DOCX builder (scripts/build-docx.ts) both consume
+ * this single ruleset — no per-region variants.
  */
-
-import type { Region } from "./geo";
 
 export type SectionKey =
   | "personalDetails"
@@ -77,246 +70,36 @@ export function bulletAllowed(
   return filter === "all" || priority === "core";
 }
 
-const SECTIONS_DEFAULT: SectionKey[] = [
-  "summary",
-  "experience",
-  "sideProjects",
-  "skills",
-  "education",
-  "languages",
-];
-
-export const RULES: Record<Region, ResumeRules> = {
-  in: {
-    lengthLabel: "1–2 pages",
-    bulletFilter: "all",
-    sectionOrder: SECTIONS_DEFAULT,
-    summaryLabel: "Professional Summary",
-    experienceLabel: "Professional Experience",
-    titleChip: "Senior DevOps Engineer",
-    projectsLabel: "Side Projects",
-    locationLine: "Hyderabad, India",
-    visaLine: null, // No visa needed.
-    workModeLine: null,
-    includeCGPA: true,
-    includeNoticePeriod: true,
-    includeNationality: false,
-    showReferencesLine: false,
-    spelling: "en-US",
-    fileSlug: "in",
-  },
-
-  us: {
-    lengthLabel: "1 page",
-    bulletFilter: "core",
-    sectionOrder: ["summary", "experience", "sideProjects", "skills", "education"],
-    summaryLabel: "Summary",
-    experienceLabel: "Experience",
-    titleChip: "Senior DevOps Engineer",
-    projectsLabel: "Projects",
-    locationLine: "Open to relocate · Hyderabad, India",
-    visaLine: "Work authorization: requires H1B sponsorship",
-    workModeLine: "Open to onsite, hybrid, or fully remote in the US",
-    includeCGPA: false,
-    includeNoticePeriod: false,
-    includeNationality: false,
-    showReferencesLine: false,
-    spelling: "en-US",
-    fileSlug: "us",
-  },
-
-  de: {
-    lengthLabel: "2 pages",
-    bulletFilter: "all",
-    sectionOrder: [
-      "personalDetails",
-      "summary",
-      "experience",
-      "sideProjects",
-      "skills",
-      "education",
-      "languages",
-    ],
-    summaryLabel: "Professional Summary",
-    experienceLabel: "Professional Experience",
-    titleChip: "Senior DevOps Engineer",
-    projectsLabel: "Side Projects",
-    locationLine: "Open to relocate to Germany · Hyderabad, India",
-    visaLine: "Visa: requires EU Blue Card sponsorship",
-    workModeLine: "Open to onsite, hybrid, or fully remote in Germany",
-    includeCGPA: false,
-    includeNoticePeriod: false,
-    includeNationality: false,
-    photoUrl: null, // Drop a /public/de-headshot.jpg path here when Anirudh provides one.
-    showReferencesLine: false,
-    spelling: "en-UK",
-    fileSlug: "de",
-  },
-
-  nl: {
-    lengthLabel: "1–2 pages",
-    bulletFilter: "all",
-    sectionOrder: SECTIONS_DEFAULT,
-    summaryLabel: "Professional Summary",
-    experienceLabel: "Professional Experience",
-    titleChip: "Senior DevOps Engineer",
-    projectsLabel: "Side Projects",
-    locationLine: "Open to relocate to the Netherlands · Hyderabad, India",
-    visaLine:
-      "Open to relocate; eligible for Highly Skilled Migrant visa sponsorship",
-    workModeLine: "Open to onsite, hybrid, or fully remote in the Netherlands",
-    includeCGPA: false,
-    includeNoticePeriod: false,
-    includeNationality: false,
-    showReferencesLine: false,
-    spelling: "en-UK",
-    fileSlug: "nl",
-  },
-
-  ie: {
-    lengthLabel: "2 pages",
-    bulletFilter: "all",
-    sectionOrder: [
-      "summary",
-      "experience",
-      "sideProjects",
-      "skills",
-      "education",
-      "languages",
-      "references",
-    ],
-    summaryLabel: "Personal Statement",
-    experienceLabel: "Professional Experience",
-    titleChip: "Senior DevOps Engineer",
-    projectsLabel: "Side Projects",
-    locationLine: "Open to relocate to Ireland · Hyderabad, India",
-    visaLine:
-      "Open to relocate; eligible for Critical Skills Employment Permit (DevOps on the eligible occupations list)",
-    workModeLine: "Open to onsite, hybrid, or fully remote in Ireland",
-    includeCGPA: false,
-    includeNoticePeriod: false,
-    includeNationality: false,
-    showReferencesLine: true,
-    spelling: "en-UK",
-    fileSlug: "ie",
-  },
-
-  uk: {
-    lengthLabel: "2 pages",
-    bulletFilter: "all",
-    sectionOrder: [
-      "summary",
-      "experience",
-      "sideProjects",
-      "skills",
-      "education",
-      "references",
-    ],
-    summaryLabel: "Personal Statement",
-    experienceLabel: "Professional Experience",
-    titleChip: "Senior DevOps Engineer",
-    projectsLabel: "Side Projects",
-    locationLine: "Open to relocate to the UK · Hyderabad, India",
-    visaLine:
-      "Open to relocate; requires Skilled Worker visa sponsorship (eligible role)",
-    workModeLine: "Open to onsite, hybrid, or fully remote in the UK",
-    includeCGPA: false,
-    includeNoticePeriod: false,
-    includeNationality: false,
-    showReferencesLine: true,
-    spelling: "en-UK",
-    fileSlug: "uk",
-  },
-
-  ca: {
-    lengthLabel: "1–2 pages",
-    bulletFilter: "all",
-    sectionOrder: ["summary", "experience", "sideProjects", "skills", "education"],
-    summaryLabel: "Professional Summary",
-    experienceLabel: "Professional Experience",
-    titleChip: "Senior DevOps Engineer",
-    projectsLabel: "Projects",
-    locationLine: "Open to relocate to Canada · Hyderabad, India",
-    visaLine: "Open to relocate; eligible for Global Talent Stream",
-    workModeLine: "Open to onsite, hybrid, or fully remote in Canada",
-    includeCGPA: false,
-    includeNoticePeriod: false,
-    includeNationality: false,
-    showReferencesLine: false,
-    spelling: "en-CA",
-    fileSlug: "ca",
-  },
-
-  sg: {
-    lengthLabel: "1–2 pages",
-    bulletFilter: "all",
-    sectionOrder: [
-      "personalDetails",
-      "summary",
-      "experience",
-      "sideProjects",
-      "skills",
-      "education",
-    ],
-    summaryLabel: "Professional Summary",
-    experienceLabel: "Professional Experience",
-    titleChip: "Senior DevOps Engineer",
-    projectsLabel: "Side Projects",
-    locationLine: "Open to relocate to Singapore · Hyderabad, India",
-    visaLine: "Open to relocate; eligible for Employment Pass",
-    workModeLine: "Open to onsite, hybrid, or fully remote in Singapore",
-    includeCGPA: true,
-    includeNoticePeriod: true, // SG employers commonly ask.
-    includeNationality: true,
-    nationality: "Indian",
-    showReferencesLine: false,
-    spelling: "en-UK",
-    fileSlug: "sg",
-  },
-
-  anz: {
-    lengthLabel: "2–3 pages",
-    bulletFilter: "all",
-    sectionOrder: [
-      "summary",
-      "skills",
-      "experience",
-      "sideProjects",
-      "education",
-      "references",
-    ],
-    summaryLabel: "Career Summary",
-    experienceLabel: "Professional Experience",
-    titleChip: "Senior DevOps Engineer",
-    projectsLabel: "Side Projects",
-    locationLine: "Open to relocate to Australia / NZ · Hyderabad, India",
-    visaLine:
-      "Open to relocate; eligible for Skills in Demand visa (Australia) or Skilled Migrant Category (NZ)",
-    workModeLine: "Open to onsite, hybrid, or fully remote in Australia / NZ",
-    includeCGPA: false,
-    includeNoticePeriod: false,
-    includeNationality: false,
-    showReferencesLine: true,
-    spelling: "en-UK",
-    fileSlug: "anz",
-  },
-
-  global: {
-    lengthLabel: "1 page",
-    bulletFilter: "core",
-    sectionOrder: ["summary", "experience", "sideProjects", "skills", "education"],
-    summaryLabel: "Summary",
-    experienceLabel: "Experience",
-    titleChip: "Senior DevOps Engineer",
-    projectsLabel: "Projects",
-    locationLine: "Hyderabad, India · IST (UTC+5:30) · Open to remote anywhere",
-    visaLine: null,
-    workModeLine: null,
-    includeCGPA: false,
-    includeNoticePeriod: false,
-    includeNationality: false,
-    showReferencesLine: false,
-    spelling: "en-US",
-    fileSlug: "global",
-  },
+/**
+ * The single, comprehensive resume shown to everyone. `bulletFilter: "all"`
+ * keeps every experience bullet; the section order includes every section so
+ * nothing is trimmed. One download artifact: anirudh-vaka-resume-universal.docx.
+ */
+export const UNIVERSAL_RULES: ResumeRules = {
+  lengthLabel: "comprehensive",
+  bulletFilter: "all",
+  sectionOrder: [
+    "summary",
+    "experience",
+    "sideProjects",
+    "skills",
+    "education",
+    "languages",
+    "references",
+  ],
+  summaryLabel: "Professional Summary",
+  experienceLabel: "Professional Experience",
+  titleChip: "Senior DevOps / Platform / SRE Engineer",
+  projectsLabel: "Products & Side Projects",
+  // Relocation/remote detail lives in the meta strip (visaLine) to avoid
+  // duplicating it here and over-widening the header's right column.
+  locationLine: "Hyderabad, India · IST (UTC+5:30)",
+  visaLine: "Open to relocation worldwide with visa sponsorship, or fully remote",
+  workModeLine: null,
+  includeCGPA: true,
+  includeNoticePeriod: true,
+  includeNationality: false,
+  showReferencesLine: true,
+  spelling: "en-US",
+  fileSlug: "universal",
 };

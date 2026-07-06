@@ -15,5 +15,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: "https://anirudhvaka.dev/writeups/architecture-evolution",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
   ];
 }

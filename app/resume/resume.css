@@ -110,7 +110,9 @@
   margin-bottom: 10px;
 }
 .resume-header-left {
-  flex: 1;
+  flex: 0 0 auto;
+}
+.resume-header-right {
   min-width: 0;
 }
 .resume-header-left h1 {
@@ -129,6 +131,7 @@
   padding: 2px 8px;
   border-radius: 3px;
   letter-spacing: 0.4px;
+  white-space: nowrap;
 }
 .resume-header-right {
   text-align: right;
