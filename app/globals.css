@@ -37,6 +37,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* Base link reset — this is a dark site where a link should never render in
+   the UA's purple/blue underlined default. Links that want an accent color or
+   underline set it explicitly (nav, buttons, article, resume all do). */
+a {
+  color: inherit;
+  text-decoration: none;
+}
 html {
   scroll-behavior: smooth;
   /* Root-level guard: clip any stray horizontal overflow (e.g. an absolutely
@@ -273,6 +280,12 @@ nav.site-nav.scrolled {
   font-weight: 700;
   font-size: 15px;
   letter-spacing: -0.3px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-brand:hover {
+  color: var(--cyan);
 }
 .nav-cursor {
   width: 14px;
