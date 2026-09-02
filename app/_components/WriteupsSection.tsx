@@ -29,14 +29,6 @@ const WRITEUPS: WriteupItem[] = [
     kind: "internal",
   },
   {
-    status: "live",
-    title: "PrepAtlas engineering deep-dive",
-    desc: "Grounded RAG with citations, pgvector over Pinecone, TWA over React Native, sub-200KB performance budget, and a $35/mo hosting story.",
-    host: "prepatlas.in/engineering",
-    href: "https://prepatlas.in/engineering",
-    kind: "external",
-  },
-  {
     status: "planned",
     title: "Building a production on-prem K8s data center from bare metal",
     desc: "Racking Dell PowerEdge at CtrlS Hyderabad, VLAN segmentation, FortiGate failover, choosing Hyper-V under Kubernetes, and what 99.9% uptime for two years actually cost.",

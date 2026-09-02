@@ -249,7 +249,7 @@ export const resume: ResumeData = {
       dates: "Dec 2025 – Present",
       tagline: "AI-assisted exam prep platform for Indian students",
       resumeBlurb:
-        "AI-assisted exam prep platform for Indian students. Next.js 15 on a self-hosted PocketBase backend, with a provider-routed LLM layer (Anthropic Claude, NVIDIA) behind a per-user token budget and schema-validated output. Hosted on a $35/month AWS stack with a Bubblewrap-wrapped Android TWA. 20+ paying users in beta. Engineering writeup at prepatlas.in/engineering.",
+        "AI-assisted exam prep platform for Indian students. Next.js 15 on a self-hosted PocketBase backend, with a provider-routed LLM layer (Anthropic Claude, NVIDIA) behind a per-user token budget and schema-validated output. Hosted on a $35/month AWS stack with a Bubblewrap-wrapped Android TWA. 20+ paying users in beta.",
       stack: [
         "Next.js 15",
         "React 19",
@@ -267,7 +267,8 @@ export const resume: ResumeData = {
         "Bubblewrap TWA",
       ],
       metrics: "20+ paying users in beta · $35/mo hosting",
-      engineeringWriteupUrl: "https://prepatlas.in/engineering",
+      // engineeringWriteupUrl: the prepatlas.in/engineering writeup was
+      // taken down — the card's deep-dive CTA hides itself while this is unset.
     },
     {
       id: "humanifycv",
