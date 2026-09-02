@@ -18,17 +18,29 @@ export function HumanifyCVCard() {
 
       <div className="project-body">
         <p>
-          <strong>The problem.</strong> Resume-optimisation tools spit out
-          generic AI-flavoured prose and leak credentials through casual OAuth
-          flows. Trust matters: you're handing it your career history.
+          <strong>The problem.</strong> Resume builders solve templates, which
+          was never the hard part. The hard part is keeping one true record of
+          what someone actually did and re-cutting it per job description
+          without the model quietly inventing an employer, a date, or a metric.
         </p>
         <p>
-          <strong>The approach.</strong> Production-grade auth as a feature, not
-          an afterthought. NextAuth v5 with email verification, TOTP 2FA backed
-          by AES-256-GCM-encrypted secrets, and WebAuthn passkeys for
-          passwordless sign-in. Razorpay payments modelled as a discriminated
-          union so refunds, captures, and disputes can't silently miscompile.
-          Anthropic Claude Sonnet runs the actual humanisation.
+          <strong>The approach.</strong> A structured Career Vault is the source
+          of truth — experience, projects, metrics, education, all typed. The
+          model writes, humanises, and tailors <em>from</em> that vault instead
+          of from its own recall, and a proof-check pass exists to catch claims
+          that aren&apos;t backed by it. On top: JD matching, ATS analysis
+          against Workday / Greenhouse / Lever / Taleo / iCIMS parsing
+          heuristics, cover letters, an interview kit, and PDF export. A
+          separate multi-tenant console lets colleges run cohorts, programs,
+          certificates, and missions over the same platform.
+        </p>
+        <p>
+          <strong>The engineering.</strong> Auth treated as a feature, not an
+          afterthought: NextAuth v5 with email verification, TOTP 2FA backed by
+          AES-256-GCM-encrypted secrets, WebAuthn passkeys, Google OAuth.
+          Razorpay events modelled as a discriminated union so captures,
+          refunds, and disputes can&apos;t silently miscompile. A multi-model
+          Claude router runs the generation.
         </p>
         <p>
           <strong>The outcome.</strong> 30–40 paying users on AWS EC2, shipped
@@ -99,7 +111,7 @@ export function HumanifyCVCard() {
           <div className="layer-pills">
             <span className="layer-pill">Sentry</span>
             <span className="layer-pill">Jest + Testing Library</span>
-            <span className="layer-pill">31 tests</span>
+            <span className="layer-pill">25 test files</span>
           </div>
         </div>
       </div>
@@ -122,7 +134,7 @@ export function HumanifyCVCard() {
         </li>
         <li>
           <strong>Test priorities</strong>
-          31 tests concentrated on the auth + payment paths — most damaging
+          Tests concentrated on the auth + payment paths — the most damaging
           failure modes are the regressions caught here first.
         </li>
       </ul>
@@ -132,7 +144,7 @@ export function HumanifyCVCard() {
           <strong>30–40</strong> paying users
         </span>
         <span className="metric">
-          <strong>31</strong> tests on auth + payments
+          <strong>5</strong> ATS engines modelled
         </span>
         <span className="metric">
           <strong>0</strong> plaintext secrets at rest

@@ -247,9 +247,10 @@ export const resume: ResumeData = {
       url: "https://prepatlas.in",
       role: "Founder & Engineer",
       dates: "Dec 2025 – Present",
-      tagline: "AI-assisted exam prep platform for Indian students",
+      tagline:
+        "AI learning + career platform — tutor, adaptive practice, exam engine, role tracks",
       resumeBlurb:
-        "AI-assisted exam prep platform for Indian students. Next.js 15 on a self-hosted PocketBase backend, with a provider-routed LLM layer (Anthropic Claude, NVIDIA) behind a per-user token budget and schema-validated output. Hosted on a $35/month AWS stack with a Bubblewrap-wrapped Android TWA. 20+ paying users in beta.",
+        "AI learning and career platform for Indian students. An AI tutor that teaches over chat, voice, and generated video; adaptive practice; a full exam engine (timed attempts, mark-for-review, negative marking, auto-submit); 13 role-based career tracks with mock interviews, JD analysis, and resume review; and a peer layer for doubts and study squads. Next.js 15 on a self-hosted PocketBase backend, with a provider-routed LLM layer (Anthropic Claude, NVIDIA) behind a per-user token budget and schema-validated output. Offline-capable PWA plus a Bubblewrap Android TWA, on a $35/month AWS stack. 20+ paying users in beta.",
       stack: [
         "Next.js 15",
         "React 19",
@@ -277,9 +278,9 @@ export const resume: ResumeData = {
       role: "Founder & Engineer",
       dates: "Jan 2026 – Present",
       tagline:
-        "AI text humanization + resume optimization SaaS with production-grade auth and payments",
+        "AI career workspace — a verified career vault that generates, tailors, and ATS-checks resumes",
       resumeBlurb:
-        "AI text humanization + resume optimization SaaS. Production-grade auth (NextAuth v5 with email verification, TOTP 2FA backed by AES-256-GCM-encrypted secrets, WebAuthn passkeys), Razorpay payments with discriminated-union typed event handling, a multi-model Anthropic Claude router, transactional email over Amazon SES SMTP, Sentry, Jest/Testing-Library suite. Deployed by GitHub Actions to a Docker Compose stack on AWS EC2 behind Cloudflare. 30–40 paying users.",
+        "AI career workspace. A structured Career Vault holds verified experience once, and the AI writes, humanises, and tailors resumes from it rather than inventing history — with proof-check, JD matching, ATS analysis against Workday / Greenhouse / Lever / Taleo / iCIMS heuristics, cover letters, interview kit, and PDF export. Also ships a multi-tenant org console for colleges (cohorts, programs, certificates, missions, audit, exec dashboard). Production-grade auth (NextAuth v5, TOTP 2FA over AES-256-GCM-encrypted secrets, WebAuthn passkeys, Google OAuth), Razorpay with discriminated-union event handling, a multi-model Claude router, SES SMTP, Sentry. Deployed by GitHub Actions to a Docker Compose stack on AWS EC2 behind Cloudflare. 30–40 paying users across Free / Smart CV / Job-Hunt Pro tiers.",
       stack: [
         "Next.js 16",
         "React 19",

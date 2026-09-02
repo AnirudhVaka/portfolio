@@ -25,24 +25,35 @@ export function PrepAtlasCard() {
 
       <div className="project-body">
         <p>
-          <strong>The problem.</strong> Indian exam prep platforms surface
-          confident-but-unsourced answers — students can't verify what they're
-          memorising, and hallucinated facts get propagated as truth.
+          <strong>The problem.</strong> Exam prep is sold as content — a fixed
+          syllabus, recorded lectures, one generic question bank. None of it
+          knows which topic a particular student is actually weak at, so
+          everyone practises the same things and revises what they already know.
         </p>
         <p>
-          <strong>The approach.</strong> Ground the model in structured content
-          rather than trusting it to recall. The student&apos;s profile, chapter
-          set, and prior tasks are loaded from PocketBase and passed as explicit
-          context; the model is routed to Claude or NVIDIA behind one provider
-          interface; and every response is parsed against a schema before it is
-          persisted, so malformed or off-syllabus output is rejected rather than
-          rendered. Each call is metered against a per-user daily token budget.
+          <strong>The approach.</strong> Close the loop: teach, practise,
+          measure, adapt. An AI tutor teaches over chat, voice, and generated
+          video; an exam engine runs real timed attempts with mark-for-review,
+          negative marking, and auto-submit; and what a student gets wrong feeds
+          the next plan. Thirteen role-based career tracks sit on the same
+          engine, with mock interviews, JD analysis, and resume review for
+          students on the way out.
+        </p>
+        <p>
+          <strong>The engineering.</strong> Every model call is grounded in
+          structured records, not recall. Profile, active path, and prior tasks
+          load from PocketBase and go in as explicit context; the model is
+          routed to Claude or NVIDIA behind one provider interface; responses
+          are schema-validated before they persist, so off-syllabus output is
+          rejected rather than rendered. Each call is metered against a per-user
+          daily token budget so cost can&apos;t run away.
         </p>
         <p>
           <strong>The outcome.</strong> 20+ paying users in beta on a $35/month
-          AWS stack. Sub-200KB JS on critical paths. Wrapped as an Android TWA
-          via Bubblewrap so the same Next.js bundle ships native-feel on Play
-          Store.
+          AWS stack. Sub-200KB JS on critical paths, an offline-capable PWA via
+          Serwist, and the same Next.js bundle wrapped as an Android TWA with
+          Bubblewrap — one codebase, Play Store install, works on a weak
+          connection.
         </p>
       </div>
 
@@ -123,6 +134,11 @@ export function PrepAtlasCard() {
           <strong>Performance budget</strong>
           Sub-200KB JS on critical paths — measurable, enforceable, falls
           straight out of Next.js bundle analysis.
+        </li>
+        <li>
+          <strong>Offline</strong>
+          Serwist service worker over a native rewrite — the students who
+          need this most are on entry-level Android and patchy data.
         </li>
       </ul>
 
