@@ -5,9 +5,12 @@ import { FlowNode } from "./FlowNode";
 /**
  * PrepAtlas — the headline side product, first in the projects list.
  *
- * Diagram: 5-stage RAG flow (Query → Embed → pgvector retrieve →
- * Claude with grounded context → Cited answer) — matches what the
- * engineering writeup at prepatlas.in/engineering describes.
+ * Diagram: the 5-stage learning-path pipeline that actually ships
+ * (Query → budget check → PocketBase records → provider-routed LLM →
+ * schema-validated plan). The earlier version of this card drew an
+ * embed → pgvector → cosine-retrieve flow; the `embedding` column
+ * exists in the schema but nothing backfills or queries it, so the
+ * diagram now matches the code.
  */
 export function PrepAtlasCard() {
   const project = resume.sideProjects.find((p) => p.id === "prepatlas")!;
@@ -27,12 +30,13 @@ export function PrepAtlasCard() {
           memorising, and hallucinated facts get propagated as truth.
         </p>
         <p>
-          <strong>The approach.</strong> Retrieval-Augmented Generation grounded
-          in a curated corpus. Every answer cites the source passage(s) it was
-          generated from. Queries are embedded, matched against pgvector in
-          Supabase Postgres, and the top-K passages are passed as context to
-          Claude — answers that can't be grounded are refused rather than
-          hallucinated.
+          <strong>The approach.</strong> Ground the model in structured content
+          rather than trusting it to recall. The student&apos;s profile, chapter
+          set, and prior tasks are loaded from PocketBase and passed as explicit
+          context; the model is routed to Claude or NVIDIA behind one provider
+          interface; and every response is parsed against a schema before it is
+          persisted, so malformed or off-syllabus output is rejected rather than
+          rendered. Each call is metered against a per-user daily token budget.
         </p>
         <p>
           <strong>The outcome.</strong> 20+ paying users in beta on a $35/month
@@ -42,7 +46,11 @@ export function PrepAtlasCard() {
         </p>
       </div>
 
-      <div className="flow-container" role="img" aria-label="PrepAtlas RAG pipeline">
+      <div
+        className="flow-container"
+        role="img"
+        aria-label="PrepAtlas learning-path pipeline"
+      >
         <div className="flow-track">
           <FlowNode
             mode="static"
@@ -52,53 +60,54 @@ export function PrepAtlasCard() {
             detail="Natural-language question entered in the Next.js client. Tokenised, normalised."
           />
           <div className="flow-connector">
-            <span className="flow-connector-label">embed</span>
+            <span className="flow-connector-label">meter</span>
           </div>
           <FlowNode
             mode="static"
             icon={<Brain size={20} />}
-            title="Embed"
-            badge="Claude embed"
-            detail="Query embedded into a 1536-dim vector. Cached on the user record for repeat hits."
+            title="Token Budget"
+            badge="per-user cap"
+            detail="Daily token spend is checked before any model call. Over-budget requests are refused outright — cost can't run away on a $35/mo box."
           />
           <div className="flow-connector">
-            <span className="flow-connector-label">pgvector</span>
+            <span className="flow-connector-label">load</span>
           </div>
           <FlowNode
             mode="static"
             icon={<Database size={20} />}
-            title="Retrieve"
-            badge="Top-K passages"
-            detail="Cosine-similarity search against the curated corpus stored in Supabase Postgres + pgvector. K = 5."
+            title="Student Context"
+            badge="PocketBase"
+            detail="Profile, active learning path, chapter set, and prior daily tasks are read from the self-hosted PocketBase collections and passed as explicit context."
           />
           <div className="flow-connector">
-            <span className="flow-connector-label">ground</span>
+            <span className="flow-connector-label">prompt</span>
           </div>
           <FlowNode
             mode="static"
             icon={<Bot size={20} />}
-            title="Claude"
-            badge="grounded prompt"
-            detail="Anthropic Claude prompted with retrieved passages as context and a strict 'refuse if not in context' instruction."
+            title="LLM"
+            badge="provider-routed"
+            detail="Anthropic Claude or NVIDIA behind one provider interface, prompted with the loaded records plus Indian-curriculum constraints (NCERT, JEE/NEET/UPSC)."
           />
           <div className="flow-connector">
-            <span className="flow-connector-label">cite</span>
+            <span className="flow-connector-label">validate</span>
           </div>
           <FlowNode
             mode="static"
             icon={<BookOpen size={20} />}
-            title="Cited Answer"
-            badge="source-linked"
-            detail="Returned answer links every claim back to the passage it was generated from. Ungrounded claims are blocked."
+            title="Validated Plan"
+            badge="schema-checked"
+            detail="Response is parsed against a schema before persisting. Invalid or off-syllabus output is rejected, never rendered to the student."
           />
         </div>
       </div>
 
       <ul className="project-decisions">
         <li>
-          <strong>Vector DB</strong>
-          pgvector inside Supabase over Pinecone — one fewer service, RLS on
-          the same Postgres, and quotas covered by the existing free tier.
+          <strong>Backend</strong>
+          Self-hosted PocketBase over hosted Supabase — auth, records, rules,
+          and file storage in one binary on the box already being paid for,
+          with no per-row quota to grow into.
         </li>
         <li>
           <strong>Mobile shipping</strong>

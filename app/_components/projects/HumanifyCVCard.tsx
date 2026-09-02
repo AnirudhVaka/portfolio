@@ -31,8 +31,9 @@ export function HumanifyCVCard() {
           Anthropic Claude Sonnet runs the actual humanisation.
         </p>
         <p>
-          <strong>The outcome.</strong> 30–40 paying users on AWS ECS. Sentry
-          for runtime, AWS SES for transactional email, 31 Jest / Testing
+          <strong>The outcome.</strong> 30–40 paying users on AWS EC2, shipped
+          by GitHub Actions to a Docker Compose stack behind Cloudflare. Sentry
+          for runtime, Amazon SES SMTP for transactional email, Jest / Testing
           Library tests on the auth + payment paths specifically.
         </p>
       </div>
@@ -59,7 +60,7 @@ export function HumanifyCVCard() {
         <div className="infra-layer l-app">
           <div className="layer-header">
             <span className="layer-label">App Layer</span>
-            <span className="layer-location">AWS ECS</span>
+            <span className="layer-location">AWS EC2</span>
           </div>
           <div className="layer-pills">
             <span className="layer-pill">Next.js 16</span>
@@ -82,7 +83,7 @@ export function HumanifyCVCard() {
           <div className="layer-pills">
             <span className="layer-pill">Claude Sonnet 4.6</span>
             <span className="layer-pill">Razorpay (discriminated union)</span>
-            <span className="layer-pill">AWS SES (Nodemailer)</span>
+            <span className="layer-pill">Nodemailer → SES SMTP</span>
           </div>
         </div>
         <div className="layer-connector">

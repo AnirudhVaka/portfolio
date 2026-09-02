@@ -10,7 +10,7 @@ interface Props {
   detail: string;
   /**
    * Render mode: "expand" makes the node click-to-expand (used on AICPA flow),
-   * "static" disables interaction (used on PrepAtlas RAG diagram).
+   * "static" disables interaction (used on the PrepAtlas pipeline diagram).
    */
   mode?: "expand" | "static";
 }
