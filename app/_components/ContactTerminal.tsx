@@ -71,7 +71,7 @@ export function ContactTerminal() {
         break;
       case "whoami":
         out = [
-          line("out", "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer."),
+          line("out", "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer · AI Infrastructure & LLMOps."),
           line("out", "Leads a team of 5; promoted intern → DevOps Lead in under 2 years."),
           line("out", "99.9% uptime for 1000+ customers. Founder of PrepAtlas + HumanifyCV."),
           line("out", <span className="term-accent">{AVAILABILITY}</span>),

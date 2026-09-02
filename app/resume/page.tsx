@@ -15,7 +15,7 @@ import "./resume.css";
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer. Comprehensive resume: production infra on AWS, Azure & Kubernetes, 99.9% uptime, and two live AI SaaS products.",
+    "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer · AI Infrastructure & LLMOps. Comprehensive resume: production infra on AWS, Azure & Kubernetes, 99.9% uptime, self-hosted LLMs and RAG, and two live AI SaaS products.",
 };
 
 export default function ResumePage() {

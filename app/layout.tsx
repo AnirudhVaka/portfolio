@@ -21,7 +21,7 @@ const firaCode = Fira_Code({
 export const metadata: Metadata = {
   metadataBase: new URL("https://anirudhvaka.dev"),
   title: {
-    default: "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer",
+    default: "Anirudh Vaka — Senior DevOps & AI Infrastructure Engineer",
     template: "%s · Anirudh Vaka",
   },
   // NOTE: the `description` <meta> is emitted as a literal tag in <head> below
@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   // head tag is guaranteed to stay in <head>.
   keywords: [
     "Senior DevOps Engineer",
+    "AI Infrastructure Engineer",
+    "MLOps",
+    "LLMOps",
     "Platform Engineer",
     "SRE",
     "AWS",
@@ -39,14 +42,16 @@ export const metadata: Metadata = {
     "GitOps",
     "GitHub Actions",
     "FinOps",
+    "Self-hosted LLMs",
+    "RAG",
     "Hyderabad",
     "Remote DevOps",
   ],
   authors: [{ name: "Anirudh Vaka", url: "https://anirudhvaka.dev" }],
   openGraph: {
-    title: "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer",
+    title: "Anirudh Vaka — Senior DevOps & AI Infrastructure Engineer",
     description:
-      "Production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers. Founder of two live AI SaaS products.",
+      "Production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers, plus self-hosted LLMs, RAG and AI-in-SDLC auto-remediation. Founder of two live AI SaaS products.",
     url: "https://anirudhvaka.dev",
     siteName: "Anirudh Vaka",
     locale: "en_US",
@@ -54,9 +59,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer",
+    title: "Anirudh Vaka — Senior DevOps & AI Infrastructure Engineer",
     description:
-      "Production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers. Founder of two live AI SaaS products.",
+      "Production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers, plus self-hosted LLMs, RAG and AI-in-SDLC auto-remediation. Founder of two live AI SaaS products.",
   },
   robots: { index: true, follow: true },
 };
@@ -78,14 +83,14 @@ export const viewport: Viewport = {
  * relocated to <body> there). ~155 chars — within Google's snippet window.
  */
 const STATIC_DESCRIPTION =
-  "Senior DevOps / Platform / SRE engineer — production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers. Founder of PrepAtlas & HumanifyCV.";
+  "Senior DevOps & AI Infrastructure engineer — AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers; self-hosted LLMs, RAG, LLMOps. Founder of PrepAtlas.";
 
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Anirudh Vaka",
   url: "https://anirudhvaka.dev",
-  jobTitle: "Senior DevOps / Platform / SRE Engineer",
+  jobTitle: "Senior DevOps / Platform / SRE Engineer · AI Infrastructure & LLMOps",
   email: "mailto:anirudhvaka@gmail.com",
   worksFor: { "@type": "Organization", name: "Snovasys Software Solutions" },
   knowsAbout: [
@@ -99,6 +104,10 @@ const personJsonLd = {
     "GitOps",
     "FinOps",
     "AI Infrastructure",
+    "MLOps",
+    "LLMOps",
+    "Retrieval-Augmented Generation",
+    "Self-hosted large language models",
   ],
   sameAs: [
     "https://www.linkedin.com/in/anirudhvaka",

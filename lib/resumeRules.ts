@@ -89,7 +89,7 @@ export const UNIVERSAL_RULES: ResumeRules = {
   ],
   summaryLabel: "Professional Summary",
   experienceLabel: "Professional Experience",
-  titleChip: "Senior DevOps / Platform / SRE Engineer",
+  titleChip: "Senior DevOps / Platform / SRE Engineer · AI Infrastructure & LLMOps",
   projectsLabel: "Products & Side Projects",
   // Relocation/remote detail lives in the meta strip (visaLine) to avoid
   // duplicating it here and over-widening the header's right column.

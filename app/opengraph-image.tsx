@@ -11,7 +11,7 @@ import { ImageResponse } from "next/og";
  * generation fast.
  */
 export const runtime = "edge";
-export const alt = "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer";
+export const alt = "Anirudh Vaka — Senior DevOps & AI Infrastructure Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -87,8 +87,8 @@ export default async function OGImage() {
             flexWrap: "wrap",
           }}
         >
-          Senior DevOps / Platform / SRE Engineer · AWS, Azure &amp; Kubernetes ·
-          Founder of PrepAtlas + HumanifyCV
+          Senior DevOps / Platform / SRE · AI Infrastructure &amp; LLMOps · AWS,
+          Azure &amp; Kubernetes · Founder of PrepAtlas + HumanifyCV
         </div>
         <div
           style={{

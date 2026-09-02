@@ -96,7 +96,7 @@ export interface ResumeData {
 export const resume: ResumeData = {
   contact: {
     name: "Anirudh Vaka",
-    title: "Senior DevOps / Platform / SRE Engineer",
+    title: "Senior DevOps / Platform / SRE Engineer · AI Infrastructure & LLMOps",
     email: "anirudhvaka@gmail.com",
     phone: "+91 79817 30312",
     linkedin: "linkedin.com/in/anirudhvaka",
@@ -106,7 +106,7 @@ export const resume: ResumeData = {
   },
 
   summary:
-    "Senior DevOps / Platform / SRE engineer with 3+ years operating production infrastructure across AWS, Azure, and on-prem Kubernetes — including building an on-prem Kubernetes data center from bare metal at 99.9% uptime for 1000+ customers. Promoted intern → DevOps Lead in under two years; now lead a team of 5 under an ISO 27001:2022-certified practice. Founder of two live AI SaaS products (PrepAtlas, HumanifyCV) with paying users. Strong on Terraform, Kubernetes, GitHub Actions, GitOps, and FinOps.",
+    "Senior DevOps / Platform / SRE engineer with 3+ years operating production infrastructure across AWS, Azure, and on-prem Kubernetes — including building an on-prem Kubernetes data center from bare metal at 99.9% uptime for 1000+ customers. Promoted intern → DevOps Lead in under two years; now lead a team of 5 under an ISO 27001:2022-certified practice. Founder of two live AI SaaS products (PrepAtlas, HumanifyCV) with paying users. Strong on Terraform, Kubernetes, GitHub Actions, GitOps, and FinOps — plus a self-hosted LLM platform (Ollama, grounded RAG on pgvector) and an AI-in-SDLC auto-remediation pipeline that cuts MTTR.",
 
   experience: [
     {
@@ -301,7 +301,7 @@ export const resume: ResumeData = {
     {
       label: "Cloud (AWS & Azure)",
       items: [
-        "AWS (ECS, RDS, Lambda, S3, Route 53, IAM, multi-region)",
+        "AWS (ECS, EKS, RDS, Lambda, S3, Route 53, IAM, multi-region)",
         "Azure (AKS, VMs / VMSS, Blob Storage, Functions)",
         "Entra ID + Key Vault",
         "Azure OpenAI + Azure Speech",
@@ -315,9 +315,12 @@ export const resume: ResumeData = {
         "Kubernetes (production, on-prem + cloud)",
         "Docker",
         "Helm",
+        "Kustomize",
         "ArgoCD",
         "Horizontal Pod Autoscaling",
         "Ingress",
+        "Network policies",
+        "Admission control",
       ],
     },
     {
@@ -341,7 +344,8 @@ export const resume: ResumeData = {
         "Ollama (self-hosted LLMs)",
         "DeepSeek / Qwen",
         "RAG on pgvector",
-        "Anthropic Claude API",
+        "Anthropic Claude API (router: prompt caching, vision)",
+        "Prompt engineering",
         "AI-in-SDLC auto-remediation",
       ],
     },
@@ -353,21 +357,32 @@ export const resume: ResumeData = {
       label: "Networking & Security",
       items: [
         "Linux",
+        "Windows Server (IIS, Hyper-V, MS SQL)",
         "Cisco switches",
         "FortiGate (firewall, VPN, SD-WAN)",
+        "IDS / IPS",
         "VLAN segmentation",
         "Cloudflare WAF",
         "OIDC / IAM",
         "TLS",
         "Trivy / Grype",
+        "SonarQube",
+        "ISO 27001:2022 / SOC 2-aligned",
       ],
     },
     {
       label: "Databases",
-      items: ["PostgreSQL", "Supabase", "MS SQL Server", "MySQL", "AWS RDS"],
+      items: [
+        "PostgreSQL",
+        "Supabase",
+        "MS SQL Server",
+        "MySQL",
+        "AWS RDS",
+        "DynamoDB",
+      ],
     },
     {
-      label: "Observability",
+      label: "Observability & SRE",
       items: [
         "Prometheus",
         "Grafana",
@@ -376,11 +391,23 @@ export const resume: ResumeData = {
         "Loki",
         "OpenSearch",
         "ELK",
+        "SLOs / error budgets",
+        "Incident response & RCA",
+        "On-call rotation",
       ],
     },
     {
-      label: "Languages",
-      items: ["TypeScript", "Python", "C# (.NET)", "Bash", "PowerShell", "SQL"],
+      label: "Languages & Frameworks",
+      items: [
+        "TypeScript",
+        "Python",
+        "Go",
+        "C# (.NET)",
+        "Bash",
+        "PowerShell",
+        "SQL",
+        "Angular",
+      ],
     },
   ],
 

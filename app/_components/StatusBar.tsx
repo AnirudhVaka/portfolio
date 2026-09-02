@@ -11,7 +11,7 @@ export function StatusBar() {
           <span className="sb-dot" aria-hidden="true" /> Available
         </span>
         <span className="sb-sep" aria-hidden="true">·</span>
-        <span className="sb-item sb-hide-sm">Senior DevOps / Platform / SRE</span>
+        <span className="sb-item sb-hide-sm">Senior DevOps · AI Infrastructure</span>
       </div>
       <div className="sb-group">
         <span className="sb-item">IST (UTC+5:30)</span>

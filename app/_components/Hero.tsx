@@ -20,15 +20,16 @@ export function Hero() {
       <div className="hero-inner hero-enter">
         <div className="hero-tag mono">
           <Globe size={13} aria-hidden="true" />
-          <span>Senior DevOps / Platform / SRE Engineer</span>
+          <span>Senior DevOps / Platform / SRE Engineer · AI Infrastructure & LLMOps</span>
         </div>
         <h1>
           Anirudh <span className="accent">Vaka</span>
         </h1>
         <p className="hero-tagline">
           Senior DevOps / Platform engineer — production infra on AWS, Azure &amp;
-          Kubernetes at <strong>99.9% uptime for 1000+ customers</strong>. Founder
-          of two live AI SaaS products.
+          Kubernetes at <strong>99.9% uptime for 1000+ customers</strong>, plus
+          self-hosted LLMs and AI-in-SDLC auto-remediation. Founder of two live
+          AI SaaS products.
         </p>
 
         <ul className="hero-cred" aria-label="Credentials">
