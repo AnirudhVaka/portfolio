@@ -7,7 +7,7 @@
 
 /** Compact availability line — hero sub-line + contact section. */
 export const AVAILABILITY =
-  "Open to visa sponsorship / relocation · 90-day notice · fully remote-friendly";
+  "Serving notice — available from 23 Oct 2026 · open to visa sponsorship / relocation · fully remote-friendly";
 
 /** Role-pitch sentence on the contact CTA. */
 export const CONTACT_CTA =

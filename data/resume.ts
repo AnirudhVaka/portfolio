@@ -398,5 +398,5 @@ export const resume: ResumeData = {
     { name: "Hindi", level: "Fluent" },
   ],
 
-  noticePeriod: "90 days (negotiable)",
+  noticePeriod: "Serving notice — last working day 22 Oct 2026",
 };
