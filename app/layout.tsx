@@ -24,9 +24,11 @@ export const metadata: Metadata = {
     default: "Anirudh Vaka — Senior DevOps & AI Infrastructure Engineer",
     template: "%s · Anirudh Vaka",
   },
-  // NOTE: the `description` <meta> is emitted as a literal tag in <head> below
-  // (see STATIC_DESCRIPTION) rather than through the metadata API, so it is
-  // guaranteed to stay in <head> however a route renders.
+  // Site-wide default (~155 chars — within Google's snippet window). Pages
+  // that set their own `description` (e.g. /resume) replace it, so each page
+  // gets exactly one description <meta>.
+  description:
+    "Senior DevOps & AI Infrastructure engineer — AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers; self-hosted LLMs, RAG, LLMOps. Founder of PrepAtlas.",
   keywords: [
     "Senior DevOps Engineer",
     "AI Infrastructure Engineer",
@@ -70,16 +72,6 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
 };
-
-/**
- * Site-wide meta description, rendered as a literal <head> tag instead of via
- * the metadata API. Every page is statically prerendered today, but on a
- * dynamically rendered route Next can stream metadata-API tags into <body>,
- * which some crawlers/auditors ignore; the literal tag always stays in <head>.
- * ~155 chars — within Google's snippet window.
- */
-const STATIC_DESCRIPTION =
-  "Senior DevOps & AI Infrastructure engineer — AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers; self-hosted LLMs, RAG, LLMOps. Founder of PrepAtlas.";
 
 /**
  * Person structured data (schema.org/Person). Rendered as JSON-LD so search
@@ -132,7 +124,6 @@ export default function RootLayout({
          * stays at opacity:0 because the IntersectionObserver never runs.
          * This forces them visible so the page is still readable + crawlable.
          */}
-        <meta name="description" content={STATIC_DESCRIPTION} />
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
