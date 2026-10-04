@@ -4,12 +4,12 @@ import type { ResumeRules, SectionKey } from "@/lib/resumeRules";
 import { bulletAllowed } from "@/lib/resumeRules";
 
 /**
- * Region-agnostic resume renderer. Takes a content object (from
- * data/resume.ts) and a region's rules (from lib/resumeRules.ts) and
- * produces ATS-friendly single-column HTML.
+ * Resume renderer. Takes a content object (from data/resume.ts) and a
+ * ruleset (UNIVERSAL_RULES from lib/resumeRules.ts) and produces
+ * ATS-friendly single-column HTML.
  *
- * All formatting differences between regions are driven by the `rules`
- * argument — this file never branches on region directly.
+ * Section order, labels and which optional fields show are all driven by
+ * the `rules` argument — this file holds no formatting decisions of its own.
  */
 
 interface Props {

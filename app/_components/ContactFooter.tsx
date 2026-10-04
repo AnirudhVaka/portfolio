@@ -1,12 +1,12 @@
 import { Mail, Phone, Code } from "lucide-react";
-import { CONTACT_CTA, AVAILABILITY } from "@/lib/regionCopy";
+import { CONTACT_CTA, AVAILABILITY } from "@/lib/siteCopy";
 import { resume } from "@/data/resume";
 import { GithubIcon, LinkedinIcon } from "./BrandIcons";
 import { ContactTerminal } from "./ContactTerminal";
 
 /**
  * Contact CTA + footer. One universal role-pitch + availability line from
- * lib/regionCopy.ts. Icons are self-hosted (lucide + inline brand marks) —
+ * lib/siteCopy.ts. Icons are self-hosted (lucide + inline brand marks) —
  * no Font Awesome CDN. The interactive terminal (ContactTerminal) is the hero
  * of this section; the `ssh anirudh@connect` block below is the static / no-JS
  * fallback.

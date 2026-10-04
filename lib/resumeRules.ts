@@ -8,7 +8,7 @@
  * There is now ONE comprehensive resume for everyone (`UNIVERSAL_RULES`):
  * every bullet (core + extra), every section, all the detail. The renderer
  * (ResumeRenderer) and the DOCX builder (scripts/build-docx.ts) both consume
- * this single ruleset — no per-region variants.
+ * this single ruleset.
  */
 
 export type SectionKey =
@@ -46,13 +46,13 @@ export interface ResumeRules {
   includeCGPA: boolean;
   /** Show notice period on Personal Details / Summary. */
   includeNoticePeriod: boolean;
-  /** Show nationality (SG-only). */
+  /** Show nationality on Personal Details. */
   includeNationality: boolean;
   /** Spoken nationality value when includeNationality is true. */
   nationality?: string;
-  /** Slot for a hosted photo URL (Germany only, optional). */
+  /** Optional hosted photo URL shown in the header. Null/absent = no photo. */
   photoUrl?: string | null;
-  /** "References available upon request." line (UK / IE / ANZ). */
+  /** Show the "References available upon request." line. */
   showReferencesLine: boolean;
   /** Spelling: subtle differences in copy. */
   spelling: "en-US" | "en-UK" | "en-CA";
@@ -61,7 +61,7 @@ export interface ResumeRules {
 }
 
 /**
- * Filter resume bullets per the region's rules.
+ * Filter resume bullets by the ruleset's `bulletFilter`.
  */
 export function bulletAllowed(
   priority: "core" | "extra",

@@ -9,8 +9,8 @@ interface Props {
 
 /**
  * Resume toolbar — sticky chip above the A4 page. Single comprehensive
- * resume, so no region switcher: just Print (window.print) + Download Word
- * (the pre-built universal .docx) + Back to portfolio.
+ * resume, so just Print (window.print) + Download Word (the pre-built
+ * universal .docx) + Back to portfolio.
  *
  * Hidden in print via `.resume-toolbar { display: none }` in print CSS.
  */

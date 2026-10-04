@@ -1,8 +1,8 @@
 /**
- * Portfolio copy — one universal version for everyone (no region variants).
+ * Portfolio copy — one universal version for everyone.
  *
- * The site no longer detects or switches on region; these are the single
- * strings surfaced in the hero, intro, and contact sections.
+ * These are the single strings surfaced in the hero, intro, and contact
+ * sections.
  */
 
 /** Compact availability line — hero sub-line + contact section. */

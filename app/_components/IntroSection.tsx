@@ -1,4 +1,4 @@
-import { INTRO_PARAGRAPH } from "@/lib/regionCopy";
+import { INTRO_PARAGRAPH } from "@/lib/siteCopy";
 
 /**
  * Single intro paragraph below the hero. One universal version.

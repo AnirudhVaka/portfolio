@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 
 /**
- * Robots policy: index everything. One universal version of the site — no
- * region variants, no per-visitor rendering.
+ * Robots policy: index everything. One universal, statically rendered
+ * version of the site — no per-visitor rendering.
  */
 export default function robots(): MetadataRoute.Robots {
   return {

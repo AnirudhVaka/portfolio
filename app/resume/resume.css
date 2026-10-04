@@ -2,7 +2,7 @@
  * RESUME STYLES — ATS-friendly. Single-column, real text (no images of text),
  * standard fonts (Inter on screen, Arial-fallback on print for max
  * compatibility with old resume parsers). Ported from the v1 resume.html
- * (which had genuinely good print CSS) and adapted for the region renderer.
+ * (which had genuinely good print CSS) and adapted for ResumeRenderer.
  *
  * Two contexts:
  *   1. Browser preview — dark wrapper around the page, paper-coloured page.

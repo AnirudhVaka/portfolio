@@ -24,10 +24,11 @@ export const metadata: Metadata = {
     default: "Anirudh Vaka — Senior DevOps & AI Infrastructure Engineer",
     template: "%s · Anirudh Vaka",
   },
-  // NOTE: the `description` <meta> is emitted as a literal tag in <head> below
-  // (see STATIC_DESCRIPTION). On the force-dynamic home route, metadata-API
-  // tags hydrate into <body>, which some crawlers/auditors ignore; a literal
-  // head tag is guaranteed to stay in <head>.
+  // Site-wide default (~155 chars — within Google's snippet window). Pages
+  // that set their own `description` (e.g. /resume) replace it, so each page
+  // gets exactly one description <meta>.
+  description:
+    "Senior DevOps & AI Infrastructure engineer — AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers; self-hosted LLMs, RAG, LLMOps. Founder of PrepAtlas.",
   keywords: [
     "Senior DevOps Engineer",
     "AI Infrastructure Engineer",
@@ -77,14 +78,6 @@ export const viewport: Viewport = {
  * engines + rich results understand who this is. Kept in sync with the hero
  * + resume — no fabricated fields.
  */
-/**
- * Region-neutral meta description, rendered as a literal <head> tag so it
- * survives hydration on the force-dynamic home route (metadata-API tags get
- * relocated to <body> there). ~155 chars — within Google's snippet window.
- */
-const STATIC_DESCRIPTION =
-  "Senior DevOps & AI Infrastructure engineer — AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers; self-hosted LLMs, RAG, LLMOps. Founder of PrepAtlas.";
-
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -131,7 +124,6 @@ export default function RootLayout({
          * stays at opacity:0 because the IntersectionObserver never runs.
          * This forces them visible so the page is still readable + crawlable.
          */}
-        <meta name="description" content={STATIC_DESCRIPTION} />
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
