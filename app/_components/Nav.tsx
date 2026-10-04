@@ -66,8 +66,8 @@ export function Nav() {
           ))}
         </div>
         <div className="nav-right">
-          <span className="nav-status mono" aria-label="Status: available">
-            <span className="dot" aria-hidden="true" /> Available
+          <span className="nav-status mono" aria-label="Status: not available">
+            <span className="dot" aria-hidden="true" /> Not available
           </span>
           <a href="/resume" className="btn-nav mono">
             Resume

@@ -91,13 +91,12 @@ export const UNIVERSAL_RULES: ResumeRules = {
   experienceLabel: "Professional Experience",
   titleChip: "Senior DevOps / Platform / SRE Engineer · AI Infrastructure & LLMOps",
   projectsLabel: "Products & Side Projects",
-  // Relocation/remote detail lives in the meta strip (visaLine) to avoid
-  // duplicating it here and over-widening the header's right column.
   locationLine: "Hyderabad, India · IST (UTC+5:30)",
-  visaLine: "Open to relocation worldwide with visa sponsorship, or fully remote",
+  // Not available for new roles — no relocation/visa line or notice period.
+  visaLine: null,
   workModeLine: null,
   includeCGPA: true,
-  includeNoticePeriod: true,
+  includeNoticePeriod: false,
   includeNationality: false,
   showReferencesLine: true,
   spelling: "en-US",

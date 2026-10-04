@@ -7,8 +7,8 @@ export function StatusBar() {
   return (
     <div className="status-bar" role="status" aria-label="Availability status">
       <div className="sb-group">
-        <span className="sb-item sb-ok">
-          <span className="sb-dot" aria-hidden="true" /> Available
+        <span className="sb-item sb-busy">
+          <span className="sb-dot" aria-hidden="true" /> Not available
         </span>
         <span className="sb-sep" aria-hidden="true">·</span>
         <span className="sb-item sb-hide-sm">Senior DevOps · AI Infrastructure</span>
