@@ -343,14 +343,14 @@ nav.site-nav.scrolled {
   align-items: center;
   gap: 6px;
   font-size: 11px;
-  color: var(--green);
+  color: var(--amber);
 }
 .nav-status .dot {
   width: 6px;
   height: 6px;
-  background: var(--green);
+  background: var(--amber);
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--green), 0 0 16px rgba(0, 230, 118, 0.2);
+  box-shadow: 0 0 8px var(--amber), 0 0 16px var(--amber-dim);
   animation: pulse 2s infinite;
 }
 @keyframes pulse {
@@ -1402,7 +1402,7 @@ footer.site-footer {
 }
 @media (max-width: 480px) {
   nav.site-nav .nav-status {
-    /* On very narrow viewports, keep the green dot only — drop "Available" */
+    /* On very narrow viewports, keep the status dot only — drop the label */
     font-size: 0;
   }
   nav.site-nav .nav-status .dot {
@@ -1510,12 +1510,15 @@ body:has(.status-bar) {
 .status-bar .sb-ok {
   color: var(--green);
 }
+.status-bar .sb-busy {
+  color: var(--amber);
+}
 .status-bar .sb-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 8px var(--green);
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber);
   animation: pulse 2s infinite;
   flex-shrink: 0;
 }
@@ -1600,8 +1603,8 @@ body:has(.status-bar) {
   color: var(--text2);
   margin-bottom: 30px;
   padding: 6px 14px;
-  border: 1px solid var(--green-dim);
-  background: var(--green-dim);
+  border: 1px solid var(--amber-dim);
+  background: var(--amber-dim);
   border-radius: 20px;
 }
 .cta-availability {
@@ -1612,8 +1615,8 @@ body:has(.status-bar) {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 8px var(--green);
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber);
   flex-shrink: 0;
   animation: pulse 2s infinite;
 }
