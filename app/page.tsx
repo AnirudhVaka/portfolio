@@ -13,7 +13,7 @@ import { StatusBar } from "./_components/StatusBar";
 import { Interactions } from "./_components/Interactions";
 
 /**
- * Portfolio root — one universal version for everyone (no region detection).
+ * Portfolio root — one universal version for everyone.
  *
  * Static Server Component. Title/OG/description come from the root layout's
  * metadata; page content is a single universal variant. Only Nav, the hero

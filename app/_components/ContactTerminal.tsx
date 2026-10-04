@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { AVAILABILITY } from "@/lib/regionCopy";
+import { AVAILABILITY } from "@/lib/siteCopy";
 
 /**
  * Interactive mini-terminal for the Contact section (brief C2). Accepts typed
@@ -64,7 +64,7 @@ export function ContactTerminal() {
           line("out", "  whoami    who is Anirudh"),
           line("out", "  projects  what I've shipped"),
           line("out", "  stack     tools I work in"),
-          line("out", "  resume    open the region-aware resume"),
+          line("out", "  resume    open the resume"),
           line("out", "  contact   how to reach me"),
           line("out", "  clear     clear the screen"),
         ];
@@ -101,7 +101,7 @@ export function ContactTerminal() {
         out = [
           line("out", (
             <>
-              opening the region-aware resume →{" "}
+              opening the resume →{" "}
               <a className="term-accent" href="/resume">
                 /resume
               </a>

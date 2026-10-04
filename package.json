@@ -2,15 +2,14 @@
   "name": "anirudhvaka-dev",
   "version": "2.0.0",
   "private": true,
-  "description": "Geo-adaptive portfolio + region-aware resume for Anirudh Vaka. Next.js 15 + Vercel.",
+  "description": "Portfolio + resume for Anirudh Vaka. Next.js 15 + Vercel.",
   "scripts": {
     "dev": "next dev",
     "build": "npm run build:docx && next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "build:docx": "tsx scripts/build-docx.ts",
-    "build:docx:py": "node --experimental-strip-types --no-warnings scripts/dump-data.mjs > /tmp/resume-data.json && python3 scripts/build_docx.py /tmp/resume-data.json public/downloads/"
+    "build:docx": "tsx scripts/build-docx.ts"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

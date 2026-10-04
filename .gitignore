@@ -42,6 +42,3 @@ next-env.d.ts
 
 # Local Cowork / Claude dev config — path-specific to each developer
 .claude/
-
-# Temporary data extracts (resume JSON from dump-data.mjs)
-/tmp/

@@ -7,8 +7,8 @@ import "./resume.css";
 /**
  * /resume route — a single comprehensive resume for everyone.
  *
- * No region logic: renders the universal ruleset with all bullets and
- * sections. Static (no cookies/headers), so it prerenders. The pre-built
+ * Renders the universal ruleset with all bullets and sections. Static
+ * (no cookies/headers), so it prerenders. The pre-built
  * DOCX lives at /public/downloads/anirudh-vaka-resume-universal.docx,
  * generated at build time by scripts/build-docx.ts.
  */

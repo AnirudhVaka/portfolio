@@ -1,33 +1,18 @@
 # anirudhvaka.dev
 
-Geo-adaptive portfolio + region-aware resume for **Anirudh Vaka**, Senior DevOps Engineer.
+Portfolio + resume for **Anirudh Vaka**, Senior DevOps Engineer.
 
-Detects the visitor's country at the Vercel edge, serves a region-appropriate variant of the portfolio copy (visa eligibility, role-pitch sentence) and a region-formatted resume (length, section order, photo, CGPA, notice period). Visitors can override the detected region via a top-right switcher.
+A static site: every page is prerendered at build time and every visitor gets the same version (only the Open Graph image is generated on demand at the edge). The resume at `/resume` is one comprehensive resume (every bullet, every section) rendered from a single ruleset, `UNIVERSAL_RULES`, with a matching pre-built Word download.
 
 ## Stack
 
 - **Next.js 15** App Router on **Vercel**
-- React 19 (RC)
+- React 19
 - TypeScript with strict + `noUncheckedIndexedAccess`
-- Edge middleware for `x-vercel-ip-country` → region resolution
-- Pre-built per-region PDFs (via print-CSS) and DOCX (via `docx` npm)
+- Statically prerendered pages: no middleware, no cookies, no per-visitor rendering
+- One pre-built DOCX resume (via the `docx` npm package); PDFs come from the browser's print-to-PDF using the `@media print` CSS
 - No Tailwind — design tokens live in `app/globals.css`
 - No client-side IP lookup; no analytics; no cookie banner needed
-
-## Region variants
-
-| Region    | Codes              | Resume style                            |
-|-----------|--------------------|------------------------------------------|
-| India     | IN                 | 2 pages, CGPA, notice period             |
-| US        | US                 | 1 page strict, no CGPA, H1B note         |
-| Germany   | DE / AT / CH       | 2 pages, optional photo, EU Blue Card    |
-| Netherlands | NL / BE / LU     | 1–2 pages, Highly Skilled Migrant        |
-| Ireland   | IE                 | 2 pages, Critical Skills Permit          |
-| UK        | GB                 | 2 pages, British English, Skilled Worker |
-| Canada    | CA                 | 1–2 pages, Global Talent Stream          |
-| Singapore | SG / MY            | 1–2 pages, CGPA, Employment Pass         |
-| Aus / NZ  | AU / NZ            | 2–3 pages, Skills in Demand              |
-| Global    | everything else    | 1 page tight, no visa line               |
 
 ## Local development
 
@@ -36,59 +21,51 @@ npm install
 npm run dev
 ```
 
-The site runs on http://localhost:3000. Locally, `x-vercel-ip-country` is absent, so detection falls back to the Global variant — use the region switcher (top-right) to preview the others. The override persists for 30 days via the `av-region-override` cookie.
-
-## Deploying
-
-```bash
-vercel
-```
-
-No environment variables are required for the geo signal — Vercel injects `x-vercel-ip-country` for free on every request.
+The site runs on http://localhost:3000; the resume is at http://localhost:3000/resume.
 
 ## Layout
 
 ```
 app/
-  page.tsx              — portfolio (Server Component, reads cookie)
-  resume/page.tsx       — region-adaptive resume (Phase 4)
-  api/set-region/       — manual override endpoint
-  _components/          — RegionSwitcher and shared portfolio components
+  page.tsx              — portfolio (static Server Component)
+  resume/page.tsx       — the resume, rendered with UNIVERSAL_RULES
+  resume/ResumeRenderer.tsx — rules-driven, ATS-friendly single-column HTML
+  resume/ResumeToolbar.tsx  — Print / Save as PDF + Download Word
+  resume/resume.css     — screen + print styles for the resume
+  writeups/             — long-form writeups
+  _components/          — shared portfolio components
   globals.css           — design tokens, aurora background, reveal system
-  layout.tsx            — fonts, OG metadata
+  layout.tsx            — fonts, metadata, meta description, JSON-LD
+  opengraph-image.tsx, twitter-image.tsx, robots.ts, sitemap.ts
 data/
   resume.ts             — typed single source of truth for resume content
 lib/
-  geo.ts                — country → region map, region labels/flags, cookie names
-  getRegion.ts          — server-side region resolver (override > detected > header > fallback)
-  regionCopy.ts         — portfolio copy that varies per region
-middleware.ts           — reads x-vercel-ip-country, writes detection cookie
+  resumeRules.ts        — UNIVERSAL_RULES: section order, labels, optional fields
+  siteCopy.ts           — portfolio copy (availability line, intro, contact CTA)
 scripts/
-  build-docx.mjs        — pre-build DOCX per region (Phase 4)
+  build-docx.ts         — builds the DOCX resume at build time
 public/
-  downloads/            — pre-built PDFs and DOCX (Phase 4)
+  downloads/            — anirudh-vaka-resume-universal.docx
 ```
 
 ## Single source of truth
 
-All resume content lives in [`data/resume.ts`](./data/resume.ts). Every region variant reads from it. One edit updates: the portfolio page, all 10 resume variants, all 10 PDFs, and all 10 DOCX files.
+All resume content lives in [`data/resume.ts`](./data/resume.ts). The formatting layer — section order, labels, and which optional fields show (CGPA, notice period, references line, …) — lives in `UNIVERSAL_RULES` in [`lib/resumeRules.ts`](./lib/resumeRules.ts).
 
-Bullet priorities (`core` vs `extra`) drive which lines stay on the strict 1-page US/Global variants and which appear on the longer EU/UK/IE/ANZ variants.
+Both the `/resume` page (`app/resume/ResumeRenderer.tsx`) and the DOCX builder (`scripts/build-docx.ts`) render `data/resume.ts` through `UNIVERSAL_RULES`, so one edit updates the resume page, its print-to-PDF output, and `public/downloads/anirudh-vaka-resume-universal.docx`.
 
-## Why no client-side IP lookup?
-
-Brief explicitly avoids third-party detection. Vercel's `x-vercel-ip-country` is server-side, free, and arrives before the page renders — no flash of default content, no cookie banner, no third-party request. Visitors who object can still override.
+Each bullet carries a `core` / `extra` priority. `UNIVERSAL_RULES` uses `bulletFilter: "all"`, so every bullet ships.
 
 ## Build commands
 
 | Command          | Effect                                              |
 |------------------|------------------------------------------------------|
 | `npm run dev`    | Next dev server on :3000                            |
-| `npm run build`  | Builds DOCX for all regions, then `next build`      |
+| `npm run build`  | Builds the DOCX resume, then `next build`           |
 | `npm run start`  | Production server                                   |
 | `npm run lint`   | ESLint (`next lint`)                                |
 | `npm run typecheck` | `tsc --noEmit`                                   |
-| `npm run build:docx` | Regenerate the 10 region DOCX files only         |
+| `npm run build:docx` | Regenerate `public/downloads/anirudh-vaka-resume-universal.docx` only |
 
 ## Deploying to Vercel (GitHub auto-deploy)
 
@@ -100,34 +77,29 @@ The full ship workflow:
    ```bash
    npm install
    npm run typecheck      # zero errors
-   npm run build          # full production build (also regenerates DOCX)
+   npm run build          # full production build (also regenerates the DOCX)
    npm run start          # spot-check http://localhost:3000 and /resume
    ```
 2. **Push to a preview branch.**
    ```bash
-   git checkout -b rebuild/geo-adaptive
+   git checkout -b <branch>
    git add -A
-   git commit -m "rebuild: geo-adaptive portfolio + 10-region resume"
-   git push -u origin rebuild/geo-adaptive
+   git commit -m "<message>"
+   git push -u origin <branch>
    ```
    Vercel creates a preview URL within ~60s. Watch the GitHub PR / Vercel dashboard for the link.
 3. **Verify the preview.**
-   - Open the preview URL in an incognito window — confirm the detected region matches your IP.
-   - Use the region switcher (top-right) to walk all 10 variants; confirm copy + visa lines.
-   - Click "Resume" → walk every region; press "Print / Save as PDF" on one; confirm output is single-column real text.
-   - Click "Download Word" on at least 2 variants; open in Word; confirm bullets, hyperlinks, fonts.
-   - Test from a VPN or by spoofing the header for sanity:
-     ```bash
-     curl -H "x-vercel-ip-country: DE" https://<preview>.vercel.app/ | grep -E "Blue Card|Germany view"
-     ```
+   - Open the preview URL; click through the portfolio sections and the writeup.
+   - Click "Resume"; press "Print / Save as PDF"; confirm output is single-column real text.
+   - Click "Download Word"; open the file in Word; confirm bullets, hyperlinks, fonts.
 4. **Promote to production by merging.**
    ```bash
    # Open a PR from the branch, get the Vercel preview link on it, click around,
    # then merge to main. Vercel auto-deploys the merge to anirudhvaka.dev.
    ```
 5. **Post-deploy verification on production (5 min).**
-   - Open https://anirudhvaka.dev in an incognito window — confirm detected region.
-   - Open one of the .docx files; upload one of the PDF prints to resumeworded.com or jobscan.co; target >90% parse.
+   - Open https://anirudhvaka.dev and https://anirudhvaka.dev/resume.
+   - Open the .docx; upload a PDF print to resumeworded.com or jobscan.co; target >90% parse (see [ATS verification](#ats-verification)).
 
 **Vercel project settings that should already be correct** — verify in the dashboard if anything looks off:
 
@@ -138,17 +110,13 @@ The full ship workflow:
 | Install Command      | `npm install` (default)                                     |
 | Output Directory     | `.next` (default)                                           |
 | Node Version         | 20.x or 22.x                                                |
-| Environment vars     | none required — `x-vercel-ip-country` is injected for free  |
+| Environment vars     | none required                                               |
 | Domain               | anirudhvaka.dev → this project                              |
-
-## Region detection — local dev
-
-`x-vercel-ip-country` is absent in `npm run dev`. The page falls back to the Global variant. Use the region switcher (top-right of the nav, or in the resume toolbar) to preview each variant. Override is cookie-persisted for 30 days; reset via the switcher's "↺ Reset to auto-detect".
 
 ## ATS verification
 
-Per-region resume PDFs should be tested at:
+The resume PDF (from "Print / Save as PDF" on `/resume`) and the DOCX should be tested at:
 - https://resumeworded.com (free for 1 scan)
 - https://jobscan.co (free trial, more detailed)
 
-Target: >90% parsing accuracy. If a region fails, the most likely cause is grey-on-white text — the print CSS forces `#333` on body text, but custom job titles might inherit. Open Chrome DevTools, Print preview, sample text colours.
+Target: >90% parsing accuracy. If a scan falls short, the most likely cause is grey-on-white text — the print CSS forces `#333` on body text, but custom job titles might inherit. Open Chrome DevTools, Print preview, sample text colours.

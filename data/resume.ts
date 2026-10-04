@@ -1,18 +1,19 @@
 /**
  * RESUME DATA — single source of truth for both portfolio + /resume.
  *
- * Every region's renderer (IN, US, DE, NL, IE, UK, CA, SG, ANZ, Global)
- * reads from this file. One change here updates all variants, the
- * pre-built PDFs (via print-CSS at build time), and the pre-built DOCX
- * files (via scripts/build-docx.mjs).
+ * The /resume page (app/resume/ResumeRenderer.tsx) and the DOCX builder
+ * (scripts/build-docx.ts) both render this file through UNIVERSAL_RULES
+ * (lib/resumeRules.ts). One change here updates the /resume page, its
+ * print-to-PDF output, and the pre-built
+ * public/downloads/anirudh-vaka-resume-universal.docx.
  *
  * Editing rules:
  *   - Numbers must be CONSISTENT across the file. 99.9% uptime, 200+
  *     pipelines, 60% faster, 25% cost cut, 70% release error reduction
  *     — these appear in multiple places and must always agree.
- *   - Use the strongest, region-neutral phrasing here. Per-region
- *     softening (e.g. British spelling on UK) is applied in the
- *     renderer, not here.
+ *   - Use the strongest phrasing here. Formatting choices (section
+ *     order, labels, optional fields) live in lib/resumeRules.ts,
+ *     not here.
  *   - Bullets are quantified: every line should answer "what changed?".
  */
 
@@ -31,9 +32,9 @@ export interface ContactBlock {
 export interface ExperienceBullet {
   text: string;
   /**
-   * If true, this bullet is high-signal — kept on short variants (US 1-page).
-   * If false, it's "nice to have" — dropped from compact variants, kept on
-   * longer ones (IN/DE/UK/IE 2-page).
+   * "core" = high-signal; "extra" = nice to have. A ruleset with
+   * `bulletFilter: "core"` keeps only core bullets; UNIVERSAL_RULES uses
+   * `bulletFilter: "all"`, so every bullet ships.
    */
   priority: "core" | "extra";
 }
@@ -74,7 +75,7 @@ export interface EducationEntry {
   institution: string;
   location: string;
   dates: string;
-  cgpa: string; // include only on IN + SG variants
+  cgpa: string; // shown when rules.includeCGPA is true
 }
 
 export interface SpokenLanguage {
@@ -90,7 +91,7 @@ export interface ResumeData {
   skills: SkillsGroup[];
   education: EducationEntry;
   languages: SpokenLanguage[];
-  noticePeriod: string; // surfaced only on IN + SG variants
+  noticePeriod: string; // shown when rules.includeNoticePeriod is true
 }
 
 export const resume: ResumeData = {

@@ -25,9 +25,8 @@ export const metadata: Metadata = {
     template: "%s · Anirudh Vaka",
   },
   // NOTE: the `description` <meta> is emitted as a literal tag in <head> below
-  // (see STATIC_DESCRIPTION). On the force-dynamic home route, metadata-API
-  // tags hydrate into <body>, which some crawlers/auditors ignore; a literal
-  // head tag is guaranteed to stay in <head>.
+  // (see STATIC_DESCRIPTION) rather than through the metadata API, so it is
+  // guaranteed to stay in <head> however a route renders.
   keywords: [
     "Senior DevOps Engineer",
     "AI Infrastructure Engineer",
@@ -73,18 +72,20 @@ export const viewport: Viewport = {
 };
 
 /**
- * Person structured data (schema.org/Person). Rendered as JSON-LD so search
- * engines + rich results understand who this is. Kept in sync with the hero
- * + resume — no fabricated fields.
- */
-/**
- * Region-neutral meta description, rendered as a literal <head> tag so it
- * survives hydration on the force-dynamic home route (metadata-API tags get
- * relocated to <body> there). ~155 chars — within Google's snippet window.
+ * Site-wide meta description, rendered as a literal <head> tag instead of via
+ * the metadata API. Every page is statically prerendered today, but on a
+ * dynamically rendered route Next can stream metadata-API tags into <body>,
+ * which some crawlers/auditors ignore; the literal tag always stays in <head>.
+ * ~155 chars — within Google's snippet window.
  */
 const STATIC_DESCRIPTION =
   "Senior DevOps & AI Infrastructure engineer — AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers; self-hosted LLMs, RAG, LLMOps. Founder of PrepAtlas.";
 
+/**
+ * Person structured data (schema.org/Person). Rendered as JSON-LD so search
+ * engines + rich results understand who this is. Kept in sync with the hero
+ * + resume — no fabricated fields.
+ */
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",

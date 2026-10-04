@@ -1,5 +1,5 @@
 /**
- * Build DOCX resumes — one per region — at build time.
+ * Build the DOCX resume from UNIVERSAL_RULES at build time.
  *
  * Runs via `npm run build:docx` (which uses tsx to import .ts source).
  * Output goes to /public/downloads/, served as a static download by

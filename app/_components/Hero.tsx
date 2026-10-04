@@ -1,9 +1,9 @@
 import { Globe } from "lucide-react";
-import { AVAILABILITY } from "@/lib/regionCopy";
+import { AVAILABILITY } from "@/lib/siteCopy";
 import { HeroBackground } from "./HeroBackground";
 
 /**
- * Hero. One universal version — no region view. The animated service-mesh
+ * Hero. One universal version for everyone. The animated service-mesh
  * topology (HeroBackground) sits behind the content and degrades to the
  * static CSS aurora under reduced-motion.
  */
