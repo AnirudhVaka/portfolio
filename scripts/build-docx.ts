@@ -11,7 +11,7 @@
  *   - Real bullet lists (not images, not custom symbols)
  *   - Single column throughout
  *   - No tables for layout
- *   - Hyperlinked email/phone/LinkedIn/portfolio/github
+ *   - Hyperlinked email/LinkedIn/portfolio/github
  *   - Bullet content matches the HTML version exactly (same source)
  */
 
@@ -226,7 +226,6 @@ function buildSections(rules: ResumeRules): Paragraph[] {
   out.push(
     contactLine([
       { text: resume.contact.email, href: `mailto:${resume.contact.email}` },
-      { text: resume.contact.phone, href: `tel:${resume.contact.phone.replace(/\s/g, "")}` },
       { text: resume.contact.portfolio, href: `https://${resume.contact.portfolio}` },
     ])
   );

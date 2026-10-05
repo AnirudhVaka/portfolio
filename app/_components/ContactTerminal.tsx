@@ -121,11 +121,6 @@ export function ContactTerminal() {
           )),
           line("out", (
             <>
-              phone     <a className="term-accent" href="tel:+917981730312">+91 79817 30312</a>
-            </>
-          )),
-          line("out", (
-            <>
               linkedin  <a className="term-accent" href="https://linkedin.com/in/anirudhvaka" target="_blank" rel="noopener noreferrer">linkedin.com/in/anirudhvaka</a>
             </>
           )),
