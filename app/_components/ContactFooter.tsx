@@ -1,4 +1,4 @@
-import { Mail, Phone, Code } from "lucide-react";
+import { Mail, Code } from "lucide-react";
 import { CONTACT_CTA, AVAILABILITY } from "@/lib/siteCopy";
 import { resume } from "@/data/resume";
 import { GithubIcon, LinkedinIcon } from "./BrandIcons";
@@ -49,10 +49,6 @@ export function ContactFooter() {
             <a href={`mailto:${resume.contact.email}`}>
               <Mail size={13} aria-hidden="true" />
               {resume.contact.email}
-            </a>
-            <a href={`tel:${resume.contact.phone.replace(/\s/g, "")}`}>
-              <Phone size={13} aria-hidden="true" />
-              {resume.contact.phone}
             </a>
             <a
               href={`https://${resume.contact.linkedin}`}

@@ -46,10 +46,6 @@ function ResumeHeader({ data, rules }: { data: ResumeData; rules: ResumeRules })
       <div className="resume-header-right">
         <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a>
         {" | "}
-        <a href={`tel:${data.contact.phone.replace(/\s/g, "")}`}>
-          {data.contact.phone}
-        </a>
-        {" | "}
         <a href={`https://${data.contact.portfolio}`} target="_blank" rel="noopener noreferrer">
           {data.contact.portfolio}
         </a>

@@ -21,7 +21,6 @@ export interface ContactBlock {
   name: string;
   title: string;
   email: string;
-  phone: string;
   /** Just the host+path, no scheme. The renderer adds https://. */
   linkedin: string;
   github: string;
@@ -99,7 +98,6 @@ export const resume: ResumeData = {
     name: "Anirudh Vaka",
     title: "Senior DevOps / Platform / SRE Engineer · AI Infrastructure & LLMOps",
     email: "anirudhvaka@gmail.com",
-    phone: "+91 79817 30312",
     linkedin: "linkedin.com/in/anirudhvaka",
     github: "github.com/AnirudhVaka",
     portfolio: "anirudhvaka.dev",
