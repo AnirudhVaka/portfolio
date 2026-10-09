@@ -187,36 +187,6 @@ function companyLine(text: string): Paragraph {
   });
 }
 
-function projectHeader(name: string, url: string, role: string, dates: string): Paragraph {
-  return new Paragraph({
-    spacing: { before: 100, after: 0 },
-    tabStops: [{ type: TabStopType.RIGHT, position: 9000 }],
-    children: [
-      new TextRun({ text: `${role} — `, bold: true, size: 24, font: "Calibri", color: TEXT_HEX }),
-      new ExternalHyperlink({
-        link: url,
-        children: [
-          new TextRun({
-            text: name,
-            bold: true,
-            size: 24,
-            font: "Calibri",
-            color: ACCENT_HEX,
-            underline: {},
-          }),
-        ],
-      }),
-      new TextRun({
-        text: `  (${url.replace(/^https?:\/\//, "")})`,
-        size: 20,
-        font: "Calibri",
-        color: MUTED_HEX,
-      }),
-      new TextRun({ text: "\t" + dates, size: 22, font: "Calibri", color: MUTED_HEX }),
-    ],
-  });
-}
-
 function buildSections(rules: ResumeRules): Paragraph[] {
   const out: Paragraph[] = [];
 
@@ -258,8 +228,6 @@ function renderSection(key: SectionKey, rules: ResumeRules): Paragraph[] {
       return summary(rules);
     case "experience":
       return experience(rules);
-    case "sideProjects":
-      return sideProjects(rules);
     case "skills":
       return skills();
     case "education":
@@ -307,15 +275,6 @@ function experience(rules: ResumeRules): Paragraph[] {
       )
     );
     for (const b of bullets) out.push(bulletPara(b.text));
-  }
-  return out;
-}
-
-function sideProjects(rules: ResumeRules): Paragraph[] {
-  const out: Paragraph[] = [sectionHeading(rules.projectsLabel)];
-  for (const p of resume.sideProjects) {
-    out.push(projectHeader(p.name, p.url, p.role, p.dates));
-    out.push(body(p.resumeBlurb));
   }
   return out;
 }

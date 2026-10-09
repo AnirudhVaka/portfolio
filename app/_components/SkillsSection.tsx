@@ -21,7 +21,7 @@ export function SkillsSection() {
         </h2>
         <p className="section-sub" data-reveal>
           Technologies I use daily to build, ship, and operate production
-          infrastructure and side products.
+          infrastructure.
         </p>
         <div className="skills-grid" data-reveal>
           {resume.skills.map((group) => (

@@ -88,7 +88,7 @@ export default async function OGImage() {
           }}
         >
           Senior DevOps / Platform / SRE · AI Infrastructure &amp; LLMOps · AWS,
-          Azure &amp; Kubernetes · Founder of PrepAtlas + HumanifyCV
+          Azure &amp; Kubernetes
         </div>
         <div
           style={{

@@ -10,13 +10,13 @@ interface Props {
   detail: string;
   /**
    * Render mode: "expand" makes the node click-to-expand (used on AICPA flow),
-   * "static" disables interaction (used on the PrepAtlas pipeline diagram).
+   * "static" disables interaction.
    */
   mode?: "expand" | "static";
 }
 
 /**
- * One node in a horizontal flow diagram. Used by PrepAtlas + AICPA cards.
+ * One node in a horizontal flow diagram. Used by the AI-Infra + AICPA cards.
  * Brief required keeping the "click to expand" behaviour for visualisations
  * — this component encapsulates that.
  */

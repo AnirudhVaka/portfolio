@@ -811,7 +811,7 @@ nav.site-nav.scrolled {
   padding: 9px 18px;
 }
 
-/* PrepAtlas flow (RAG pipeline) */
+/* Flow diagrams (AI-Infra, AICPA) */
 .flow-container {
   position: relative;
   overflow-x: auto;
@@ -958,7 +958,7 @@ nav.site-nav.scrolled {
   line-height: 1.5;
 }
 
-/* HumanifyCV / TimeChamp layered infra */
+/* TimeChamp layered infra */
 .infra-layers {
   max-width: 720px;
   display: flex;
@@ -992,18 +992,6 @@ nav.site-nav.scrolled {
 }
 .infra-layer.l-cicd {
   border-left: 3px solid var(--purple);
-}
-.infra-layer.l-auth {
-  border-left: 3px solid var(--red);
-}
-.infra-layer.l-app {
-  border-left: 3px solid var(--cyan);
-}
-.infra-layer.l-int {
-  border-left: 3px solid var(--purple);
-}
-.infra-layer.l-ops {
-  border-left: 3px solid var(--green);
 }
 .layer-header {
   display: flex;

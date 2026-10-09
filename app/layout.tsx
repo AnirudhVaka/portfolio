@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   // that set their own `description` (e.g. /resume) replace it, so each page
   // gets exactly one description <meta>.
   description:
-    "Senior DevOps & AI Infrastructure engineer — AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers; self-hosted LLMs, RAG, LLMOps. Founder of PrepAtlas.",
+    "Senior DevOps & AI Infrastructure engineer — AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers; self-hosted LLMs, RAG, LLMOps.",
   keywords: [
     "Senior DevOps Engineer",
     "AI Infrastructure Engineer",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Anirudh Vaka — Senior DevOps & AI Infrastructure Engineer",
     description:
-      "Production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers, plus self-hosted LLMs, RAG and AI-in-SDLC auto-remediation. Founder of two live AI SaaS products.",
+      "Production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers, plus self-hosted LLMs, RAG and AI-in-SDLC auto-remediation.",
     url: "https://anirudhvaka.dev",
     siteName: "Anirudh Vaka",
     locale: "en_US",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Anirudh Vaka — Senior DevOps & AI Infrastructure Engineer",
     description:
-      "Production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers, plus self-hosted LLMs, RAG and AI-in-SDLC auto-remediation. Founder of two live AI SaaS products.",
+      "Production infra on AWS, Azure & Kubernetes at 99.9% uptime for 1000+ customers, plus self-hosted LLMs, RAG and AI-in-SDLC auto-remediation.",
   },
   robots: { index: true, follow: true },
 };

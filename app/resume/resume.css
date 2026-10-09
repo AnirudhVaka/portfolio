@@ -252,41 +252,6 @@
   font-weight: 700;
 }
 
-/* Side projects. */
-.resume-project {
-  margin-bottom: 6px;
-}
-.resume-project-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-}
-.resume-project-header .name {
-  font-size: 12px;
-  font-weight: 700;
-}
-.resume-project-header .name a {
-  color: var(--resume-text);
-  text-decoration: none;
-}
-.resume-project-header .name .url {
-  font-weight: 400;
-  color: var(--resume-muted);
-  font-size: 11px;
-}
-.resume-project-header .dates {
-  font-size: 11px;
-  color: var(--resume-muted);
-  white-space: nowrap;
-}
-.resume-project p {
-  font-size: 11px;
-  color: var(--resume-muted);
-  line-height: 1.55;
-  margin-top: 2px;
-}
-
 /* Education. */
 .resume-edu {
   font-size: 11px;
@@ -380,7 +345,6 @@
   .resume-edu .inst,
   .resume-header-right,
   .resume-meta-strip,
-  .resume-project p,
   .resume-personal,
   .resume-languages,
   .resume-references {
@@ -404,13 +368,11 @@
     page-break-after: avoid;
     break-after: avoid;
   }
-  .resume-job-header h3,
-  .resume-project-header .name {
+  .resume-job-header h3 {
     page-break-after: avoid;
     break-after: avoid;
   }
   .resume-job,
-  .resume-project,
   .resume-edu {
     page-break-inside: avoid;
     break-inside: avoid;

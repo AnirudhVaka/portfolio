@@ -4,8 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 /**
  * Headline metrics that count up when the strip scrolls into view (brief C5),
- * each with a small sparkline for the observability aesthetic. Values are the
- * same 6 numbers as before — only the presentation animates.
+ * each with a small sparkline for the observability aesthetic.
  *
  * Reduced-motion: renders the final values immediately, no counting.
  */
@@ -24,7 +23,7 @@ const METRICS: Metric[] = [
   { to: 200, dec: 0, suffix: "+", label: "Pipelines", sub: "GitHub Actions + Azure DevOps", spark: "M1 9 L11 7 L20 8 L29 4 L36 5 L43 2" },
   { to: 60, dec: 0, suffix: "%", label: "Faster releases", sub: "via containerization", spark: "M1 8 L10 9 L19 6 L27 7 L35 4 L43 3" },
   { to: 25, dec: 0, suffix: "%", label: "Cloud cost cut", sub: "FinOps + right-sizing", spark: "M1 3 L10 5 L18 4 L27 7 L35 6 L43 9" },
-  { to: 2, dec: 0, suffix: "", label: "Paid SaaS products", sub: "PrepAtlas, HumanifyCV", spark: "M1 10 L14 10 L14 4 L28 4 L28 2 L43 2" },
+  { to: 5, dec: 0, suffix: "", label: "Engineers led", sub: "intern → lead in < 2 yrs", spark: "M1 10 L14 10 L14 4 L28 4 L28 2 L43 2" },
   { to: 3, dec: 0, suffix: "+ yrs", label: "Production DevOps", sub: "since Jan 2023", spark: "M1 9 L11 8 L21 6 L30 6 L37 4 L43 3" },
 ];
 
