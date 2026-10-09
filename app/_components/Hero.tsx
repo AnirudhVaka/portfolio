@@ -28,8 +28,7 @@ export function Hero() {
         <p className="hero-tagline">
           Senior DevOps / Platform engineer — production infra on AWS, Azure &amp;
           Kubernetes at <strong>99.9% uptime for 1000+ customers</strong>, plus
-          self-hosted LLMs and AI-in-SDLC auto-remediation. Founder of two live
-          AI SaaS products.
+          self-hosted LLMs and AI-in-SDLC auto-remediation.
         </p>
 
         <ul className="hero-cred" aria-label="Credentials">

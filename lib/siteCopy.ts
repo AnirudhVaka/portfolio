@@ -14,4 +14,4 @@ export const CONTACT_CTA =
 
 /** Intro paragraph below the hero. */
 export const INTRO_PARAGRAPH =
-  "I build and operate production infrastructure — and I ship products on top of it. By day, I lead DevOps for an enterprise SaaS platform and operate an on-prem Kubernetes data center I built from bare metal. Outside work, I run two paid SaaS products — PrepAtlas (AI-assisted exam prep) and HumanifyCV (AI text humanization).";
+  "I build and operate production infrastructure. I lead DevOps for an enterprise SaaS platform, operate an on-prem Kubernetes data center I built from bare metal, and run the self-hosted LLM platform our engineers use internally.";

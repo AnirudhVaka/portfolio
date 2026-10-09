@@ -73,14 +73,12 @@ export function ContactTerminal() {
         out = [
           line("out", "Anirudh Vaka — Senior DevOps / Platform / SRE Engineer · AI Infrastructure & LLMOps."),
           line("out", "Leads a team of 5; promoted intern → DevOps Lead in under 2 years."),
-          line("out", "99.9% uptime for 1000+ customers. Founder of PrepAtlas + HumanifyCV."),
+          line("out", "99.9% uptime for 1000+ customers."),
           line("out", <span className="term-accent">{AVAILABILITY}</span>),
         ];
         break;
       case "projects":
         out = [
-          line("out", "• PrepAtlas          AI-grounded exam prep · 20+ paying users"),
-          line("out", "• HumanifyCV         AI humanization SaaS · 30+ paying users"),
           line("out", "• AI Platform        self-hosted LLMs + AI-in-SDLC auto-remediation"),
           line("out", "• AICPA & CIMA       multi-region AWS + label-driven GitOps"),
           line("out", "• On-prem K8s        bare-metal data center · 99.9% uptime · 2 yrs"),

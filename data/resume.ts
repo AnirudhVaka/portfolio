@@ -49,20 +49,6 @@ export interface ExperienceEntry {
   bullets: ExperienceBullet[];
 }
 
-export interface SideProject {
-  id: string;
-  name: string;
-  url: string;
-  role: string;
-  dates: string;
-  tagline: string;
-  /** ~2-3 sentence description for the resume. Portfolio gets a richer copy. */
-  resumeBlurb: string;
-  stack: string[];
-  metrics?: string; // e.g. "20+ paying users"
-  engineeringWriteupUrl?: string;
-}
-
 export interface SkillsGroup {
   /** Used on the resume's two-column skills list and on the portfolio constellation. */
   label: string;
@@ -86,7 +72,6 @@ export interface ResumeData {
   contact: ContactBlock;
   summary: string;
   experience: ExperienceEntry[];
-  sideProjects: SideProject[];
   skills: SkillsGroup[];
   education: EducationEntry;
   languages: SpokenLanguage[];
@@ -105,7 +90,7 @@ export const resume: ResumeData = {
   },
 
   summary:
-    "Senior DevOps / Platform / SRE engineer with 3+ years operating production infrastructure across AWS, Azure, and on-prem Kubernetes — including building an on-prem Kubernetes data center from bare metal at 99.9% uptime for 1000+ customers. Promoted intern → DevOps Lead in under two years; now lead a team of 5 under an ISO 27001:2022-certified practice. Founder of two live AI SaaS products (PrepAtlas, HumanifyCV) with paying users. Strong on Terraform, Kubernetes, GitHub Actions, GitOps, and FinOps — plus a self-hosted LLM platform (Ollama, grounded RAG on pgvector) and an AI-in-SDLC auto-remediation pipeline that cuts MTTR.",
+    "Senior DevOps / Platform / SRE engineer with 3+ years operating production infrastructure across AWS, Azure, and on-prem Kubernetes — including building an on-prem Kubernetes data center from bare metal at 99.9% uptime for 1000+ customers. Promoted intern → DevOps Lead in under two years; now lead a team of 5 under an ISO 27001:2022-certified practice. Strong on Terraform, Kubernetes, GitHub Actions, GitOps, and FinOps — plus a self-hosted LLM platform (Ollama, grounded RAG on pgvector) and an AI-in-SDLC auto-remediation pipeline that cuts MTTR.",
 
   experience: [
     {
@@ -248,69 +233,6 @@ export const resume: ResumeData = {
           priority: "extra",
         },
       ],
-    },
-  ],
-
-  sideProjects: [
-    {
-      id: "prepatlas",
-      name: "PrepAtlas",
-      url: "https://prepatlas.in",
-      role: "Founder & Engineer",
-      dates: "Dec 2025 – Present",
-      tagline:
-        "AI learning + career platform — tutor, adaptive practice, exam engine, role tracks",
-      resumeBlurb:
-        "AI learning and career platform for Indian students — an AI tutor teaching over chat, voice, and generated video, adaptive practice, a timed exam engine, and 13 role-based career tracks with mock interviews and JD analysis. Next.js 15 on self-hosted PocketBase with a provider-routed LLM layer (Claude, NVIDIA) behind a per-user token budget and schema-validated output; offline-capable PWA and Android TWA on a $35/month AWS stack, 20+ paying users in beta.",
-      stack: [
-        "Next.js 15",
-        "React 19",
-        "TypeScript",
-        "Tailwind",
-        "shadcn/ui",
-        "PocketBase (self-hosted)",
-        "Anthropic Claude API",
-        "NVIDIA API",
-        "Razorpay",
-        "Resend",
-        "Sentry",
-        "AWS EC2",
-        "nginx",
-        "Bubblewrap TWA",
-      ],
-      metrics: "20+ paying users in beta · $35/mo hosting",
-      // engineeringWriteupUrl: the prepatlas.in/engineering writeup was
-      // taken down — the card's deep-dive CTA hides itself while this is unset.
-    },
-    {
-      id: "humanifycv",
-      name: "HumanifyCV",
-      url: "https://humanifycv.com",
-      role: "Founder & Engineer",
-      dates: "Jan 2026 – Present",
-      tagline:
-        "AI career workspace — a verified career vault that generates, tailors, and ATS-checks resumes",
-      resumeBlurb:
-        "AI career workspace built on a structured Career Vault — verified experience stored once, with AI generation, humanisation, and JD tailoring reading from it rather than inventing history, plus ATS analysis, cover letters, and a multi-tenant console for colleges. Next.js 16 + Prisma/Postgres with NextAuth v5 (TOTP 2FA over AES-256-GCM secrets, WebAuthn passkeys), Razorpay, and a multi-model Claude router, deployed by GitHub Actions to Docker Compose on AWS EC2 behind Cloudflare; 30–40 paying users.",
-      stack: [
-        "Next.js 16",
-        "React 19",
-        "TypeScript",
-        "Postgres + Prisma 7",
-        "NextAuth v5",
-        "WebAuthn passkeys",
-        "TOTP 2FA",
-        "Anthropic Claude (multi-model router)",
-        "Razorpay",
-        "AWS EC2 + Docker Compose",
-        "Amazon SES SMTP (Nodemailer)",
-        "Cloudflare",
-        "GitHub Actions",
-        "Sentry",
-        "Jest + Testing Library",
-      ],
-      metrics: "30–40 paying users",
-      // engineeringWriteupUrl: pending — surface as "coming soon" disabled CTA.
     },
   ],
 

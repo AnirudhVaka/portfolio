@@ -15,7 +15,6 @@ export type SectionKey =
   | "personalDetails"
   | "summary"
   | "experience"
-  | "sideProjects"
   | "skills"
   | "education"
   | "languages"
@@ -34,8 +33,6 @@ export interface ResumeRules {
   experienceLabel: string;
   /** Title used on the chip under the candidate name. */
   titleChip: string;
-  /** Section title for projects. */
-  projectsLabel: string;
   /** City / availability line on the right of the header. */
   locationLine: string;
   /** Visa eligibility line — appears just under contact links. Null = omit. */
@@ -81,7 +78,6 @@ export const UNIVERSAL_RULES: ResumeRules = {
   sectionOrder: [
     "summary",
     "experience",
-    "sideProjects",
     "skills",
     "education",
     "languages",
@@ -90,7 +86,6 @@ export const UNIVERSAL_RULES: ResumeRules = {
   summaryLabel: "Professional Summary",
   experienceLabel: "Professional Experience",
   titleChip: "Senior DevOps / Platform / SRE Engineer · AI Infrastructure & LLMOps",
-  projectsLabel: "Products & Side Projects",
   locationLine: "Hyderabad, India · IST (UTC+5:30)",
   // Not available for new roles — no relocation/visa line or notice period.
   visaLine: null,

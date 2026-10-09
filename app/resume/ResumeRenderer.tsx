@@ -99,8 +99,6 @@ function SectionByKey({
       return <SummarySection data={data} rules={rules} />;
     case "experience":
       return <ExperienceSection data={data} rules={rules} />;
-    case "sideProjects":
-      return <SideProjectsSection data={data} rules={rules} />;
     case "skills":
       return <SkillsSection data={data} />;
     case "education":
@@ -192,32 +190,6 @@ function ExperienceSection({
           </article>
         );
       })}
-    </section>
-  );
-}
-
-function SideProjectsSection({
-  data,
-  rules,
-}: {
-  data: ResumeData;
-  rules: ResumeRules;
-}) {
-  return (
-    <section className="resume-section">
-      <h2 className="resume-section-title">{rules.projectsLabel}</h2>
-      {data.sideProjects.map((p) => (
-        <article className="resume-project" key={p.id}>
-          <div className="resume-project-header">
-            <div className="name">
-              {p.role} — <a href={p.url}>{p.name}</a>{" "}
-              <span className="url">({p.url.replace(/^https?:\/\//, "")})</span>
-            </div>
-            <span className="dates">{p.dates}</span>
-          </div>
-          <p>{p.resumeBlurb}</p>
-        </article>
-      ))}
     </section>
   );
 }
